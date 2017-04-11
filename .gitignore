@@ -1,0 +1,7 @@
+﻿=======
+#需要过滤的目录
+/target
+/.project
+/.settings
+/.classpath
+/target/

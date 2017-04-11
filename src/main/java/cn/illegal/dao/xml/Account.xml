@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.illegal.dao.mapper.IllegalMapper">
+
+
+    
+    
+    
+    <resultMap type="cn.illegal.orm.WechatUserInfoORM" id="wechatUserInfo">
+		<result property="id" column="id" />
+		<result property="openId" column="openid" />
+		<result property="nickname" column="nickname" />
+		<result property="headImgUrl" column="head_img_url" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<sql id="sql4WechatUserInfo">
+		`id`, `openid`, `nickname`,`head_img_url`, `update_time`
+	</sql>
+	
+	<!-- 添加微信用户信息 -->
+	<insert id="insertWechatUserInfo" parameterType="cn.illegal.bean.WechatUserInfoBean" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO 
+			`test_wechat_userinfo` (`openid`, `nickname`, `head_img_url`, `update_time`) 
+		VALUES 
+			(#{openId}, #{nickname}, #{headImgUrl}, #{updateTime})
+		ON DUPLICATE KEY UPDATE 
+			`nickname`= #{nickname},
+			`head_img_url` = #{headImgUrl},
+			`update_time` = #{updateTime}; 
+	</insert>
+	
+	<select id="getWechatUserInfoById" resultMap="wechatUserInfo" >
+		SELECT
+			<include refid="sql4WechatUserInfo"></include>
+		FROM
+			`test_wechat_userinfo`
+		WHERE
+			`id` = #{id};
+	</select>
+	
+	<select id="getWechatUserInfo" resultMap="wechatUserInfo" >
+		SELECT
+			<include refid="sql4WechatUserInfo"></include>
+		FROM
+			`test_wechat_userinfo`
+		WHERE
+			`openid` = #{openId};
+	</select>
+	
+	<select id="getAllWechatUserInfoBeanList" resultMap="wechatUserInfo" >
+		SELECT
+			<include refid="sql4WechatUserInfo"></include>
+		FROM
+			`test_wechat_userinfo`
+    </select>
+    
+
+
+	<resultMap type="UserRegInfo" id="modelResultMap">
+		<result property="userId" column="user_id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="email" column="email" />
+		<result property="img" column="img" />
+		<result property="creatOn" column="add_time" />
+		<result property="lastLogin" column="last_time" />
+		<result property="status" column="status" />
+		<result property="isPublish" column="ispublish" />
+		<result property="nickname" column="nickname" />
+		<result property="sex" column="sex" />
+		<result property="birthday" column="birthday" />
+		<result property="area" column="area" />
+		<result property="grade" column="grade" />
+		<result property="growth" column="growth" />
+		<result property="isOfficial" column="isofficial" />
+		<result property="mobilePhone" column="mobilephone" />
+		<result property="hairType" column="hair_type" />
+		<result property="OSType" column="os_type" />
+		<result property="lastLoginIp" column="last_login_ip" />
+		<result property="costPassword" column="costpwd" />
+		<result property="costGrade" column="costgrade" />
+		<result property="couponMoney" column="couponmoney" />
+		<result property="companyId" column="companyId" />
+		<result property="balance" column="money" />
+	</resultMap>
+
+	<select id="getMaxUsername" resultType="String">
+		SELECT username FROM `cm_user` WHERE user_id = (SELECT MAX(user_id) FROM
+		cm_user);
+	</select>
+
+	<insert id="addNewUser" parameterType="UserRegInfo" useGeneratedKeys="true" keyProperty="id" >
+		insert into cm_user (
+		username, nickname, mobilephone, costgrade,
+		hair_type, status, password, img, add_time, area, couponmoney
+		)values(
+		#{username}, #{nickname}, #{mobilePhone}, #{costGrade}, #{hairType},
+		#{status}, #{password}, #{img}, #{creatOn}, #{area}, #{couponMoney}
+		)
+	</insert>
+	
+	<insert id="createUsername" parameterType="cn.illegal.orm.UsernameORM" useGeneratedKeys="true"
+		keyColumn="id" keyProperty="id">
+		INSERT INTO cm_username(addTime) VALUES(#{addTime});
+	</insert>
+	
+	<!-- 绑定微信 -->
+	<insert id="addBindOpenid" parameterType="UserOpenidBean">
+		INSERT INTO cm_user_openid (openid,user_id,status,bind_time) 
+		VALUES (#{openid},#{userId},#{status},#{bindTime}) ON DUPLICATE KEY UPDATE user_id = #{userId}, bind_time=#{bindTime}, status= #{status}
+	</insert>
+	
+	<!-- 取消绑定微信 -->
+	<update id="updateBindOpenidStatus" parameterType="UserOpenidBean" >
+		UPDATE cm_user_openid SET status=#{status},unbind_time=#{unBindTime} WHERE user_id=#{userId} 
+	</update>
+	
+	<!-- 通过openid拿到userId -->
+	<select id="getUserIdByOpenid" parameterType="String" resultType="java.lang.Long">
+		SELECT user_id FROM cm_user_openid WHERE openid=#{openid} AND status=1 limit 1
+	</select> 
+	
+	
+	<!-- 通过userId拿到openid -->
+	<select id="getOpenidByUserId" parameterType="long" resultType="String">
+		select openid from cm_user_openid where user_id=#{userId} AND `status` = 1
+	</select>
+	
+	
+	<resultMap id="getDeviceResultMap" type="cn.illegal.orm.DeviceORM" >
+		<result property="id" column="id" />
+		<result property="deviceUuid" column="device_uuid" />
+		<result property="osType" column="os_type" />
+		<result property="userId" column="user_id" />
+		<result property="addTime" column="add_time" />
+	</resultMap>
+	
+	<select id="getDevice" parameterType="HashMap" resultMap="getDeviceResultMap">
+		select id,device_uuid,os_type,user_id,add_time from cm_devices where 
+		device_uuid=#{deviceUuid} and os_type=#{osType} order by add_time desc limit 1
+	</select>
+	
+	<insert id="addDevice" parameterType="cn.illegal.orm.DeviceORM" >
+		insert into cm_devices (device_uuid,os_type,user_id,add_time) values 
+		(#{deviceUuid},#{osType},#{userId},#{addTime})
+	</insert>
+	
+	
+	<update id="updateDevice" parameterType="cn.illegal.orm.DeviceORM">
+		update cm_devices set user_id=#{userId} where device_uuid=#{deviceUuid} and os_type=#{osType}
+	</update>
+	
+</mapper>

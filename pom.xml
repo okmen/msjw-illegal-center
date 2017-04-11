@@ -1,0 +1,414 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.chudaokeji.services</groupId>
+	<artifactId>illegal-center</artifactId>
+	<version>${publish.version}</version>
+	<name>illegal-center</name>
+	<description>illegal-center</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<packaging.type>jar</packaging.type>
+		<!-- spring版本号 -->
+		<spring.version>3.2.11.RELEASE</spring.version>
+		<!-- mybatis版本号 -->
+		<mybatis.version>3.2.8</mybatis.version>
+		<!-- log4j日志文件管理包版本 -->
+		<slf4j.version>1.6.6</slf4j.version>
+	</properties>
+
+	<build>
+		<finalName>illegal-center-server</finalName>
+		<resources>
+			<resource>
+				<includes>
+					<include>datasource.properties</include>
+					<include>config.properties</include>
+					<include>META-INF/conf/dubbo.properties</include>
+					<include>applicationContext.xml</include>
+					<include>applicationContext-redis.xml</include>
+					<include>applicationContext-mybatis.xml</include>
+					<include>provider.xml</include>
+					<include>log4j.properties</include>
+				</includes>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>false</filtering>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+
+			<!-- 打包，指定main方法 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<useUniqueVersions>true</useUniqueVersions>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix></classpathPrefix>
+							<mainClass>cn.account.main.Provider</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/src.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<distributionManagement>
+				<repository>
+					<id>snapshots</id>
+					<url>http://192.168.1.251:8081/nexus/content/repositories/snapshots/</url>
+					<layout>default</layout>
+				</repository>
+			</distributionManagement>
+			<properties>
+				<env>dev</env>
+				<publish.version>1.0.0-SNAPSHOT</publish.version>
+				<sdk.version>1.0.0-SNAPSHOT</sdk.version>
+				<account.center.api.version>1.0.0-SNAPSHOT</account.center.api.version>
+				
+				<dubbo.registry.url><![CDATA[192.168.1.120:2181]]></dubbo.registry.url>
+				<dubbo.provider.port><![CDATA[30200]]></dubbo.provider.port>
+				<dubbo.provider.timeout><![CDATA[5000]]></dubbo.provider.timeout>
+				<dubbo.monitor.address><![CDATA[192.168.1.120:7070]]></dubbo.monitor.address>
+
+				<mysql.account.read.url><![CDATA[jdbc:mysql://192.168.1.121:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.read.url>
+				<mysql.account.read.username><![CDATA[root]]></mysql.account.read.username>
+				<mysql.account.read.password><![CDATA[123456]]></mysql.account.read.password>
+
+				<mysql.account.write.url><![CDATA[jdbc:mysql://192.168.1.121:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.write.url>
+				<mysql.account.write.username><![CDATA[root]]></mysql.account.write.username>
+				<mysql.account.read.password><![CDATA[123456]]></mysql.account.read.password>
+
+
+				<redis.user-center.configstr><![CDATA[illegal-center1:192.168.1.121:6379,user-center2:192.168.1.121:6379]]></redis.user-center.configstr>
+				
+				
+				<accessToken.time>86400</accessToken.time>
+				<refreshToken.time>2592000</refreshToken.time>
+                <encypt.access.token.time>86400</encypt.access.token.time>
+             
+                
+				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
+				<log4j.rootLogger><![CDATA[debug,R,stdout]]></log4j.rootLogger>
+				<log4j.choumeiLevel><![CDATA[debug]]></log4j.choumeiLevel>
+				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
+				<isOnline>0</isOnline>
+				<log4j.socket.host><![CDATA[192.168.1.120]]></log4j.socket.host>
+				<log4j.socket.port><![CDATA[10005]]></log4j.socket.port>
+				<isMWuserResultsTaskNeed>0</isMWuserResultsTaskNeed>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>test</id>
+			<distributionManagement>
+				<repository>
+					<id>snapshots</id>
+					<url>http://192.168.1.251:8081/nexus/content/repositories/snapshots</url>
+					<layout>default</layout>
+				</repository>
+			</distributionManagement>
+			<properties>
+				<env>test</env>
+				<publish.version>1.0.0-SNAPSHOT</publish.version>
+				<sdk.version>1.0.0-SNAPSHOT</sdk.version>
+				<account.center.api.version>1.0.0-SNAPSHOT</account.center.api.version>
+				<dubbo.registry.url><![CDATA[test-zookeeper.choumei.me:2181]]></dubbo.registry.url>
+				<dubbo.provider.port><![CDATA[30000]]></dubbo.provider.port>
+				<dubbo.provider.timeout><![CDATA[5000]]></dubbo.provider.timeout>
+				<dubbo.monitor.address><![CDATA[test-monitor.choumei.me:7070]]></dubbo.monitor.address>
+
+				<mysql.account.read.url><![CDATA[jdbc:mysql://test-cmdb.choumei.me:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.read.url>
+                <mysql.account.read.username><![CDATA[u_webapp]]></mysql.account.read.username>
+
+                <mysql.account.write.url><![CDATA[jdbc:mysql://test-cmdb.choumei.me:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.write.url>
+                <mysql.account.write.username><![CDATA[u_webapp]]></mysql.account.write.username>
+
+				<mysql.account.password.config><![CDATA[config.file=/workspace/druid/choumei-password_test.properties;secretkey.file=/workspace/druid/key_test]]></mysql.account.password.config>
+
+				<redis.user-center.configstr><![CDATA[user-center1:test-redis1.choumei.me:6379,user-center2:test-redis1.choumei.me:6379]]></redis.user-center.configstr>
+
+                <!-- accessToken有效期60秒 -->
+                <accessToken.time>86400</accessToken.time>
+				<refreshToken.time>2592000</refreshToken.time>
+                <encypt.access.token.time>86400</encypt.access.token.time>
+                
+				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
+				<log4j.rootLogger><![CDATA[error,R]]></log4j.rootLogger>
+				<log4j.choumeiLevel><![CDATA[debug]]></log4j.choumeiLevel>
+				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
+				<isOnline>1</isOnline>
+				<log4j.socket.host><![CDATA[test-logserver.choumei.me]]></log4j.socket.host>
+				<log4j.socket.port><![CDATA[10003]]></log4j.socket.port>
+				<isMWuserResultsTaskNeed>0</isMWuserResultsTaskNeed>
+			</properties>
+		</profile>
+		
+	
+		<profile>
+			<id>online</id>
+			<distributionManagement>
+				<repository>
+					<id>releases</id>
+					<url>http://192.168.1.251:8081/nexus/content/repositories/releases/</url>
+					<layout>default</layout>
+				</repository>
+			</distributionManagement>
+			<properties>
+				<env>online</env>
+				<publish.version>1.0.0</publish.version>
+				<sdk.version>1.0.0</sdk.version>
+				<account.center.api.version>1.0.0</account.center.api.version>
+				<dubbo.registry.url><![CDATA[zookeeper.choumei.cn:2181]]></dubbo.registry.url>
+				<dubbo.provider.port><![CDATA[30000]]></dubbo.provider.port>
+				<dubbo.provider.timeout><![CDATA[5000]]></dubbo.provider.timeout>
+				<dubbo.monitor.address><![CDATA[monitor.choumei.cn:7070]]></dubbo.monitor.address>
+
+				<mysql.account.read.url><![CDATA[jdbc:mysql://cmdb.choumei.cn:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.read.url>
+				<mysql.account.read.username><![CDATA[app_illegal-center]]></mysql.account.read.username>
+				<mysql.account.write.url><![CDATA[jdbc:mysql://cmdb.choumei.cn:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.write.url>
+				<mysql.account.write.username><![CDATA[app_illegal-center]]></mysql.account.write.username>
+
+				<mysql.account.password.config><![CDATA[config.file=/workspace/druid/choumei-password_online.properties;secretkey.file=/workspace/druid/key_online]]></mysql.account.password.config>
+
+				<redis.user-center.configstr><![CDATA[user-center1:redis2.choumei.cn:6379,user-center2:redis2.choumei.cn:6379]]></redis.user-center.configstr>
+               
+                <!-- accessToken有效期30天 -->
+                <accessToken.time>2592000</accessToken.time>
+				<refreshToken.time>2592000</refreshToken.time>
+                <encypt.access.token.time>2592000</encypt.access.token.time>
+                
+				<env.url_prefix><![CDATA[]]>
+				</env.url_prefix>
+				<log4j.rootLogger><![CDATA[error,R]]></log4j.rootLogger>
+				<log4j.choumeiLevel><![CDATA[info]]></log4j.choumeiLevel>
+				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
+				<isOnline>0</isOnline>
+				<log4j.socket.host><![CDATA[logserver.choumei.cn]]></log4j.socket.host>
+				<log4j.socket.port><![CDATA[10003]]></log4j.socket.port>
+				<isMWuserResultsTaskNeed>1</isMWuserResultsTaskNeed>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- spring核心包 -->
+		<!-- springframe start -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- springframe end -->
+
+		<!-- mybatis核心包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<!-- mybatis/spring包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- mysql驱动包 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.29</version>
+		</dependency>
+		<!-- junit测试包 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 阿里巴巴数据源包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
+		<!-- 私有工程 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.39</version>
+		</dependency>
+		<!-- RPC -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>2.4.9</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.4.6</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.chudaokeji.lib</groupId>
+			<artifactId>common-sdk</artifactId>
+			<version>${sdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.chudaokeji.services</groupId>
+			<artifactId>illegal-center-api</artifactId>
+			<version>${account.center.api.version}</version>
+		</dependency>
+	</dependencies>
+</project>

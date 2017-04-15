@@ -32,6 +32,54 @@ public class IIllegalCachedImpl implements IIllegalCached{
     @Value("${accessTokentime}")
     private int accessTokenTime;
     
+    
+    //平安接口--合作方代码
+    @Value("${partnerCode}")
+    private String  partnerCode;
+    //平安接口--合作方唯一标识
+    @Value("${partnerUserId}")
+    private String partnerUserId;
+    //平安接口--秘钥
+    @Value("${partnerKey}")
+    private String partnerKey;
+    //平安接口--签名算法
+    @Value("${partnerMacAlg}")
+    private String partnerMacAlg;
+    
+    //违法预约接口--ip
+    @Value("${subcribeLrip}")
+    private String subcribeLrip;
+    //违法预约接口--mac
+    @Value("${subcribeLrmac}")
+    private String subcribeLrmac;
+    //违法预约接口--用户名
+    @Value("${subcribeUserid}")
+    private String subcribeUserid;
+    //违法预约接口--密码
+    @Value("${subcribeUserpwd}")
+    private String subcribeUserpwd;
+  //违法预约接口--密码
+    @Value("${subcribeUrl}")
+    private String subcribeUrl;
+    
+    
+    //警司通接口--请求地址
+    @Value("${policeUrl}")
+    private String policeUrl;
+    //警司通接口--方法
+    @Value("${policeMethod}")
+    private String policeMethod;
+    //警司通接口--秘钥
+    @Value("${policeKey}")
+    private String policeKey;
+    //警司通接口--用户名
+    @Value("${policeUserid}")
+    private String policeUserid;
+    //警司通接口--密码
+    @Value("${policeUserpwd}")
+    private String policeUserpwd;
+    
+    
 	@Autowired
 	@Qualifier("jedisCacheManagerImpl")
 	private ICacheManger<String> cacheManger;
@@ -39,6 +87,9 @@ public class IIllegalCachedImpl implements IIllegalCached{
 	@Autowired
 	@Qualifier("jedisCacheManagerImpl")
 	private ICacheManger<Object> objectcacheManger;
+	
+	
+	
 	
 	@Autowired
 	private ISerializeManager< Map<String, String> > serializeManager;
@@ -135,5 +186,147 @@ public class IIllegalCachedImpl implements IIllegalCached{
             return null;
         }
     }
+
+
+	public String getPartnerCode() {
+		return partnerCode;
+	}
+
+
+	public void setPartnerCode(String partnerCode) {
+		this.partnerCode = partnerCode;
+	}
+
+
+	public String getPartnerUserId() {
+		return partnerUserId;
+	}
+
+
+	public void setPartnerUserId(String partnerUserId) {
+		this.partnerUserId = partnerUserId;
+	}
+
+
+	public String getPartnerKey() {
+		return partnerKey;
+	}
+
+
+	public void setPartnerKey(String partnerKey) {
+		this.partnerKey = partnerKey;
+	}
+
+
+	public String getPartnerMacAlg() {
+		return partnerMacAlg;
+	}
+
+
+	public void setPartnerMacAlg(String partnerMacAlg) {
+		this.partnerMacAlg = partnerMacAlg;
+	}
+
+
+	public String getSubcribeLrip() {
+		return subcribeLrip;
+	}
+
+
+	public void setSubcribeLrip(String subcribeLrip) {
+		this.subcribeLrip = subcribeLrip;
+	}
+
+
+	public String getSubcribeLrmac() {
+		return subcribeLrmac;
+	}
+
+
+	public void setSubcribeLrmac(String subcribeLrmac) {
+		this.subcribeLrmac = subcribeLrmac;
+	}
+
+
+	public String getSubcribeUserid() {
+		return subcribeUserid;
+	}
+
+
+	public void setSubcribeUserid(String subcribeUserid) {
+		this.subcribeUserid = subcribeUserid;
+	}
+
+
+	public String getSubcribeUserpwd() {
+		return subcribeUserpwd;
+	}
+
+
+	public void setSubcribeUserpwd(String subcribeUserpwd) {
+		this.subcribeUserpwd = subcribeUserpwd;
+	}
+
+
+	public String getPoliceUrl() {
+		return policeUrl;
+	}
+
+
+	public void setPoliceUrl(String policeUrl) {
+		this.policeUrl = policeUrl;
+	}
+
+
+	public String getPoliceMethod() {
+		return policeMethod;
+	}
+
+
+	public void setPoliceMethod(String policeMethod) {
+		this.policeMethod = policeMethod;
+	}
+
+
+	public String getPoliceKey() {
+		return policeKey;
+	}
+
+
+	public void setPoliceKey(String policeKey) {
+		this.policeKey = policeKey;
+	}
+
+
+	public String getPoliceUserid() {
+		return policeUserid;
+	}
+
+
+	public void setPoliceUserid(String policeUserid) {
+		this.policeUserid = policeUserid;
+	}
+
+
+	public String getPoliceUserpwd() {
+		return policeUserpwd;
+	}
+
+
+	public void setPoliceUserpwd(String policeUserpwd) {
+		this.policeUserpwd = policeUserpwd;
+	}
+
+
+	public String getSubcribeUrl() {
+		return subcribeUrl;
+	}
+
+
+	public void setSubcribeUrl(String subcribeUrl) {
+		this.subcribeUrl = subcribeUrl;
+	}
+
+
 
 }

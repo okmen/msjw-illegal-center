@@ -149,6 +149,26 @@
 				<refreshToken.time>2592000</refreshToken.time>
                 <encypt.access.token.time>86400</encypt.access.token.time>
              
+             
+             	<partner.code>P003</partner.code>
+             	<partner.userid>123456</partner.userid>
+             	<partner.key>1234567890123456</partner.key>
+             	<partner.macAlg>33</partner.macAlg>
+             	
+             	
+             	<subcribe.lrip>123.56.180.216</subcribe.lrip>
+             	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
+             	<subcribe.userid>WX02</subcribe.userid>
+             	<subcribe.userpwd>WX02@168</subcribe.userpwd>
+             	<subcribe.url>https://szjjapi.chudaokeji.com/yywfcl/services/yywfcl</subcribe.url>
+             	
+             	<police.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</police.url>
+             	<police.method>xxptSchuding</police.method>
+             	<police.userid>WX02</police.userid>
+             	<police.userpwd>WX02@168</police.userpwd>
+             	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
+ 
+             	
                 
 				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
 				<log4j.rootLogger><![CDATA[debug,R,stdout]]></log4j.rootLogger>
@@ -409,6 +429,6 @@
 			<groupId>cn.chudaokeji.services</groupId>
 			<artifactId>illegal-center-api</artifactId>
 			<version>${account.center.api.version}</version>
-		</dependency>
+		</dependency>	 
 	</dependencies>
 </project>

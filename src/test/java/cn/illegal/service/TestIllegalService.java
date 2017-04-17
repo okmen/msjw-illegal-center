@@ -60,7 +60,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void queryInfoByLicensePlateNo(){
-	   illegalService.queryInfoByLicensePlateNo("粤B6F7M1","2","9094");
+	   illegalService.queryInfoByLicensePlateNo("粤B6F7M1","02","9094");
    }
    
    /**
@@ -71,8 +71,15 @@ public class TestIllegalService {
 	   illegalService.queryInfoByDrivingLicenceNo("622822198502074110","440200642519");
    }
    
+   
+   @Test
+   public void  trafficIllegalClaimReg(){
+	   CarInfoBean carinfo=new CarInfoBean("粤B6F7M1",  "2", "9094");
+	   CustInfoBean custinfo=new CustInfoBean("王玉璞", "622822198502074110", "01", "18601174358",  "622822198502074110");
+	   illegalService.trafficIllegalClaimReg(custinfo, carinfo);
+   }
    /**
-	 * 打单前查询 --
+	 * 打单前查询 
 	 */
    @Test
    public void trafficIllegalClaimBefore(){
@@ -80,11 +87,14 @@ public class TestIllegalService {
    }
   
    /**
-	 * 查询缴费信息--302
+	 * 查询缴费信息
 	 */
    @Test
    public void toQueryPunishmentPage(){
-	   illegalService.toQueryPunishmentPage("00000000001","粤B6F7M1","18601174358");
+	  String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358");
+	  //String ss= illegalService.toPayPage("4403010922403405","粤B8A3N2","18601174358");
+	  
+	  System.out.println(ss+"--test");
    }
    
    /**
@@ -100,7 +110,8 @@ public class TestIllegalService {
 	 */
    @Test
    public void toGetSubscribeSorts(){
-	   illegalService.toGetSubscribeSorts("440319000000");
+	   //illegalService.toGetSubscribeSorts("440319000000");
+	   illegalService.isRegisterUser();
    }
     
    /**

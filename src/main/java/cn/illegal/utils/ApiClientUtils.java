@@ -8,6 +8,7 @@ import java.util.Map;
 
 import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ResultReturnBean;
+import cn.illegal.bean.ResultReturnBeanA;
 import cn.sdk.util.DateUtil;
 import cn.sdk.util.HttpClientUtil;
 import cn.sdk.util.MacUtil;
@@ -66,6 +67,28 @@ public class ApiClientUtils {
 		    return  result;
 	 }
 	 
+	 public static ResultReturnBeanA requestApiA(String url,ParamRequestBean paramBean, Object data,String key){
+		    /*    Map<String, Object> postData = new HashMap<String, Object>();
+		        postData.put("partnerCode", "P003");
+		        postData.put("partnerUserId", "123456");
+		        postData.put("serialNo", "12345678900987654321");
+		        postData.put("macAlg", "33");
+		        postData.put("timeStamp", timeStamp);
+		        postData.put("data", data);*/
+		        
+		       
+		        JSONObject show1=JSONObject.fromObject(data);
+		        String mac= MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
+		        System.out.println(mac);
+		        paramBean.setMac(mac);     
+		        JSONObject jsons=JSONObject.fromObject(paramBean);
+		        System.out.println(jsons);
+		
+		        String respStr = HttpClientUtil.post(url,jsons.toString());
+		        System.out.println("Json:"+respStr);
+		        ResultReturnBeanA result=(ResultReturnBeanA) JSONObject.toBean(JSONObject.fromObject(respStr),ResultReturnBeanA.class);		 
+			    return  result;
+		 }
 	 
 	 public static void main(String[] args) {
 		 String key="1234567890123456";

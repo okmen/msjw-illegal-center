@@ -143,7 +143,7 @@
 
 
 				<redis.user-center.configstr><![CDATA[illegal-center1:192.168.1.121:6379,user-center2:192.168.1.121:6379]]></redis.user-center.configstr>
-				
+				<redis.user-center.password><![CDATA[123456]]></redis.user-center.password>
 				
 				<accessToken.time>86400</accessToken.time>
 				<refreshToken.time>2592000</refreshToken.time>

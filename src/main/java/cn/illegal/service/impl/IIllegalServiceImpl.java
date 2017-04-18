@@ -28,6 +28,7 @@ import cn.illegal.bean.IllegalInfoBean;
 import cn.illegal.bean.IllegalInfoClaim;
 import cn.illegal.bean.IllegalInfoSheet;
 import cn.illegal.bean.IllegalProcessPointBean;
+import cn.illegal.bean.MessageBean;
 import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ReservationDay;
 import cn.illegal.bean.Sditem;
@@ -134,7 +135,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 查询违法信息根据--根据车牌号
 	 */
-	public List<IllegalInfoBean> queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
+	public MessageBean queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
 		String vehicleIdentifyNoLast4) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalQuerySync.do";
@@ -152,12 +153,22 @@ public class IIllegalServiceImpl implements IIllegalService {
 		ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 		ResultReturnBean result= ApiClientUtils.requestApi(url,bean,data,key);
+		MessageBean message=new MessageBean();
 		
-		List<IllegalInfoBean> infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
+		message.setCode(result.getRespCode());
+		message.setMessage(result.getRespMsg());
+		if(result.getRespCode().equals("0000")){			
+			if(result.getData()==null){
+				message.setMessage("车辆当前无未处理的违法!");
+			}else{
+				List<IllegalInfoBean> infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
+				message.setData(infos);
+			}
+		}
 		
 		System.out.println("---"+result.getData());
 			
-		return infos;
+		return message;
 	}
 
 

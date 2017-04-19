@@ -87,9 +87,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 	}
 
 
-	public int isRegisterUser(){
+	public String isRegisterUser(){
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/isRegisterUser.do";
+		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/isRegisterUser.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -104,7 +104,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 		ResultReturnBean result= ApiClientUtils.requestApi(url,bean,data,key);
 		System.out.println(result.getRespCode());
-		return   0;
+		return   result.getRespCode();
 		
 	}
 	
@@ -139,7 +139,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
 		String vehicleIdentifyNoLast4) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalQuerySync.do";
+		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/trafficIllegalQuerySync.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -154,12 +154,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 		ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 		ResultReturnBean result= ApiClientUtils.requestApi(url,bean,data,key);
-		BaseBean message=new BaseBean();
+		
 		List<IllegalInfoBean> infos=null;
 
 		if(result.getRespCode().equals("0000")&&result.getData()!=null){			
 			infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
-			message.setData(infos);
 		}
 		
 		System.out.println("---"+result.getData());
@@ -189,10 +188,14 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 		ResultReturnBean result= ApiClientUtils.requestApi(url,bean,data,key);
 			
-		List<IllegalInfoBean> infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
+		List<IllegalInfoBean> infos=null;
+
+		if(result.getRespCode().equals("0000")&&result.getData()!=null){			
+			infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
+		}
 		
 		System.out.println("---"+result.getData());
-			
+		
 		return infos;
 
 	}
@@ -202,7 +205,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 打单注册接口
 	 * @return
 	 */
-	public String  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo){
+	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo){
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalClaimReg.do";
 		String key=illegalCache.getPartnerKey();
@@ -223,12 +226,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-		ResultReturnBean result= ApiClientUtils.requestApi(url,bean,data,key);
+		ResultReturnBeanA result= ApiClientUtils.requestApiA(url,bean,data,key);
 			
 		//List<IllegalInfoBean> infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData(), IllegalInfoBean.class); 
-		
+		BaseBean baseBean =new BaseBean();
+		baseBean.setCode(result.getRespCode());
+		baseBean.setMsg(result.getRespMsg());
+		baseBean.setData(result.getData());
+	
 		System.out.println("---"+result.getData());
-		return  "";
+		return  baseBean;
 	}
 	
 	/**
@@ -237,7 +244,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	@Override
 	public List<IllegalInfoClaim> trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalQuery.do";
+		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/trafficIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -254,8 +261,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 		ResultReturnBean result= ApiClientUtils.requestApi(url,bean,data,key);
 			
-		List<IllegalInfoClaim> infos=(List<IllegalInfoClaim>) JSON.parseArray(result.getData().toString(), IllegalInfoClaim.class); 
+		List<IllegalInfoClaim> infos=null; 
 		
+		if(result.getRespCode().equals("0000")&&result.getData()!=null){			
+			infos=(List<IllegalInfoClaim>) JSON.parseArray(result.getData().toString(), IllegalInfoClaim.class); 
+		}
 		System.out.println("---"+result.getData());
 			
 		return infos;

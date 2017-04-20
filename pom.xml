@@ -227,6 +227,24 @@
 
 				<redis.user-center.configstr><![CDATA[user-center1:test-redis1.choumei.me:6379,user-center2:test-redis1.choumei.me:6379]]></redis.user-center.configstr>
  -->
+ 				<partner.code>P003</partner.code>
+             	<partner.userid>123456</partner.userid>
+             	<partner.key>1234567890000000</partner.key>
+             	<partner.macAlg>33</partner.macAlg>
+             	
+             	
+             	<subcribe.lrip>123.56.180.216</subcribe.lrip>
+             	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
+             	<subcribe.userid>WX02</subcribe.userid>
+             	<subcribe.userpwd>WX02@168</subcribe.userpwd>
+             	<subcribe.url>https://szjjapi.chudaokeji.com/yywfcl/services/yywfcl</subcribe.url>
+             	
+             	<police.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</police.url>
+             	<police.method>xxptSchuding</police.method>
+             	<police.userid>WX02</police.userid>
+             	<police.userpwd>WX02@168</police.userpwd>
+             	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
+ 				
                 <!-- accessToken有效期60秒 -->
                 <accessToken.time>86400</accessToken.time>
 				<refreshToken.time>2592000</refreshToken.time>
@@ -271,6 +289,24 @@
 				<mysql.illegal.password.config><![CDATA[config.file=/workspace/druid/choumei-password_online.properties;secretkey.file=/workspace/druid/key_online]]></mysql.illegal.password.config>
 
 				<redis.user-center.configstr><![CDATA[user-center1:redis2.choumei.cn:6379,user-center2:redis2.choumei.cn:6379]]></redis.user-center.configstr>
+               
+                <partner.code>P003</partner.code>
+             	<partner.userid>123456</partner.userid>
+             	<partner.key>1234567890000000</partner.key>
+             	<partner.macAlg>33</partner.macAlg>
+             	
+             	
+             	<subcribe.lrip>123.56.180.216</subcribe.lrip>
+             	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
+             	<subcribe.userid>WX02</subcribe.userid>
+             	<subcribe.userpwd>WX02@168</subcribe.userpwd>
+             	<subcribe.url>https://szjjapi.chudaokeji.com/yywfcl/services/yywfcl</subcribe.url>
+             	
+             	<police.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</police.url>
+             	<police.method>xxptSchuding</police.method>
+             	<police.userid>WX02</police.userid>
+             	<police.userpwd>WX02@168</police.userpwd>
+             	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
                
                 <!-- accessToken有效期30天 -->
                 <accessToken.time>2592000</accessToken.time>

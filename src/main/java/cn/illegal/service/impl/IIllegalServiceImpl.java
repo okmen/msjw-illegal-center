@@ -90,25 +90,26 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	public String isRegisterUser(){
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/isRegisterUser.do";
+		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/isRegisterUser.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		ResultReturnBeanA result=null;
+		ParamRequestBean bean=null;
 		String isReg="0";
 		
 		CustDataInfo data=new CustDataInfo();
 		//data.setCustInfo(custInfo);
 		//data.setCarInfo(carInfo);
 		try {
-			ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 			result= ApiClientUtils.requestApiA(url,bean,data,key);
 			isReg=result.getData().get("isRegister").toString();
 			System.out.println(result.getRespCode()+"--"+isReg);
 		} catch (Exception e) {
-			logger.error("校验客户是否注册失败，ResultReturnBeanA= "+result.toString(), e);
+			logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 				
@@ -122,7 +123,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/custRegInfoReceive.do";
+		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/custRegInfoReceive.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -133,12 +134,13 @@ public class IIllegalServiceImpl implements IIllegalService {
 		data.setCustInfo(custInfo);
 		data.setCarInfo(carInfo);
 		ResultReturnBean result=null;
+		ParamRequestBean bean=null;
 		try {
-			ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 			result= ApiClientUtils.requestApi(url,bean,data,key);
 		} catch (Exception e) {
-			logger.error("已注册客户信息同步失败，ResultReturnBean= "+result.toString(), e);
+			logger.error("已注册客户信息同步失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 		
@@ -153,7 +155,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
 		String vehicleIdentifyNoLast4) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalQuerySync.do";
+		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/trafficIllegalQuerySync.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -166,9 +168,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 		//data.put("vehicleIdentifyNoLast4", vehicleIdentifyNoLast4);
 		
 		ResultReturnBean result=null;
+		ParamRequestBean bean=null;
 		List<IllegalInfoBean> infos=null;
 		try {
-			ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 			result= ApiClientUtils.requestApi(url,bean,data,key);
 			
@@ -177,7 +180,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			}
 
 		} catch (Exception e) {
-			logger.error("查询违法信息根据（根据车牌号）失败，ResultReturnBean= "+result.toString(), e);
+			logger.error("查询违法信息根据（根据车牌号）失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 			
@@ -192,7 +195,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficDriverIllegalQuery.do";
+		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/trafficDriverIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -206,8 +209,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		ResultReturnBean result=null;
 		List<IllegalInfoBean> infos=null;
+		ParamRequestBean bean=null;
 		try {
-			ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 			result= ApiClientUtils.requestApi(url,bean,data,key);
 				
@@ -216,7 +220,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			}
 
 		} catch (Exception e) {
-			logger.error("查询违法信息根据（根据驾驶证号）失败，ResultReturnBean= "+result.toString(), e);
+			logger.error("查询违法信息根据（根据驾驶证号）失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 	
@@ -252,15 +256,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		ResultReturnBeanA result=null;
 		BaseBean baseBean =new BaseBean();
+		ParamRequestBean bean=null;
 		try {
-			ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 			result= ApiClientUtils.requestApiA(url,bean,data,key);
 			baseBean.setCode(result.getRespCode());
 			baseBean.setMsg(result.getRespMsg());
 			baseBean.setData(result.getData());
 		} catch (Exception e) {
-			logger.error("打单注册失败，ResultReturnBeanA= "+result.toString(), e);
+			logger.error("打单注册失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 
@@ -274,7 +279,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	@Override
 	public List<IllegalInfoClaim> trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/trafficIllegalQuery.do";
+		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -287,8 +292,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 		data.put("licensePlateType", licensePlateType); 
 		List<IllegalInfoClaim> infos=null; 
 		ResultReturnBean result=null;
+		ParamRequestBean bean=null;
 		try {
-			ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 			result= ApiClientUtils.requestApi(url,bean,data,key);
 				
@@ -297,7 +303,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			}
 
 		} catch (Exception e) {
-			logger.error("违法确认，打单前查询失败，ResultReturnBean= "+result.toString(), e);
+			logger.error("违法确认，打单前查询失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 			
@@ -325,15 +331,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 		data.put("illegalNo",illegalNo);
 		ResultReturnBeanA result=null;
 		IllegalInfoSheet info=null;
+		ParamRequestBean bean=null;
 		try {
-			ParamRequestBean bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 			result= ApiClientUtils.requestApiA(url,bean,data,key);
 				
 			info=(IllegalInfoSheet) JSON.parseObject(result.getData().toString(), IllegalInfoSheet.class); 
 
 		} catch (Exception e) {
-			logger.error("违法确认，打单前查询失败，ResultReturnBeanA= "+result.toString(), e);
+			logger.error("违法确认，打单前查询失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 	
@@ -344,7 +351,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 
 	/**
-	 * 查询缴费信息
+	 * 违法缴费信息
 	 * @throws Exception 
 	 */
 	@Override
@@ -390,9 +397,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 			}
 			
 		} catch (HttpException e) {
-			logger.error("查询缴费信息失败  Http， ResultReturnBeanA= "+bean.toString(), e);		
+			logger.error("查询缴费信息失败  Http， ParamRequestBean= "+bean.toString(), e);		
 		} catch (IOException e) {
-			logger.error("查询缴费信息失败  IO，ResultReturnBeanA= "+bean.toString(), e);
+			logger.error("查询缴费信息失败  IO，ParamRequestBean= "+bean.toString(), e);
 		}
 			
 		return redirectUrl;
@@ -400,7 +407,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 
 	
-	@Override
+	/**
+	 * 规费缴费信息
+	 */
 	public String toPayPage(String illegalNo,String licensePlateNo, String mobileNo) {
 		String url="http://uat.stcpay.com/ysth-traffic-front/fee/toQueryFeePage.do";
 		PostMethod post=null;
@@ -451,9 +460,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 			
 
 		} catch (HttpException e) {
-			logger.error("查询规费信息失败  Http， ResultReturnBeanA= "+bean.toString(), e);		
+			logger.error("查询规费信息失败  Http， ParamRequestBean= "+bean.toString(), e);		
 		} catch (IOException e) {
-			logger.error("查询规费信息失败  IO，ResultReturnBeanA= "+bean.toString(), e);
+			logger.error("查询规费信息失败  IO，ParamRequestBean= "+bean.toString(), e);
 		}
 			
 		return redirectUrl;
@@ -509,7 +518,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 预约排期信息读取
 	 */
 	@Override
-	public List<ReservationDay> toGetSubscribeSorts(String cldbmid) {
+	public Map toGetSubscribeSorts(String cldbmid) {
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
 		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
@@ -521,11 +530,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String url = illegalCache.getSubcribeUrl();
 		String method = "getYypqByCldbmid";
 		List<ReservationDay> days=new ArrayList<>();
+		Map<String,Object> map=new HashMap();
 		try {
 			JSONObject respStr = WebServiceClient.easyWebService(url, method, xml.toString());
 			JSONObject head=(JSONObject) respStr.get("head");
 	         //返回的message
-	        //String msg = head.get("message").toString();
+	        String snm = head.get("snm").toString();
 	         //返回的状态码
 	        String code = head.get("code").toString();
 	         
@@ -534,13 +544,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 	        String items=body.get("item").toString();
 	   
 	        days=(List<ReservationDay>) JSON.parseArray(items, ReservationDay.class);
+	        
+	        map.put("snm", snm);
+	        map.put("data", days);
 	        System.out.println(days.get(0).getYydate());
 		} catch (Exception e) {
 			logger.error("预约排期信息读取失败 ， XML= "+xml.toString(), e);
 			e.printStackTrace();
 		}
 		
-		return days;
+		return map;
 	}
 	
 
@@ -647,8 +660,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	        String code = head.get("code").toString();
 	        JSONObject body=(JSONObject) respStr.get("body");
 	        String items=body.get("item").toString();
-	 	   
-	        subcribes=(List<SubcribeBean>) JSON.parseArray(items, SubcribeBean.class); 
+	 	    if(items.indexOf("[")!=-1){
+	 	    	subcribes=(List<SubcribeBean>) JSON.parseArray(items, SubcribeBean.class); 
+	 	    }else{
+	 	    	SubcribeBean bean=JSON.parseObject(items, SubcribeBean.class);
+	 	    	subcribes.add(bean);
+	 	    }        
 	        System.out.println("第一个预约地点："+subcribes.get(0).getCldbmmc());
 		} catch (Exception e) {
 			logger.error("获取预约信息列表失败 ， XML= "+xml.toString(), e);

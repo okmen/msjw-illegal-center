@@ -60,7 +60,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void queryInfoByLicensePlateNo(){
-	   illegalService.queryInfoByLicensePlateNo("粤BMF688","02","9094");
+	   illegalService.queryInfoByLicensePlateNo("粤BMF688","2","9094");
    }
    
    /**
@@ -137,7 +137,7 @@ public class TestIllegalService {
     */
    @Test
    public void querySubscribe(){
-	   illegalService.querySubscribe("粤B6F7M1","2","18601174358");
+	   illegalService.querySubscribe("粤B6F7M1",2,"18601174358");
    }
    
    @Test

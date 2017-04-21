@@ -637,7 +637,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 获取预约信息列表
 	 */
 	@Override
-	public List<SubcribeBean> querySubscribe(String licensePlateNo, String licensePlateType, String mobilephone) {
+	public List<SubcribeBean> querySubscribe(String licensePlateNo, int licensePlateType, String mobilephone) {
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
 		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");

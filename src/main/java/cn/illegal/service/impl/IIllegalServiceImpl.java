@@ -659,14 +659,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 	         //返回的状态码
 	        String code = head.get("code").toString();
 	        JSONObject body=(JSONObject) respStr.get("body");
-	        String items=body.get("item").toString();
-	 	    if(items.indexOf("[")!=-1){
-	 	    	subcribes=(List<SubcribeBean>) JSON.parseArray(items, SubcribeBean.class); 
-	 	    }else{
-	 	    	SubcribeBean bean=JSON.parseObject(items, SubcribeBean.class);
-	 	    	subcribes.add(bean);
-	 	    }        
-	        System.out.println("第一个预约地点："+subcribes.get(0).getCldbmmc());
+	        if(body!=null){
+		        String items=body.get("item").toString();
+		 	    if(items.indexOf("[")!=-1){
+		 	    	subcribes=(List<SubcribeBean>) JSON.parseArray(items, SubcribeBean.class); 
+		 	    }else{
+		 	    	SubcribeBean bean=JSON.parseObject(items, SubcribeBean.class);
+		 	    	subcribes.add(bean);
+		 	    }  
+	        }
+	        
 		} catch (Exception e) {
 			logger.error("获取预约信息列表失败 ， XML= "+xml.toString(), e);
 			e.printStackTrace();

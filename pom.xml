@@ -171,7 +171,7 @@
              	
                 
 				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
-				<log4j.rootLogger><![CDATA[DEBUG,socket,R,std]]></log4j.rootLogger>
+				<log4j.rootLogger><![CDATA[DEBUG,socket,R,stdout]]></log4j.rootLogger>
 				<log4j.logLevel><![CDATA[DEBUG]]></log4j.logLevel>
 				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
 				<isOnline>0</isOnline>
@@ -251,7 +251,7 @@
                 <encypt.access.token.time>86400</encypt.access.token.time>
                 
 				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
-				<log4j.rootLogger><![CDATA[DEBUG,socket,R,std]]></log4j.rootLogger>
+				<log4j.rootLogger><![CDATA[DEBUG,socket,R,stdout]]></log4j.rootLogger>
 				<log4j.logLevel><![CDATA[DEBUG]]></log4j.logLevel>
 				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
 				<isOnline>1</isOnline>
@@ -315,7 +315,7 @@
                 
 				<env.url_prefix><![CDATA[]]>
 				</env.url_prefix>
-				<log4j.rootLogger><![CDATA[DEBUG,socket,R,std]]></log4j.rootLogger>
+				<log4j.rootLogger><![CDATA[DEBUG,socket,R,stdout]]></log4j.rootLogger>
 				<log4j.logLevel><![CDATA[DEBUG]]></log4j.logLevel>
 				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
 				<isOnline>0</isOnline>

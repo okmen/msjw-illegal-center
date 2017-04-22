@@ -171,8 +171,8 @@
              	
                 
 				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
-				<log4j.rootLogger><![CDATA[debug,R,stdout]]></log4j.rootLogger>
-				<log4j.choumeiLevel><![CDATA[debug]]></log4j.choumeiLevel>
+				<log4j.rootLogger><![CDATA[DEBUG,socket,R,std]]></log4j.rootLogger>
+				<log4j.logLevel><![CDATA[DEBUG]]></log4j.logLevel>
 				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
 				<isOnline>0</isOnline>
 				<log4j.socket.host><![CDATA[192.168.1.120]]></log4j.socket.host>
@@ -251,8 +251,8 @@
                 <encypt.access.token.time>86400</encypt.access.token.time>
                 
 				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
-				<log4j.rootLogger><![CDATA[error,R]]></log4j.rootLogger>
-				<log4j.choumeiLevel><![CDATA[debug]]></log4j.choumeiLevel>
+				<log4j.rootLogger><![CDATA[DEBUG,socket,R,std]]></log4j.rootLogger>
+				<log4j.logLevel><![CDATA[DEBUG]]></log4j.logLevel>
 				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
 				<isOnline>1</isOnline>
 				<log4j.socket.host><![CDATA[test-logserver.choumei.me]]></log4j.socket.host>
@@ -315,8 +315,8 @@
                 
 				<env.url_prefix><![CDATA[]]>
 				</env.url_prefix>
-				<log4j.rootLogger><![CDATA[error,R]]></log4j.rootLogger>
-				<log4j.choumeiLevel><![CDATA[info]]></log4j.choumeiLevel>
+				<log4j.rootLogger><![CDATA[DEBUG,socket,R,std]]></log4j.rootLogger>
+				<log4j.logLevel><![CDATA[DEBUG]]></log4j.logLevel>
 				<log4j.R.file><![CDATA[/workspace/logs/illegal-center.log]]></log4j.R.file>
 				<isOnline>0</isOnline>
 				<log4j.socket.host><![CDATA[logserver.choumei.cn]]></log4j.socket.host>

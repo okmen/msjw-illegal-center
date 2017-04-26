@@ -572,7 +572,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		xml.append("<cldbmid>"+cldbmid+"</cldbmid >");
 		xml.append("<cczb_id>"+cczb_id+"</cczb_id>");
 		xml.append("<hphm>"+carInfo.getLicensePlateNo()+"</hphm>");
-		xml.append("<hpzl>"+carInfo.getLicensePlateType()+"</hpzl>");
+		xml.append("<hpzl>"+Integer.parseInt(carInfo.getLicensePlateType())+"</hpzl>");
 		xml.append("<jszh>"+custInfo.getDrivingLicenceNo()+"</jszh>");
 		xml.append("<sjhm>"+custInfo.getMobileNo()+"</sjhm>");
 		xml.append("<lyfs>"+sourceType+"</lyfs>");

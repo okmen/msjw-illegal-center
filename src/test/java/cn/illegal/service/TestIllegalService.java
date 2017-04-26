@@ -46,8 +46,8 @@ public class TestIllegalService {
 	 */
    @Test
    public void custRegInfoReceive() {
-	   CarInfoBean carinfo=new CarInfoBean("粤B6F7M1",  "2", "9094");
-	   CustInfoBean custinfo=new CustInfoBean("王玉璞", "622822198502074110", "01", "18601174358",  "622822198502074110");
+	   CarInfoBean carinfo=new CarInfoBean("粤B701NR",  "2", "9094");
+	   CustInfoBean custinfo=new CustInfoBean("杨明畅", "440301199002101119", "01", "18603017278",  "440301199002101119");
 
 	   List<CarInfoBean> list=new ArrayList<>();
 	   list.add(carinfo);

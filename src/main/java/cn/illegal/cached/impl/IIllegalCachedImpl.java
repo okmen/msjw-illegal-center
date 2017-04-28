@@ -36,6 +36,8 @@ public class IIllegalCachedImpl implements IIllegalCached{
     //平安接口--合作方代码
     @Value("${partnerCode}")
     private String  partnerCode;
+    @Value("${partnerUrl}")
+    private String  partnerUrl;
     //平安接口--合作方唯一标识
     @Value("${partnerUserId}")
     private String partnerUserId;
@@ -325,6 +327,16 @@ public class IIllegalCachedImpl implements IIllegalCached{
 
 	public void setSubcribeUrl(String subcribeUrl) {
 		this.subcribeUrl = subcribeUrl;
+	}
+
+
+	public String getPartnerUrl() {
+		return partnerUrl;
+	}
+
+
+	public void setPartnerUrl(String partnerUrl) {
+		this.partnerUrl = partnerUrl;
 	}
 
 

@@ -90,7 +90,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	public String isRegisterUser(){
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/isRegisterUser.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/isRegisterUser.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -123,7 +123,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/custRegInfoReceive.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/custRegInfoReceive.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -155,7 +155,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
 		String vehicleIdentifyNoLast4) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/trafficIllegalQuerySync.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -184,7 +184,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 			
-		System.out.println("---"+result.getData());
+		logger.info("---"+result.getData());
 			
 		return infos;
 	}
@@ -195,7 +195,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/trafficDriverIllegalQuery.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/trafficDriverIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -224,7 +224,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 	
-		System.out.println("---"+result.getData());
+		logger.info("---"+result.getData());
 		
 		return infos;
 
@@ -237,7 +237,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo){
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalClaimReg.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaimReg.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -269,7 +269,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 
-		System.out.println("---"+result.getData());
+		logger.info("---"+result.getData());
 		return  baseBean;
 	}
 	
@@ -279,7 +279,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	@Override
 	public List<IllegalInfoClaim> trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalQuery.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -307,7 +307,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 			
-		System.out.println("---"+result.getData());
+		logger.info("---"+result.getData());
 			
 		return infos;
 
@@ -320,7 +320,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	@Override
 	public IllegalInfoSheet trafficIllegalClaim(String illegalNo) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/trafficIllegalClaim.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaim.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
 		String partnerUserId=illegalCache.getPartnerUserId();
@@ -344,7 +344,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 	
-		System.out.println("---"+result.getData());
+		logger.info("---"+result.getData());
 			
 		return info;
 	}
@@ -356,7 +356,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	@Override
 	public String toQueryPunishmentPage(String billNo, String licensePlateNo, String mobileNo){
-		String url="http://uat.stcpay.com/ysth-traffic-front/punishment/toQueryPunishmentPage.do";
+		String url=illegalCache.getPartnerUrl()+"punishment/toQueryPunishmentPage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
 		String key="1234567890000000";//illegalCache.getPartnerKey();
@@ -411,7 +411,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 规费缴费信息
 	 */
 	public String toPayPage(String illegalNo,String licensePlateNo, String mobileNo) {
-		String url="http://uat.stcpay.com/ysth-traffic-front/fee/toQueryFeePage.do";
+		String url=illegalCache.getPartnerUrl()+"fee/toQueryFeePage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
 		String key="1234567890000000";//illegalCache.getPartnerKey();

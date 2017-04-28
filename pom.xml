@@ -276,21 +276,24 @@
 				<publish.version>1.0.0</publish.version>
 				<sdk.version>1.0.0</sdk.version>
 				<account.center.api.version>1.0.0</account.center.api.version>
-				<dubbo.registry.url><![CDATA[zookeeper.choumei.cn:2181]]></dubbo.registry.url>
+				<dubbo.registry.url><![CDATA[zookeeper.szjj.me:2181]]></dubbo.registry.url>
 				<dubbo.provider.port><![CDATA[30200]]></dubbo.provider.port>
 				<dubbo.provider.timeout><![CDATA[35000]]></dubbo.provider.timeout>
-				<dubbo.monitor.address><![CDATA[monitor.choumei.cn:7070]]></dubbo.monitor.address>
+				<dubbo.monitor.address><![CDATA[monitor.szjj.me:7070]]></dubbo.monitor.address>
 
-				<mysql.illegal.read.url><![CDATA[jdbc:mysql://cmdb.choumei.cn:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.read.url>
+				<mysql.illegal.read.url><![CDATA[jdbc:mysql://db.szjj.me:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.read.url>
 				<mysql.illegal.read.username><![CDATA[app_illegal-center]]></mysql.illegal.read.username>
-				<mysql.illegal.write.url><![CDATA[jdbc:mysql://cmdb.choumei.cn:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.write.url>
+				<mysql.illegal.write.url><![CDATA[jdbc:mysql://db.szjj.me:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.write.url>
 				<mysql.illegal.write.username><![CDATA[app_illegal-center]]></mysql.illegal.write.username>
 
 				<mysql.illegal.password.config><![CDATA[config.file=/workspace/druid/choumei-password_online.properties;secretkey.file=/workspace/druid/key_online]]></mysql.illegal.password.config>
+				
+				<mysql.illegal.read.password><![CDATA[123456]]></mysql.illegal.read.password>
 
-				<redis.user-center.configstr><![CDATA[user-center1:redis2.choumei.cn:6379,user-center2:redis2.choumei.cn:6379]]></redis.user-center.configstr>
+				<redis.user-center.configstr><![CDATA[user-center1:redis.szjj.me:6379]]></redis.user-center.configstr>
                
                 <partner.code>P003</partner.code>
+                <partner.url>http://uat.stcpay.com/ysth-traffic-front/</partner.url>
              	<partner.userid>123456</partner.userid>
              	<partner.key>1234567890000000</partner.key>
              	<partner.macAlg>33</partner.macAlg>
@@ -300,9 +303,9 @@
              	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
              	<subcribe.userid>WX02</subcribe.userid>
              	<subcribe.userpwd>WX02@168</subcribe.userpwd>
-             	<subcribe.url>https://szjjapi.chudaokeji.com/yywfcl/services/yywfcl</subcribe.url>
+             	<subcribe.url>https://wfyyapi.szjj.me:8095/yywfcl/services/yywfcl?WSDL</subcribe.url>
              	
-             	<police.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</police.url>
+             	<police.url>api.szjj.me:9080/xxfbpt/services/xxfbptservice?wsdl</police.url>
              	<police.method>xxptSchuding</police.method>
              	<police.userid>WX02</police.userid>
              	<police.userpwd>WX02@168</police.userpwd>

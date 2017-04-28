@@ -184,7 +184,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 			
-		logger.info("---"+result.getData());
+		logger.debug("---"+result.getData());
 			
 		return infos;
 	}
@@ -224,7 +224,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 	
-		logger.info("---"+result.getData());
+		logger.debug("---"+result.getData());
 		
 		return infos;
 
@@ -269,7 +269,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 
-		logger.info("---"+result.getData());
+		logger.debug("---"+result.getData());
 		return  baseBean;
 	}
 	
@@ -307,7 +307,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 			
-		logger.info("---"+result.getData());
+		logger.debug("---"+result.getData());
 			
 		return infos;
 
@@ -344,7 +344,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			throw e;
 		}
 	
-		logger.info("---"+result.getData());
+		logger.debug("---"+result.getData());
 			
 		return info;
 	}

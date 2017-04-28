@@ -284,15 +284,16 @@
 				<dubbo.monitor.address><![CDATA[monitor.szjj.me:7070]]></dubbo.monitor.address>
 
 				<mysql.illegal.read.url><![CDATA[jdbc:mysql://db.szjj.me:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.read.url>
-				<mysql.illegal.read.username><![CDATA[app_illegal-center]]></mysql.illegal.read.username>
+				<mysql.illegal.read.username><![CDATA[root]]></mysql.illegal.read.username>
 				<mysql.illegal.write.url><![CDATA[jdbc:mysql://db.szjj.me:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.write.url>
-				<mysql.illegal.write.username><![CDATA[app_illegal-center]]></mysql.illegal.write.username>
-
+				<mysql.illegal.write.username><![CDATA[root]]></mysql.illegal.write.username>
+                <mysql.illegal.write.password><![CDATA[123456]]></mysql.illegal.write.password>
 				<mysql.illegal.password.config><![CDATA[config.file=/workspace/druid/choumei-password_online.properties;secretkey.file=/workspace/druid/key_online]]></mysql.illegal.password.config>
 				
 				<mysql.illegal.read.password><![CDATA[123456]]></mysql.illegal.read.password>
 
 				<redis.user-center.configstr><![CDATA[user-center1:redis.szjj.me:6379]]></redis.user-center.configstr>
+                <redis.user-center.password><![CDATA[123456]]></redis.user-center.password>
                
                 <partner.code>P003</partner.code>
                 <partner.url>http://code.stcpay.com:8088/ysth-traffic-front/</partner.url>

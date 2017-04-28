@@ -46,8 +46,8 @@ public class TestIllegalService {
 	 */
    @Test
    public void custRegInfoReceive() {
-	   CarInfoBean carinfo=new CarInfoBean("粤B701NR",  "2", "9094");
-	   CustInfoBean custinfo=new CustInfoBean("杨明畅", "440301199002101119", "01", "18603017278",  "440301199002101119");
+	   CarInfoBean carinfo=new CarInfoBean("粤B6A42E",  "02", "5563");
+	   CustInfoBean custinfo=new CustInfoBean("张羽帆", "445222199209020034", "01", "15920050177",  "445222199209020034");
 
 	   List<CarInfoBean> list=new ArrayList<>();
 	   list.add(carinfo);
@@ -60,7 +60,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void queryInfoByLicensePlateNo(){
-	   illegalService.queryInfoByLicensePlateNo("粤BMF688","2","9094");
+	   illegalService.queryInfoByLicensePlateNo("粤B6A42E","02","9094");
    }
    
    /**
@@ -74,8 +74,8 @@ public class TestIllegalService {
    
    @Test
    public void  trafficIllegalClaimReg(){
-	   CarInfoBean carinfo=new CarInfoBean("粤B6F7M1",  "2", "9094");
-	   CustInfoBean custinfo=new CustInfoBean("王玉璞", "622822198502074110", "01", "18601174358",  "622822198502074110");
+	   CarInfoBean carinfo=new CarInfoBean("粤B6A42E",  "02", "5563");
+	   CustInfoBean custinfo=new CustInfoBean("张羽帆", "445222199209020034", "01", "15920050177",  "445222199209020034");
 	   illegalService.trafficIllegalClaimReg(custinfo, carinfo);
    }
    /**
@@ -83,7 +83,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void trafficIllegalClaimBefore(){
-	   illegalService.trafficIllegalClaimBefore("粤B6F7M3","2","18601174358");
+	   illegalService.trafficIllegalClaimBefore("粤B6A42E","02","15920050177");
    }
   
    /**

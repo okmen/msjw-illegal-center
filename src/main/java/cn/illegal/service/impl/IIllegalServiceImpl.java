@@ -277,7 +277,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 打单前查询
 	 */
 	@Override
-	public List<IllegalInfoClaim> trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) {
+	public BaseBean trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
@@ -285,7 +285,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String partnerUserId=illegalCache.getPartnerUserId();
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
-		
+		BaseBean baseBean=new BaseBean();
 		Map<String,String> data=new HashMap<String,String>();
 		data.put("mobileNo", mobilephone);
 		data.put("licensePlateNo",licensePlateNo);
@@ -298,9 +298,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 			result= ApiClientUtils.requestApi(url,bean,data,key);
 				
-			if(result.getRespCode().equals("0000")&&result.getData()!=null){			
-				infos=(List<IllegalInfoClaim>) JSON.parseArray(result.getData().toString(), IllegalInfoClaim.class); 
-			}
+			baseBean.setCode(result.getRespCode());
+			baseBean.setMsg(result.getRespMsg());
+			baseBean.setData(result.getData());
 
 		} catch (Exception e) {
 			logger.error("违法确认，打单前查询失败，ParamRequestBean= "+bean.toString(), e);
@@ -309,7 +309,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			
 		logger.debug("---"+result.getData());
 			
-		return infos;
+		return baseBean;
 
 	}
 	

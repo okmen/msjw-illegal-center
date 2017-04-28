@@ -151,7 +151,7 @@
              
              
              	<partner.code>P003</partner.code>
-             	<partner.url>http://uat.stcpay.com/ysth-traffic-front/</partner.url>
+             	<partner.url>http://code.stcpay.com:8088/ysth-traffic-front/</partner.url>
              	<partner.userid>123456</partner.userid>
              	<partner.key>1234567890000000</partner.key>
              	<partner.macAlg>33</partner.macAlg>
@@ -229,7 +229,7 @@
 				<redis.user-center.configstr><![CDATA[user-center1:test-redis1.choumei.me:6379,user-center2:test-redis1.choumei.me:6379]]></redis.user-center.configstr>
  -->
  				<partner.code>P003</partner.code>
- 				<partner.url>http://uat.stcpay.com/ysth-traffic-front/</partner.url>
+ 				<partner.url>http://code.stcpay.com:8088/ysth-traffic-front/</partner.url>
              	<partner.userid>123456</partner.userid>
              	<partner.key>1234567890000000</partner.key>
              	<partner.macAlg>33</partner.macAlg>

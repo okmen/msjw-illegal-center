@@ -14,7 +14,6 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,41 +22,26 @@ import cn.illegal.bean.AppealInfoBean;
 import cn.illegal.bean.CarInfoBean;
 import cn.illegal.bean.CustDataInfo;
 import cn.illegal.bean.CustInfoBean;
-import cn.illegal.bean.DeviceBean;
 import cn.illegal.bean.IllegalInfoBean;
 import cn.illegal.bean.IllegalInfoClaim;
 import cn.illegal.bean.IllegalInfoSheet;
 import cn.illegal.bean.IllegalProcessPointBean;
-import cn.illegal.bean.MessageBean;
 import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ReservationDay;
-import cn.illegal.bean.Sditem;
 import cn.illegal.bean.SubcribeBean;
 import cn.illegal.bean.ResultReturnBean;
 import cn.illegal.bean.ResultReturnBeanA;
-import cn.illegal.bean.Token;
-import cn.illegal.bean.UserOpenidBean;
-import cn.illegal.bean.UserRegInfo;
-import cn.illegal.bean.WechatUserInfoBean;
 import cn.illegal.cached.impl.IIllegalCachedImpl;
-import cn.illegal.config.IConfig;
 import cn.illegal.dao.IIllegalDao;
-import cn.illegal.orm.DeviceORM;
-import cn.illegal.orm.UsernameORM;
 import cn.illegal.service.IIllegalService;
 import cn.illegal.utils.ApiClientUtils;
-import cn.illegal.utils.RandomUtils;
-import cn.illegal.utils.TokenGenerater;
 import cn.sdk.bean.BaseBean;
 import cn.sdk.util.DateUtil;
 import cn.sdk.util.HttpClientUtil;
 import cn.sdk.util.MacUtil;
 import cn.sdk.util.RandomUtil;
-import cn.sdk.util.StringUtil;
 import cn.sdk.webservice.WebServiceClient;
-import net.sf.json.JSONArray;
 
-import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
@@ -107,7 +91,6 @@ public class IIllegalServiceImpl implements IIllegalService {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 			result= ApiClientUtils.requestApiA(url,bean,data,key);
 			isReg=result.getData().get("isRegister").toString();
-			System.out.println(result.getRespCode()+"--"+isReg);
 		} catch (Exception e) {
 			logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
@@ -353,9 +336,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 违法缴费信息
 	 * @throws Exception 
+	 * @throws Exception 
 	 */
 	@Override
-	public String toQueryPunishmentPage(String billNo, String licensePlateNo, String mobileNo){
+	public String toQueryPunishmentPage(String billNo, String licensePlateNo, String mobileNo) throws Exception{
 		String url=illegalCache.getPartnerUrl()+"punishment/toQueryPunishmentPage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
@@ -398,8 +382,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 			
 		} catch (HttpException e) {
 			logger.error("查询缴费信息失败  Http， ParamRequestBean= "+bean.toString(), e);		
+			throw e;
 		} catch (IOException e) {
 			logger.error("查询缴费信息失败  IO，ParamRequestBean= "+bean.toString(), e);
+			throw e;
 		}
 			
 		return redirectUrl;
@@ -409,8 +395,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 	
 	/**
 	 * 规费缴费信息
+	 * @throws Exception 
 	 */
-	public String toPayPage(String illegalNo,String licensePlateNo, String mobileNo) {
+	public String toPayPage(String illegalNo,String licensePlateNo, String mobileNo) throws Exception {
 		String url=illegalCache.getPartnerUrl()+"fee/toQueryFeePage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
@@ -461,8 +448,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 		} catch (HttpException e) {
 			logger.error("查询规费信息失败  Http， ParamRequestBean= "+bean.toString(), e);		
+			throw e;
 		} catch (IOException e) {
 			logger.error("查询规费信息失败  IO，ParamRequestBean= "+bean.toString(), e);
+			throw e;
 		}
 			
 		return redirectUrl;
@@ -470,8 +459,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 	
 	/**
 	 * 获取所以违法处理点
+	 * @throws Exception 
 	 */
-	public List<IllegalProcessPointBean> getIllegalProcessingPoint(){
+	public List<IllegalProcessPointBean> getIllegalProcessingPoint() throws Exception{
 		//String xml = "<request><userid>WX02</userid><userpwd>WX02@168</userpwd ><lrip>123.56.180.216</lrip><lrmac>00:16:3e:10:16:4d</lrmac></request>";
 		StringBuffer xml=new StringBuffer();
 		xml.append("<request>");
@@ -504,7 +494,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			 System.out.println("第一个处理点:"+result.get(0).getCldaddress());
 		} catch (Exception e) {
 			logger.error("获取所以违法处理点失败 ， XML= "+xml.toString(), e);		
-			e.printStackTrace();
+			throw e;
 		}
 			 
 		return result;
@@ -516,9 +506,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 	
 	/**
 	 * 预约排期信息读取
+	 * @throws Exception 
 	 */
 	@Override
-	public Map toGetSubscribeSorts(String cldbmid) {
+	public Map toGetSubscribeSorts(String cldbmid) throws Exception {
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
 		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
@@ -534,23 +525,27 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			JSONObject respStr = WebServiceClient.easyWebService(url, method, xml.toString());
 			JSONObject head=(JSONObject) respStr.get("head");
-	         //返回的message
-	        String snm = head.get("snm").toString();
-	         //返回的状态码
+			 //返回的状态码
 	        String code = head.get("code").toString();
-	         
-	        JSONObject body=(JSONObject) respStr.get("body");
-	         
-	        String items=body.get("item").toString();
-	   
-	        days=(List<ReservationDay>) JSON.parseArray(items, ReservationDay.class);
-	        
-	        map.put("snm", snm);
-	        map.put("data", days);
-	        System.out.println(days.get(0).getYydate());
+	        String snm="";
+	        if(code.equals("0")){
+	        	snm = head.get("snm").toString();
+	        	JSONObject body=(JSONObject) respStr.get("body");
+		         
+		        String items=body.get("item").toString();
+		   
+		        days=(List<ReservationDay>) JSON.parseArray(items, ReservationDay.class);
+		        map.put("snm", snm);
+		        map.put("data", days);
+	        }else{
+	        	snm=head.get("message").toString();
+	        	map.put("message", snm);
+	        }     
+	        map.put("code", code);
+	        //System.out.println(days.get(0).getYydate());
 		} catch (Exception e) {
 			logger.error("预约排期信息读取失败 ， XML= "+xml.toString(), e);
-			e.printStackTrace();
+			throw e;
 		}
 		
 		return map;
@@ -559,9 +554,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	/**
 	 * 预约接口
+	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean toChangeSubscribe(String snm,String cldbmid,String cczb_id,CustInfoBean custInfo,CarInfoBean carInfo,String sourceType) {
+	public BaseBean toChangeSubscribe(String snm,String cldbmid,String cczb_id,CustInfoBean custInfo,CarInfoBean carInfo,String sourceType) throws Exception {
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
 		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
@@ -593,7 +589,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	        System.out.println(msg);
 		} catch (Exception e) {
 			logger.error("预约失败 ， XML= "+xml.toString(), e);
-			e.printStackTrace();
+			throw e;
 		}
 		return bean;
 	}
@@ -601,9 +597,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	/**
 	 * 取消预约接口
+	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean toCancleSubscribe(String subscribeNo) {
+	public BaseBean toCancleSubscribe(String subscribeNo) throws Exception {
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
 		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
@@ -627,7 +624,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	        bean.setMsg(msg);
 		} catch (Exception e) {
 			logger.error("取消预约失败 ， XML= "+xml.toString(), e);
-			e.printStackTrace();
+			throw e;
 		}
 		return bean;
 	}
@@ -635,9 +632,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	/**
 	 * 获取预约信息列表
+	 * @throws Exception 
 	 */
 	@Override
-	public List<SubcribeBean> querySubscribe(String licensePlateNo, int licensePlateType, String mobilephone) {
+	public List<SubcribeBean> querySubscribe(String licensePlateNo, int licensePlateType, String mobilephone) throws Exception {
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
 		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
@@ -671,7 +669,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	        
 		} catch (Exception e) {
 			logger.error("获取预约信息列表失败 ， XML= "+xml.toString(), e);
-			e.printStackTrace();
+			throw e;
 		}
 		return subcribes;
 	}
@@ -679,9 +677,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	/**
 	 * 提交申诉
+	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean trafficIllegalAppeal(AppealInfoBean info,String identityCard,String userCode,String sourceType) {
+	public BaseBean trafficIllegalAppeal(AppealInfoBean info,String identityCard,String userCode,String sourceType) throws Exception {
 		String url = illegalCache.getPoliceUrl(); //webservice请求url
 		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
 		String userid = illegalCache.getPoliceUserid(); //webservice登录账号
@@ -716,7 +715,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			bean.setMsg(msg);
 		} catch (Exception e) {
 			logger.error("申诉信息录入失败 ， XML= "+xml.toString(), e);
-			e.printStackTrace();
+			throw e;
 		}	
 		//Map<String, String> map = TransferThirdParty.commitDriverInformationSinglePrintApplicationInterface(applyType, userName, identityCard, mobilephone, sourceOfCertification, url, method, userId, userPwd, key);
 
@@ -725,9 +724,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	/**
 	 * 申诉反馈
+	 * @throws Exception 
 	 */
 	@Override
-	public List<AppealInfoBack> trafficIllegalAppealFeedback(String identityCard,String sourceType) {
+	public List<AppealInfoBack> trafficIllegalAppealFeedback(String identityCard,String sourceType) throws Exception {
 		List<AppealInfoBack> info=null;
 		String url = illegalCache.getPoliceUrl(); //webservice请求url
 		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
@@ -750,7 +750,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			//System.out.println(info.get(0).getLXDZ());
 		} catch (Exception e) {
 			logger.error("获取申诉反馈信息失败 ， XML= "+xml.toString(), e);
-			e.printStackTrace();
+			throw e;
 		}	
 		return info;
 	}

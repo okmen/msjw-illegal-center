@@ -308,7 +308,7 @@
              	<subcribe.userpwd>WX02@168</subcribe.userpwd>
              	<subcribe.url>https://wfyyapi.szjj.me:8095/yywfcl/services/yywfcl</subcribe.url>
              	
-             	<police.url>api.szjj.me:9080/xxfbpt/services/xxfbptservice</police.url>
+             	<police.url>http://api.szjj.me:9080/xxfbpt/services/xxfbptservice</police.url>
              	<police.method>xxptSchuding</police.method>
              	<police.userid>WX02</police.userid>
              	<police.userpwd>WX02@168</police.userpwd>

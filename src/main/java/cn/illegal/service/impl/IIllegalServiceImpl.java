@@ -392,6 +392,58 @@ public class IIllegalServiceImpl implements IIllegalService {
 	}
 
 
+	public String qrCodeToQueryPage(String userName, String traffData, String mobileNo,String openId) throws Exception{
+		String url=illegalCache.getPartnerUrl()+"partnerService/qrCodeToQueryPage.do";
+		PostMethod post=null;
+		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
+		String key="1234567890000000";//illegalCache.getPartnerKey();
+		String partnerCode=illegalCache.getPartnerCode();
+		String partnerUserId=openId;
+		String macAlg=illegalCache.getPartnerMacAlg();
+		String serionNo=RandomUtil.randomString(20);
+		
+		Map<String,String> data=new HashMap<String,String>();
+		data.put("traffData",traffData);
+		data.put("userName",userName);
+		data.put("mobileNo",mobileNo);
+		data.put("remark1", "1");	
+		ParamRequestBean bean=null;
+
+	    String redirectUrl="";
+        try {     	
+        	bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+     		
+     		JSONObject show1=(JSONObject) JSONObject.toJSON(data);
+     	    String mac= MacUtil.genMsgMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
+     	    bean.setMac(mac);     
+
+     	    JSONObject jsons=(JSONObject) JSONObject.toJSON(bean);
+     	    
+        	URL _url = new URL(url);
+            HostConfiguration config = new HostConfiguration();
+            int port = _url.getPort() > 0 ? _url.getPort() : 80;
+            config.setHost(_url.getHost(), port, _url.getProtocol());
+
+            post = new PostMethod(url);
+            post.setRequestEntity(new StringRequestEntity(jsons.toString(), "application/x-www-form-urlencoded", "UTF-8"));
+			int result = HttpClientUtil.getHttpClient().executeMethod(config, post);
+			if(result==302){
+				Header header=post.getResponseHeader("location");
+				redirectUrl=header.getValue();
+				System.out.println(redirectUrl+"---");
+			}
+			
+		} catch (HttpException e) {
+			logger.error("失败  Http， ParamRequestBean= "+bean.toString(), e);		
+			throw e;
+		} catch (IOException e) {
+			logger.error("失败  IO，ParamRequestBean= "+bean.toString(), e);
+			throw e;
+		}
+			
+		return redirectUrl;
+	}
+	
 	
 	/**
 	 * 规费缴费信息

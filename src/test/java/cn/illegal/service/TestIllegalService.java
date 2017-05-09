@@ -88,9 +88,10 @@ public class TestIllegalService {
   
    /**
 	 * 查询缴费信息
+ * @throws Exception 
 	 */
    @Test
-   public void toQueryPunishmentPage(){
+   public void toQueryPunishmentPage() throws Exception{
 	  String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358");
 	  //String ss= illegalService.toPayPage("4403010922403405","粤B8A3N2","18601174358");
 	  
@@ -99,9 +100,10 @@ public class TestIllegalService {
    
    /**
     * 获取违法处理点
+ * @throws Exception 
     */
    @Test
-   public void getIllegalProcessingPoint(){
+   public void getIllegalProcessingPoint() throws Exception{
 	   illegalService.getIllegalProcessingPoint();
    }
    
@@ -116,9 +118,10 @@ public class TestIllegalService {
     
    /**
     * 预约
+ * @throws Exception 
     */
    @Test
-   public void toChangeSubscribe(){
+   public void toChangeSubscribe() throws Exception{
 	   CarInfoBean carinfo=new CarInfoBean("粤B6F7M1",  "2", "9094");
 	   CustInfoBean custinfo=new CustInfoBean("王玉璞", "622822198502074110", "01", "18601174358",  "622822198502074110");
 	   illegalService.toChangeSubscribe("CgQxRtU5pO", "440319000000", "140053", custinfo, carinfo, "003");
@@ -126,28 +129,30 @@ public class TestIllegalService {
    
    /**
     * 取消预约
+ * @throws Exception 
     */
    @Test
-   public void toCancleSubscribe(){
+   public void toCancleSubscribe() throws Exception{
 	   illegalService.toCancleSubscribe("1170414100961");
    }
    
    /**
     * 预约查询
+ * @throws Exception 
     */
    @Test
-   public void querySubscribe(){
+   public void querySubscribe() throws Exception{
 	   illegalService.querySubscribe("粤B6F7M1",2,"18601174358");
    }
    
    @Test
-   public void trafficIllegalAppeal(){
+   public void trafficIllegalAppeal() throws Exception{
 	   AppealInfoBean bean=new AppealInfoBean("000000002", "粤B6F7M1","2", "2017-04-11 14:20:24", "深南大道2", "测试用2！", "交警队", "小王", "白石洲", "18601174358", "2", "测试！", "xxx");
 	   illegalService.trafficIllegalAppeal(bean, "622822198502074110", "", "C");
    }
    
    @Test
-   public void trafficIllegalAppealFeedback(){
+   public void trafficIllegalAppealFeedback() throws Exception{
 	   illegalService.trafficIllegalAppealFeedback("622822198502074110", "C");
    }
 }

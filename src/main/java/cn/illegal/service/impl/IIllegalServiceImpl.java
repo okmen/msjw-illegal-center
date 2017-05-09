@@ -395,6 +395,26 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 扫码查询信息
 	 */
+	public String callback(String traffData) throws Exception{
+		String url ="";    
+        try {     	
+        	String source=illegalCache.getPartnerUrl()+"/illegalHanding/qrCodeToQueryPage.html?traffData="+traffData;
+    	    url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx48a8104946507c1e"+
+    	    "&redirect_uri="+java.net.URLEncoder.encode(source,"utf-8")+
+    	    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"; 
+			
+		} catch (Exception e) {
+			logger.error("微信回调地址拼接失败 ！  traffData "+traffData, e);
+			throw e;
+		}
+			
+		return url;
+	}
+	
+	
+	/**
+	 * 扫码查询信息
+	 */
 	public String qrCodeToQueryPage(String userName, String traffData, String mobileNo,String openId) throws Exception{
 		String url=illegalCache.getPartnerUrl()+"partnerService/qrCodeToQueryPage.do";
 		//String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/qrCodeToQueryPage.do";

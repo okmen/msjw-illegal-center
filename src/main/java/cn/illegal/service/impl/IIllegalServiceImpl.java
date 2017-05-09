@@ -396,8 +396,8 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 扫码查询信息
 	 */
 	public String qrCodeToQueryPage(String userName, String traffData, String mobileNo,String openId) throws Exception{
-		//String url=illegalCache.getPartnerUrl()+"partnerService/qrCodeToQueryPage.do";
-		String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/qrCodeToQueryPage.do";
+		String url=illegalCache.getPartnerUrl()+"partnerService/qrCodeToQueryPage.do";
+		//String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/qrCodeToQueryPage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
 		String key="1234567890000000";//illegalCache.getPartnerKey();

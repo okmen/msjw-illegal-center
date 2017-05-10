@@ -72,6 +72,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 
 
+	/**
+	 * 验证用户是否注册或同步   0-未同步   1-已同步
+	 */
 	public String isRegisterUser(){
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/isRegisterUser.do";
@@ -401,7 +404,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	String source="https://szjjapi.stc.gov.cn/illegalHanding/qrCodeToQueryPage.html?traffData="+traffData;
     	    url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc2b699cf2f919b58"+
     	    "&redirect_uri="+java.net.URLEncoder.encode(source,"utf-8")+
-    	    "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"; 
+    	    "&response_type=code&scope=snsapi_base&state=123#wechat_redirect"; 
 			
 		} catch (Exception e) {
 			logger.error("微信回调地址拼接失败 ！  traffData "+traffData, e);

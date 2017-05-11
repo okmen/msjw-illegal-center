@@ -74,8 +74,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	/**
 	 * 验证用户是否注册或同步   0-未同步   1-已同步
+	 * @throws Exception 
 	 */
-	public String isRegisterUser(){
+	public String isRegisterUser() throws Exception{
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/isRegisterUser.do";
 		String key=illegalCache.getPartnerKey();
@@ -107,7 +108,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 已注册客户信息同步
 	 */
-	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo) {
+	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo)throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/custRegInfoReceive.do";
 		String key=illegalCache.getPartnerKey();
@@ -137,9 +138,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 	
 	/**
 	 * 查询违法信息根据--根据车牌号
+	 * @throws Exception 
 	 */
 	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
-		String vehicleIdentifyNoLast4) {
+		String vehicleIdentifyNoLast4) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
 		String key=illegalCache.getPartnerKey();
@@ -178,8 +180,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 	/**
 	 * 查询违法信息--根据驾驶证
+	 * @throws Exception 
 	 */
-	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo) {
+	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficDriverIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
@@ -220,8 +223,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 打单注册接口
 	 * @return
+	 * @throws Exception 
 	 */
-	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo){
+	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo) throws Exception{
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaimReg.do";
 		String key=illegalCache.getPartnerKey();
@@ -261,9 +265,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 	
 	/**
 	 * 打单前查询
+	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) {
+	public BaseBean trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
@@ -302,9 +307,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 	
 	/**
 	 * 确认打单接口
+	 * @throws Exception 
 	 */
 	@Override
-	public IllegalInfoSheet trafficIllegalClaim(String illegalNo) {
+	public IllegalInfoSheet trafficIllegalClaim(String illegalNo) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaim.do";
 		String key=illegalCache.getPartnerKey();

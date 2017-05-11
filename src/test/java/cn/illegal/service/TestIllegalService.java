@@ -43,9 +43,10 @@ public class TestIllegalService {
     
     /**
 	 * 注册用户信息同步
+     * @throws Exception 
 	 */
    @Test
-   public void custRegInfoReceive() {
+   public void custRegInfoReceive() throws Exception {
 	   CarInfoBean carinfo=new CarInfoBean("粤B6A42E",  "02", "5563");
 	   CustInfoBean custinfo=new CustInfoBean("张羽帆", "445222199209020034", "01", "15920050177",  "445222199209020034");
 
@@ -57,32 +58,35 @@ public class TestIllegalService {
 
    /**
 	 * 查询违法信息根据--根据车牌号
+ * @throws Exception 
 	 */
    @Test
-   public void queryInfoByLicensePlateNo(){
+   public void queryInfoByLicensePlateNo() throws Exception{
 	   illegalService.queryInfoByLicensePlateNo("粤B6A42E","02","9094");
    }
    
    /**
 	 * 查询违法信息--根据驾驶证
+ * @throws Exception 
 	 */
    @Test
-   public void queryInfoByDrivingLicenceNo(){
+   public void queryInfoByDrivingLicenceNo() throws Exception{
 	   illegalService.queryInfoByDrivingLicenceNo("622822198502074110","440200642519");
    }
    
    
    @Test
-   public void  trafficIllegalClaimReg(){
+   public void  trafficIllegalClaimReg() throws Exception{
 	   CarInfoBean carinfo=new CarInfoBean("粤B6A42E",  "02", "5563");
 	   CustInfoBean custinfo=new CustInfoBean("张羽帆", "445222199209020034", "01", "15920050177",  "445222199209020034");
 	   illegalService.trafficIllegalClaimReg(custinfo, carinfo);
    }
    /**
 	 * 打单前查询 
+ * @throws Exception 
 	 */
    @Test
-   public void trafficIllegalClaimBefore(){
+   public void trafficIllegalClaimBefore() throws Exception{
 	   illegalService.trafficIllegalClaimBefore("粤B6A42E","02","15920050177");
    }
   
@@ -109,9 +113,10 @@ public class TestIllegalService {
    
    /**
 	 * 预约排期信息读取
+ * @throws Exception 
 	 */
    @Test
-   public void toGetSubscribeSorts(){
+   public void toGetSubscribeSorts() throws Exception{
 	   //illegalService.toGetSubscribeSorts("440319000000");
 	   illegalService.isRegisterUser();
    }

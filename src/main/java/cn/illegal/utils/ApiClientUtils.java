@@ -1,17 +1,15 @@
 package cn.illegal.utils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.apache.log4j.Logger;
 
 import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ResultReturnBean;
 import cn.illegal.bean.ResultReturnBeanA;
-import cn.sdk.util.DateUtil;
+import cn.sdk.exception.HttpPingAnException;
 import cn.sdk.util.HttpClientUtil;
 import cn.sdk.util.MacUtil;
+import cn.sdk.util.MsgCode;
+
 import net.sf.json.JSONObject;
 
 public class ApiClientUtils {
@@ -19,6 +17,7 @@ public class ApiClientUtils {
 	private ApiClientUtils(){
 		
 	}
+	public static final Logger logger= Logger.getLogger(ApiClientUtils.class);
 	
 	//使用volatile关键字保其可见性  
     volatile private static ApiClientUtils instance = null;
@@ -44,61 +43,67 @@ public class ApiClientUtils {
 	    }
 	
 	 
-	 public static ResultReturnBean requestApi(String url,ParamRequestBean paramBean, Object data,String key){
-	    /*    Map<String, Object> postData = new HashMap<String, Object>();
-	        postData.put("partnerCode", "P003");
-	        postData.put("partnerUserId", "123456");
-	        postData.put("serialNo", "12345678900987654321");
-	        postData.put("macAlg", "33");
-	        postData.put("timeStamp", timeStamp);
-	        postData.put("data", data);*/
-	        
-	       
-	        JSONObject show1=JSONObject.fromObject(data);
-	        String mac= MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
-	        System.out.println(mac);
-	        paramBean.setMac(mac);     
-	        JSONObject jsons=JSONObject.fromObject(paramBean);
-	        System.out.println(jsons);
-	
-	        String respStr = HttpClientUtil.post(url,jsons.toString());
-	        System.out.println("Json:"+respStr);
-	        ResultReturnBean result=(ResultReturnBean) JSONObject.toBean(JSONObject.fromObject(respStr),ResultReturnBean.class);		 
-		    return  result;
-	 }
-	 
-	 public static ResultReturnBeanA requestApiA(String url,ParamRequestBean paramBean, Object data,String key){
-		    /*    Map<String, Object> postData = new HashMap<String, Object>();
-		        postData.put("partnerCode", "P003");
-		        postData.put("partnerUserId", "123456");
-		        postData.put("serialNo", "12345678900987654321");
-		        postData.put("macAlg", "33");
-		        postData.put("timeStamp", timeStamp);
-		        postData.put("data", data);*/
-		        
-		       
-		        JSONObject show1=JSONObject.fromObject(data);
+	 public static ResultReturnBean requestApi(String url,ParamRequestBean paramBean, Object data,String key)throws Exception{
+		 ResultReturnBean result=null;
+	     try {
+		    	JSONObject show1=JSONObject.fromObject(data);
 		        String mac= MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
-		        System.out.println(mac);
 		        paramBean.setMac(mac);     
 		        JSONObject jsons=JSONObject.fromObject(paramBean);
-		        System.out.println(jsons);
+		        logger.info("Json"+jsons);
 		
+		        long startTime = System.currentTimeMillis();
 		        String respStr = HttpClientUtil.post(url,jsons.toString());
-		        System.out.println("Json:"+respStr);
-		        ResultReturnBeanA result=(ResultReturnBeanA) JSONObject.toBean(JSONObject.fromObject(respStr),ResultReturnBeanA.class);		 
-			    return  result;
+	            long endTime = System.currentTimeMillis();
+	            long times = (endTime - startTime) / 1000;
+	            if(times > 5){
+	            	logger.info(url + "接口执行耗时:" + times + " 秒");
+	            }
+		       
+	            logger.info("ReturnJson:"+respStr);
+		        result=(ResultReturnBean) JSONObject.toBean(JSONObject.fromObject(respStr),ResultReturnBean.class);	
+			} catch (Exception e) {
+				logger.error("平安接口调用错误,url=" + url,e);
+	            throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
+			}       	 
+		  return  result;
+	 }
+	 
+	 public static ResultReturnBeanA requestApiA(String url,ParamRequestBean paramBean, Object data,String key) throws Exception{		        
+		 ResultReturnBeanA result=null;
+	     try {
+		    	JSONObject show1=JSONObject.fromObject(data);
+		        String mac= MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
+		        paramBean.setMac(mac);     
+		        JSONObject jsons=JSONObject.fromObject(paramBean);
+		        logger.info("Json"+jsons);
+		
+		        long startTime = System.currentTimeMillis();
+		        String respStr = HttpClientUtil.post(url,jsons.toString());
+	            long endTime = System.currentTimeMillis();
+	            long times = (endTime - startTime) / 1000;
+	            if(times > 5){
+	            	logger.info(url + "接口执行耗时:" + times + " 秒");
+	            }
+		       
+	            logger.info("ReturnJson:"+respStr);
+		        result=(ResultReturnBeanA) JSONObject.toBean(JSONObject.fromObject(respStr),ResultReturnBeanA.class);	
+			} catch (Exception e) {
+				logger.error("平安接口调用错误,url=" + url,e);
+	            throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
+			}       	 
+		  return  result;  
 		 }
 	 
-	 public static void main(String[] args) {
+/*	 public static void main(String[] args) {
 		 String key="1234567890123456";
 		 String macAlg="33";
 		 String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		 String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/custRegInfoReceive.do";
 		 Map<String, Object> show = new HashMap<String, Object>();
-	     /*show.put("mobileNo", "18601174358");
+	     show.put("mobileNo", "18601174358");
 	     show.put("licensePlateNo", "粤B6F7M1");
-	     show.put("licensePlateType", "2");*/
+	     show.put("licensePlateType", "2");
 	     
 	     Map<String, String> custInfo = new HashMap<String, String>();
 	     custInfo.put("custName", "王玉璞");
@@ -118,5 +123,5 @@ public class ApiClientUtils {
 	     show.put("carInfo", list);
 	   
 	    // String result=ApiClientUtils.requestApi(url, key, macAlg, timeStamp, show);
-	}
+	}*/
 }

@@ -348,13 +348,13 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public String toQueryPunishmentPage(String billNo, String licensePlateNo, String mobileNo) throws Exception{
+	public String toQueryPunishmentPage(String billNo, String licensePlateNo, String mobileNo,String openId) throws Exception{
 		String url=illegalCache.getPartnerUrl()+"punishment/toQueryPunishmentPage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
 		String key="1234567890000000";//illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		

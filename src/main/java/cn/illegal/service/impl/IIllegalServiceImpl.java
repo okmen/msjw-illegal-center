@@ -76,12 +76,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 验证用户是否注册或同步   0-未同步   1-已同步
 	 * @throws Exception 
 	 */
-	public String isRegisterUser() throws Exception{
+	public String isRegisterUser(String openId) throws Exception{
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/isRegisterUser.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		ResultReturnBeanA result=null;
@@ -108,12 +108,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 已注册客户信息同步
 	 */
-	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo)throws Exception {
+	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo,String openId)throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/custRegInfoReceive.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		
@@ -141,12 +141,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
-		String vehicleIdentifyNoLast4) throws Exception {
+		String vehicleIdentifyNoLast4,String openId) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		
@@ -182,12 +182,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 查询违法信息--根据驾驶证
 	 * @throws Exception 
 	 */
-	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo) throws Exception {
+	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo,String openId) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficDriverIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		
@@ -225,12 +225,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @return
 	 * @throws Exception 
 	 */
-	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo) throws Exception{
+	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo,String openId) throws Exception{
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaimReg.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		
@@ -268,12 +268,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone) throws Exception {
+	public BaseBean trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone,String openId) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuery.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		BaseBean baseBean=new BaseBean();
@@ -310,12 +310,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public IllegalInfoSheet trafficIllegalClaim(String illegalNo) throws Exception {
+	public IllegalInfoSheet trafficIllegalClaim(String illegalNo,String openId) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaim.do";
 		String key=illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		
@@ -482,13 +482,13 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 规费缴费信息
 	 * @throws Exception 
 	 */
-	public String toPayPage(String illegalNo,String licensePlateNo, String mobileNo) throws Exception {
+	public String toPayPage(String illegalNo,String licensePlateNo, String mobileNo,String openId) throws Exception {
 		String url=illegalCache.getPartnerUrl()+"fee/toQueryFeePage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
 		String key="1234567890000000";//illegalCache.getPartnerKey();
 		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=illegalCache.getPartnerUserId();
+		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
 		
@@ -643,6 +643,13 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	@Override
 	public BaseBean toChangeSubscribe(String snm,String cldbmid,String cczb_id,CustInfoBean custInfo,CarInfoBean carInfo,String sourceType) throws Exception {
+		Integer plateType=null;
+		try {
+			plateType=Integer.parseInt(carInfo.getLicensePlateType());
+		} catch (Exception e) {
+			plateType=2;
+		}
+		
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
 		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
@@ -653,7 +660,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		xml.append("<cldbmid>"+cldbmid+"</cldbmid >");
 		xml.append("<cczb_id>"+cczb_id+"</cczb_id>");
 		xml.append("<hphm>"+carInfo.getLicensePlateNo()+"</hphm>");
-		xml.append("<hpzl>"+Integer.parseInt(carInfo.getLicensePlateType())+"</hpzl>");
+		xml.append("<hpzl>"+plateType+"</hpzl>");
 		xml.append("<jszh>"+custInfo.getDrivingLicenceNo()+"</jszh>");
 		xml.append("<sjhm>"+custInfo.getMobileNo()+"</sjhm>");
 		xml.append("<lyfs>"+sourceType+"</lyfs>");

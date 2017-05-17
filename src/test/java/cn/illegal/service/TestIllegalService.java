@@ -40,6 +40,7 @@ public class TestIllegalService {
     @Qualifier("illegalService")
     private IIllegalService illegalService;
     
+    private String openId="123456";
     
     /**
 	 * 注册用户信息同步
@@ -52,7 +53,7 @@ public class TestIllegalService {
 
 	   List<CarInfoBean> list=new ArrayList<>();
 	   list.add(carinfo);
-	   String code=illegalService.custRegInfoReceive(custinfo, list);
+	   String code=illegalService.custRegInfoReceive(custinfo, list,openId);
 	   System.out.println("返回結果："+code);
     }
 
@@ -62,7 +63,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void queryInfoByLicensePlateNo() throws Exception{
-	   illegalService.queryInfoByLicensePlateNo("粤B6A42E","02","9094");
+	   illegalService.queryInfoByLicensePlateNo("粤B6A42E","02","9094",openId);
    }
    
    /**
@@ -71,7 +72,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void queryInfoByDrivingLicenceNo() throws Exception{
-	   illegalService.queryInfoByDrivingLicenceNo("622822198502074110","440200642519");
+	   illegalService.queryInfoByDrivingLicenceNo("622822198502074110","440200642519",openId);
    }
    
    
@@ -79,7 +80,7 @@ public class TestIllegalService {
    public void  trafficIllegalClaimReg() throws Exception{
 	   CarInfoBean carinfo=new CarInfoBean("粤B6A42E",  "02", "5563");
 	   CustInfoBean custinfo=new CustInfoBean("张羽帆", "445222199209020034", "01", "15920050177",  "445222199209020034");
-	   illegalService.trafficIllegalClaimReg(custinfo, carinfo);
+	   illegalService.trafficIllegalClaimReg(custinfo, carinfo,openId);
    }
    /**
 	 * 打单前查询 
@@ -87,7 +88,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void trafficIllegalClaimBefore() throws Exception{
-	   illegalService.trafficIllegalClaimBefore("粤B6A42E","02","15920050177");
+	   illegalService.trafficIllegalClaimBefore("粤B6A42E","02","15920050177",openId);
    }
   
    /**
@@ -96,7 +97,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void toQueryPunishmentPage() throws Exception{
-	  String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358");
+	  String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358",openId);
 	  //String ss= illegalService.toPayPage("4403010922403405","粤B8A3N2","18601174358");
 	  
 	  System.out.println(ss+"--test");
@@ -118,7 +119,7 @@ public class TestIllegalService {
    @Test
    public void toGetSubscribeSorts() throws Exception{
 	   //illegalService.toGetSubscribeSorts("440319000000");
-	   illegalService.isRegisterUser();
+	   illegalService.isRegisterUser(openId);
    }
     
    /**
@@ -127,7 +128,7 @@ public class TestIllegalService {
     */
    @Test
    public void toChangeSubscribe() throws Exception{
-	   CarInfoBean carinfo=new CarInfoBean("粤B6F7M1",  "2", "9094");
+	   CarInfoBean carinfo=new CarInfoBean("粤B6F7M1",  "002", "9094");
 	   CustInfoBean custinfo=new CustInfoBean("王玉璞", "622822198502074110", "01", "18601174358",  "622822198502074110");
 	   illegalService.toChangeSubscribe("CgQxRtU5pO", "440319000000", "140053", custinfo, carinfo, "003");
    }

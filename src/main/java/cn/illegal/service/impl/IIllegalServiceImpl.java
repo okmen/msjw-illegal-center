@@ -328,11 +328,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
 			result= ApiClientUtils.requestApiA(url,bean,data,key);
-				
-			info=(IllegalInfoSheet) JSON.parseObject(result.getData().toString(), IllegalInfoSheet.class); 
+			if(result.getRespCode().equals("0000")&&result.getData()!=null){	
+				info=(IllegalInfoSheet) JSON.parseObject(result.getData().toString(), IllegalInfoSheet.class);
+			}
 
 		} catch (Exception e) {
-			logger.error("违法确认，打单前查询失败，ParamRequestBean= "+bean.toString(), e);
+			logger.error("违法确认，打单失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 	

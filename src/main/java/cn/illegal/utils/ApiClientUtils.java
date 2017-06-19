@@ -56,7 +56,7 @@ public class ApiClientUtils {
 		        String respStr = HttpClientUtil.post(url,jsons.toString());
 	            long endTime = System.currentTimeMillis();
 	            long times = (endTime - startTime) / 1000;
-	            if(times >= 40){
+	            if(times > 10){
 	            	logger.error(url + "接口执行耗时:" + times + " 秒");
 	            	throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 	            }
@@ -83,7 +83,7 @@ public class ApiClientUtils {
 		        String respStr = HttpClientUtil.post(url,jsons.toString());
 	            long endTime = System.currentTimeMillis();
 	            long times = (endTime - startTime) / 1000;
-	            if(times >= 40){
+	            if(times > 10){
 	            	logger.error(url + "接口执行耗时:" + times + " 秒");
 	            	throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 	            }

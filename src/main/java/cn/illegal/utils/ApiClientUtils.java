@@ -6,7 +6,6 @@ import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ResultReturnBean;
 import cn.illegal.bean.ResultReturnBeanA;
 import cn.sdk.exception.HttpPingAnException;
-import cn.sdk.util.HttpClientUtil;
 import cn.sdk.util.MacUtil;
 import cn.sdk.util.MsgCode;
 

@@ -197,7 +197,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		ResultReturnBean result=null;
 		ParamRequestBean bean=null;
-		List<IllegalInfoBean> infos=null;
+		List<IllegalInfoBean> infos = new ArrayList<IllegalInfoBean>();
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 

@@ -1,14 +1,8 @@
 package cn.illegal.service;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +10,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.illegal.bean.AppealInfoBack;
 import cn.illegal.bean.AppealInfoBean;
 import cn.illegal.bean.CarInfoBean;
 import cn.illegal.bean.CustInfoBean;
-import cn.illegal.bean.DeviceBean;
-import cn.illegal.bean.Token;
-import cn.illegal.bean.UserOpenidBean;
-import cn.illegal.bean.UserRegInfo;
-import cn.illegal.bean.WechatUserInfoBean;
-import cn.illegal.service.IIllegalService;
-import cn.sdk.util.AESNewUtils;
-import cn.sdk.util.DESUtils;
-import cn.sdk.util.HttpClientUtil;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import cn.illegal.bean.IllegalInfoBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:junit-test.xml" })
@@ -41,6 +25,15 @@ public class TestIllegalService {
     private IIllegalService illegalService;
     
     private String openId="123456";
+    
+    @Test
+    public void illegalPictureQuery() {
+    	try {
+			illegalService.illegalPictureQuery("1A84ED1DECF55BA7330BB05302BDE6F2");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
     
     /**
 	 * 注册用户信息同步
@@ -63,7 +56,8 @@ public class TestIllegalService {
 	 */
    @Test
    public void queryInfoByLicensePlateNo() throws Exception{
-	   illegalService.queryInfoByLicensePlateNo("粤B6A42E","02","9094",openId);
+	   List<IllegalInfoBean> illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo("粤BY685S","02","5675",openId);
+	   System.out.println(illegalInfoBeans);
    }
    
    /**
@@ -88,7 +82,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void trafficIllegalClaimBefore() throws Exception{
-	   illegalService.trafficIllegalClaimBefore("粤B6A42E","02","15920050177",openId);
+	   illegalService.trafficIllegalClaimBefore("粤B6F7M1","02","15920071829",openId);
    }
   
    /**

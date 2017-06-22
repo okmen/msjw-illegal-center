@@ -12,6 +12,7 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,6 +136,45 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return result.getRespCode();
 	}
 
+	/**
+	 * 查询违法信息根据--根据车牌号
+	 * @throws Exception 
+	 */
+	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo1(String licensePlateNo, String licensePlateType,
+		String vehicleIdentifyNoLast4,String openId) throws Exception {
+		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
+		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
+		String key=illegalCache.getPartnerKey();
+		String partnerCode=illegalCache.getPartnerCode();
+		String partnerUserId=openId;
+		String macAlg=illegalCache.getPartnerMacAlg();
+		String serionNo=RandomUtil.randomString(20);
+		
+		Map<String,String> data=new HashMap<String,String>();
+		data.put("licensePlateNo",licensePlateNo);
+		data.put("licensePlateType", licensePlateType);
+		//data.put("vehicleIdentifyNoLast4", vehicleIdentifyNoLast4);
+		
+		ResultReturnBean result=null;
+		ParamRequestBean bean=null;
+		List<IllegalInfoBean> infos=null;
+		try {
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+
+			result= ApiClientUtils.requestApi(url,bean,data,key);
+			
+			if(result.getRespCode().equals("0000")&&result.getData()!=null){			
+				infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
+			}
+
+		} catch (Exception e) {
+			logger.error("查询违法信息根据（根据车牌号）失败，ParamRequestBean= "+bean.toString(), e);
+			throw e;
+		}
+		logger.debug("---"+result.getData());
+		
+		return infos;
+	}
 	
 	/**
 	 * 查询违法信息根据--根据车牌号
@@ -171,9 +211,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 			logger.error("查询违法信息根据（根据车牌号）失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
-			
+		
 		logger.debug("---"+result.getData());
-			
+		
+		if(infos.size() > 0){
+			for(IllegalInfoBean illegalInfoBean : infos){
+				//查询违法图片
+				if(StringUtils.isNotBlank(illegalInfoBean.getImgQueryCode())){
+					List<String> illegalImgs = illegalPictureQuery(illegalInfoBean.getImgQueryCode());
+					illegalInfoBean.setIllegalImgs(illegalImgs);
+				}
+			}
+		}
 		return infos;
 	}
 
@@ -848,7 +897,38 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return info;
 	}
 
-
+	/**
+	 * 根据图片查询码查询违法图片
+	 * @throws Exception 
+	 */
+	public List<String> illegalPictureQuery(String imgQueryCode) throws Exception {
+		List<String> strings = new ArrayList<String>();
+		String url = illegalCache.getPoliceUrl(); //webservice请求url
+		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
+		String userid = illegalCache.getPoliceUserid(); //webservice登录账号
+		String userpwd = illegalCache.getPoliceUserpwd(); //webservice登录密码
+		String key = illegalCache.getPoliceKey(); //秘钥
+		String jkid="WFTPCX";
+		StringBuffer xml=new StringBuffer();
+		xml.append("<request><head>");
+		xml.append("<tpcxm>"+imgQueryCode+"</tpcxm>");
+		xml.append("<sqly>C</sqly>");//用户来源，C-微信；Z-支付宝；A-移动APP	
+		xml.append("</head></request>");
+		try {
+			JSONObject result=WebServiceClient.requestWebService(url, method, jkid, xml.toString(),userid,userpwd, key);
+			JSONObject head = (JSONObject) result.get("head");
+			if("0000".equals(head.getString("code"))){
+				JSONObject body=(JSONObject) result.get("body");
+				String wftp = body.getString("wftp");
+				wftp = wftp.replaceAll("\n", "");
+				strings.add(wftp);
+			}
+		} catch (Exception e) {
+			logger.error("illegalPictureQuery失败 ， XML= "+xml.toString() + "请求参数imgQueryCode是：" + imgQueryCode, e);
+			throw e;
+		}	
+		return strings;
+	}
 	
 
 }

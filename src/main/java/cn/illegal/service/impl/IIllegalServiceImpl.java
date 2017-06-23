@@ -216,9 +216,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		if(infos.size() > 0){
 			for(IllegalInfoBean illegalInfoBean : infos){
+				List<String> illegalImgs = new ArrayList<String>();
 				//查询违法图片
 				if(StringUtils.isNotBlank(illegalInfoBean.getImgQueryCode())){
-					List<String> illegalImgs = illegalPictureQuery(illegalInfoBean.getImgQueryCode());
+					illegalImgs = illegalPictureQuery(illegalInfoBean.getImgQueryCode());
+					illegalInfoBean.setIllegalImgs(illegalImgs);
+				}else{
 					illegalInfoBean.setIllegalImgs(illegalImgs);
 				}
 			}

@@ -925,10 +925,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 				String wftp = body.getString("wftp");
 				wftp = wftp.replaceAll("\n", "");
 				strings.add(wftp);
-			}
+			}	
 		} catch (Exception e) {
 			logger.error("illegalPictureQuery失败 ， XML= "+xml.toString() + "请求参数imgQueryCode是：" + imgQueryCode, e);
-			throw e;
+			//throw e;
+			return strings;
 		}	
 		return strings;
 	}

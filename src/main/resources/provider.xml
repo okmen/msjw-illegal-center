@@ -13,7 +13,7 @@
 	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.url}" />
 	<!--<dubbo:registry register="false"/>-->
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:protocol name="dubbo" port="${dubbo.provider.port}" />
-	
+	<!-- <dubbo:protocol name="dubbo" port="${dubbo.provider.port}" /> -->
+	<dubbo:protocol name="dubbo" port="${dubbo.provider.port}" dispatcher="all" threadpool="fixed" threads="500" />
 	<import resource="classpath*:/META-INF/spring/illegal-center-provider.xml"/>
 </beans>

@@ -6,7 +6,7 @@ import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ResultReturnBean;
 import cn.illegal.bean.ResultReturnBeanA;
 import cn.sdk.exception.HttpPingAnException;
-import cn.sdk.util.HttpClientUtil;
+import cn.illegal.utils.HttpClientUtil;
 import cn.sdk.util.MacUtil;
 import cn.sdk.util.MsgCode;
 
@@ -55,9 +55,9 @@ public class ApiClientUtils {
 		        long startTime = System.currentTimeMillis();
 		        String respStr = HttpClientUtil.post(url,jsons.toString());
 	            long endTime = System.currentTimeMillis();
-	            long times = (endTime - startTime) / 1000;
-	            if(times > 10){
-	            	logger.error(url + "接口执行耗时:" + times + " 秒");
+	            long times = endTime - startTime;
+	            if(times > 9900){
+	            	logger.error(url + "接口执行耗时:" + times + " 毫秒");
 	            	throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 	            }
 		       
@@ -82,9 +82,9 @@ public class ApiClientUtils {
 		        long startTime = System.currentTimeMillis();
 		        String respStr = HttpClientUtil.post(url,jsons.toString());
 	            long endTime = System.currentTimeMillis();
-	            long times = (endTime - startTime) / 1000;
-	            if(times > 10){
-	            	logger.error(url + "接口执行耗时:" + times + " 秒");
+	            long times = endTime - startTime;
+	            if(times > 9900){
+	            	logger.error(url + "接口执行耗时:" + times + " 毫秒");
 	            	throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 	            }
 		       

@@ -904,7 +904,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 根据图片查询码查询违法图片
 	 * @throws Exception 
 	 */
-	public List<String> illegalPictureQuery(String imgQueryCode) throws Exception {
+	public List<String> illegalPictureQuery(String imgQueryCode,String sourceOfCertification) throws Exception {
 		List<String> strings = new ArrayList<String>();
 		String url = illegalCache.getPoliceUrl(); //webservice请求url
 		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
@@ -915,7 +915,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		StringBuffer xml=new StringBuffer();
 		xml.append("<request><head>");
 		xml.append("<tpcxm>"+imgQueryCode+"</tpcxm>");
-		xml.append("<sqly>C</sqly>");//用户来源，C-微信；Z-支付宝；A-移动APP	
+		xml.append("<sqly>"+sourceOfCertification+"</sqly>");//用户来源，C-微信；Z-支付宝；A-移动APP	
 		xml.append("</head></request>");
 		try {
 			JSONObject result=WebServiceClient.requestWebService(url, method, jkid, xml.toString(),userid,userpwd, key);

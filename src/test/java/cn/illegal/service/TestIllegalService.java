@@ -29,7 +29,7 @@ public class TestIllegalService {
     @Test
     public void illegalPictureQuery() {
     	try {
-			illegalService.illegalPictureQuery("1A84ED1DECF55BA7330BB05302BDE6F2");
+			illegalService.illegalPictureQuery("1A84ED1DECF55BA7330BB05302BDE6F2","C");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

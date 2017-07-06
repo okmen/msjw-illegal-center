@@ -15,6 +15,7 @@ import cn.illegal.bean.AppealInfoBean;
 import cn.illegal.bean.CarInfoBean;
 import cn.illegal.bean.CustInfoBean;
 import cn.illegal.bean.IllegalInfoBean;
+import cn.illegal.bean.ReportingNoParking;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:junit-test.xml" })
@@ -25,6 +26,49 @@ public class TestIllegalService {
     private IIllegalService illegalService;
     
     private String openId="123456";
+    
+    
+	@Test
+	public void testQueryOfreportingNoParking() {
+		try {
+			illegalService.recordOfReportingNoParking("粤B6F7M1", "02", "C");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testsingleQueryOfreportingNoParking() {
+		try {
+			illegalService.singleQueryOfReportingNoParking("10611", "粤B6F7M1", "02", "C");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 车辆临时停车违停申报
+	 */
+	@Test
+	public void testreportingNoParking() {
+		try {
+			ReportingNoParking rp = new ReportingNoParking();
+			rp.setIDcard("440301199002101119");
+			rp.setNumberPlateNumber("粤B6F7M1");
+			rp.setParkingReason("111");
+			rp.setParkingSpot("111");
+			rp.setPlateType("02");
+			rp.setScenePhoto("111");
+			rp.setScenePhoto1("22");
+			rp.setScenePhoto2("33");
+			rp.setScenePhoto3("44");
+			rp.setSourceOfCertification("C");
+			rp.setStopNoticePhoto("gg");
+			illegalService.reportingNoParking(rp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
     
     @Test
     public void illegalPictureQuery() {

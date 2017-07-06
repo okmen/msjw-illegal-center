@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,8 @@ import cn.illegal.bean.IllegalInfoClaim;
 import cn.illegal.bean.IllegalInfoSheet;
 import cn.illegal.bean.IllegalProcessPointBean;
 import cn.illegal.bean.ParamRequestBean;
+import cn.illegal.bean.RecordOfReportingNoParking;
+import cn.illegal.bean.ReportingNoParking;
 import cn.illegal.bean.ReservationDay;
 import cn.illegal.bean.SubcribeBean;
 import cn.illegal.bean.ResultReturnBean;
@@ -38,12 +41,14 @@ import cn.illegal.service.IIllegalService;
 import cn.illegal.utils.ApiClientUtils;
 import cn.sdk.bean.BaseBean;
 import cn.sdk.util.DateUtil;
+import cn.sdk.util.DateUtil2;
 import cn.sdk.util.HttpClientUtil;
 import cn.sdk.util.MacUtil;
 import cn.sdk.util.RandomUtil;
 import cn.sdk.webservice.WebServiceClient;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 @Service("illegalService")
@@ -938,5 +943,183 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return strings;
 	}
 	
+	/**
+	 * 车辆临时停车违停申报
+	 */
+	public Map<String, String> reportingNoParking(ReportingNoParking reportingNoParking) throws Exception {
+		String url = illegalCache.getPoliceUrl(); // webservice请求url
+		String method = illegalCache.getPoliceMethod(); // webservice请求方法名称
+		String userid = illegalCache.getPoliceUserid(); // webservice登录账号
+		String userpwd = illegalCache.getPoliceUserpwd(); // webservice登录密码
+		String key = illegalCache.getPoliceKey(); // 秘钥
+		Map<String, String> map = new HashMap<>();
+		String jkid = "WTSQ01";
+		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><HPHM>"
+				+ reportingNoParking.getNumberPlateNumber() + "</HPHM><HPZL>" + reportingNoParking.getPlateType()
+				+ "</HPZL><SFZMHM>" + reportingNoParking.getIDcard() + "</SFZMHM><TCDD>"
+				+ reportingNoParking.getParkingSpot() + "</TCDD><TCYY>" + reportingNoParking.getParkingReason()
+				+ "</TCYY><TCZP>" + reportingNoParking.getScenePhoto() + "</TCZP><TCZP1>"
+				+ reportingNoParking.getScenePhoto1() + "</TCZP1><TCZP2>" + reportingNoParking.getScenePhoto2()
+				+ "</TCZP2><TCZP3>" + reportingNoParking.getScenePhoto3() + "</TCZP3><TCGZDZP>"
+				+ reportingNoParking.getStopNoticePhoto() + "</TCGZDZP><YHLY>"
+				+ reportingNoParking.getSourceOfCertification() + "</YHLY></REQUEST>";
+		try {
+			JSONObject json = WebServiceClient.requestWebService(url, method, jkid, xml, userid, userpwd, key);
+			String code = json.getString("CODE");
+			String msg = json.getString("MSG");
+			map.put("code", code);
+			map.put("msg", msg);
+			if ("0000".equals(code)) {
+				json = json.getJSONObject("BODY");
+				String cid = json.getString("CID");
+				map.put("cid", cid);
+			}
+		} catch (Exception e) {
+			logger.error("reportingNoParking 失败 ， xml = " + xml);
+			throw e;
+		}
+
+		return map;
+	}
+
+	/**
+	 * 单宗违停申报结果查询
+	 */
+	public Map<String, Object> singleQueryOfReportingNoParking(String orderNumber, String numberPlateNumber,
+			String plateType, String sourceOfCertification) throws Exception {
+		String url = illegalCache.getPoliceUrl(); // webservice请求url
+		String method = illegalCache.getPoliceMethod(); // webservice请求方法名称
+		String userid = illegalCache.getPoliceUserid(); // webservice登录账号
+		String userpwd = illegalCache.getPoliceUserpwd(); // webservice登录密码
+		String key = illegalCache.getPoliceKey(); // 秘钥
+		String jkid = "WTSQ02";
+		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><XH>" + orderNumber + "</XH><HPHM>"
+				+ numberPlateNumber + "</HPHM><HPZL>" + plateType + "</HPZL><YHLY>" + sourceOfCertification
+				+ "</YHLY></REQUEST>";
+		Map<String, Object> map = new HashMap<>();
+		try {
+			JSONObject json = WebServiceClient.changedWebService(url, method, jkid, xml, userid, userpwd, key);
+			String code = json.getString("code");
+			String msg = json.getString("msg");
+			map.put("code", code);
+			map.put("msg", msg);
+			if ("0000".equals(code)) {
+				RecordOfReportingNoParking recordOfReportingNoParking = new RecordOfReportingNoParking();
+				json = json.getJSONObject("body");
+				json = json.getJSONObject("ret");
+				String description = json.getString("clms");
+				String state = json.getString("clzt");
+				String numberPlateNumber2 = json.getString("hphm");
+				String plateType2 = json.getString("hpzl");
+				recordOfReportingNoParking.setDescription(description);
+				recordOfReportingNoParking.setState(state);
+				recordOfReportingNoParking.setNumberPlateNumber(numberPlateNumber2);
+				recordOfReportingNoParking.setPlateType(plateType2);
+				map.put("data", recordOfReportingNoParking);
+			}
+		} catch (Exception e) {
+			logger.error("singleQueryOfReportingNoParking 失败 ， xml = " + xml);
+			throw e;
+		}
+
+		return map;
+	}
+
+	/**
+	 * 查询申报记录列表查询
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map<String, Object> recordOfReportingNoParking(String numberPlateNumber, String plateType,
+			String sourceOfCertification) throws Exception {
+		String url = illegalCache.getPoliceUrl(); // webservice请求url
+		String method = illegalCache.getPoliceMethod(); // webservice请求方法名称
+		String userid = illegalCache.getPoliceUserid(); // webservice登录账号
+		String userpwd = illegalCache.getPoliceUserpwd(); // webservice登录密码
+		String key = illegalCache.getPoliceKey(); // 秘钥
+		String jkid = "WTSQ03";
+		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><HPHM>" + numberPlateNumber + "</HPHM><HPZL>"
+				+ plateType + "</HPZL><YHLY>" + sourceOfCertification + "</YHLY></REQUEST>";
+		Map<String, Object> map = new HashMap<>();
+		try {
+			JSONObject json = WebServiceClient.changedWebService(url, method, jkid, xml, userid, userpwd, key);
+			String code = json.getString("code");
+			String msg = json.getString("msg");
+			map.put("code", code);
+			map.put("msg", msg);
+			if ("0000".equals(code)) {
+				// 成功
+				json = json.getJSONObject("body");
+				List<RecordOfReportingNoParking> list = new ArrayList<>();
+				if (json.toJSONString().contains("[")) {
+					// 多条
+					JSONArray jsonArray = json.getJSONArray("ret");
+					Iterator iterator = jsonArray.iterator();
+					while (iterator.hasNext()) {
+						RecordOfReportingNoParking recordOfReportingNoParking = new RecordOfReportingNoParking();
+						JSONObject jsonObject = (JSONObject) iterator.next();
+						String numberPlateNumber2 = jsonObject.getString("hphm");
+						String plateType2 = jsonObject.getString("hpzl");
+						String parkingSpot = jsonObject.getString("tcdd");
+						String parkingReason = jsonObject.getString("tcyy");
+						String reportTime = jsonObject.getString("sqsj");
+						String sourceOfCertification2 = jsonObject.getString("sqly");
+						String IDcard = jsonObject.getString("sqsfzmhm");
+						String state = jsonObject.getString("clzt");
+						String description = jsonObject.getString("clms");
+						String orderNumber = jsonObject.getString("xh");
+						recordOfReportingNoParking.setDescription(description);
+						recordOfReportingNoParking.setIDcard(IDcard);
+						recordOfReportingNoParking.setNumberPlateNumber(numberPlateNumber2);
+						recordOfReportingNoParking.setParkingReason(parkingReason);
+						recordOfReportingNoParking.setParkingSpot(parkingSpot);
+						recordOfReportingNoParking.setPlateType(plateType2);
+						recordOfReportingNoParking.setReportTime(reportTime);
+						recordOfReportingNoParking.setSourceOfCertification(sourceOfCertification2);
+						recordOfReportingNoParking.setState(state);
+						recordOfReportingNoParking.setOrderNumber(orderNumber);
+						list.add(recordOfReportingNoParking);
+					}
+
+				} else {
+					RecordOfReportingNoParking recordOfReportingNoParking = new RecordOfReportingNoParking();
+					JSONObject jsonObject = json.getJSONObject("ret");
+					String numberPlateNumber2 = jsonObject.getString("hphm");
+					String plateType2 = jsonObject.getString("hpzl");
+					String parkingSpot = jsonObject.getString("tcdd");
+					String parkingReason = jsonObject.getString("tcyy");
+					String reportTime = jsonObject.getString("sqsj");
+					String sourceOfCertification2 = jsonObject.getString("sqly");
+					String IDcard = jsonObject.getString("sqsfzmhm");
+					String state = jsonObject.getString("clzt");
+					String description = jsonObject.getString("clms");
+					String orderNumber = jsonObject.getString("xh");
+					recordOfReportingNoParking.setDescription(description);
+					recordOfReportingNoParking.setIDcard(IDcard);
+					recordOfReportingNoParking.setNumberPlateNumber(numberPlateNumber2);
+					recordOfReportingNoParking.setParkingReason(parkingReason);
+					recordOfReportingNoParking.setParkingSpot(parkingSpot);
+					recordOfReportingNoParking.setPlateType(plateType2);
+					recordOfReportingNoParking.setReportTime(reportTime);
+					recordOfReportingNoParking.setSourceOfCertification(sourceOfCertification2);
+					recordOfReportingNoParking.setState(state);
+					recordOfReportingNoParking.setOrderNumber(orderNumber);
+					list.add(recordOfReportingNoParking);
+				}
+				map.put("code", code);
+				map.put("data", list);
+			} else {
+				// 失败
+				map.put("code", code);
+				map.put("msg", msg);
+				map.put("data", null);
+			}
+
+		} catch (Exception e) {
+			logger.error("recordOfReportingNoParking 失败 ， xml = " + xml);
+			throw e;
+		}
+
+		return map;
+	}
 
 }

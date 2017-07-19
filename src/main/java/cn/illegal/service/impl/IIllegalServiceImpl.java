@@ -24,6 +24,7 @@ import cn.illegal.bean.AppealInfoBean;
 import cn.illegal.bean.CarInfoBean;
 import cn.illegal.bean.CustDataInfo;
 import cn.illegal.bean.CustInfoBean;
+import cn.illegal.bean.ElectronicReceiptBean;
 import cn.illegal.bean.IllegalInfoBean;
 import cn.illegal.bean.IllegalInfoClaim;
 import cn.illegal.bean.IllegalInfoSheet;
@@ -202,7 +203,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		Map<String,String> data=new HashMap<String,String>();
 		data.put("licensePlateNo",licensePlateNo);
 		data.put("licensePlateType", licensePlateType);
-		//data.put("vehicleIdentifyNoLast4", vehicleIdentifyNoLast4);
+		data.put("vehicleIdentifyNoLast4", vehicleIdentifyNoLast4);
 		
 		ResultReturnBean result=null;
 		ParamRequestBean bean=null;
@@ -544,7 +545,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 规费缴费信息
 	 * @throws Exception 
 	 */
-	public String toPayPage(String illegalNo,String licensePlateNo, String mobileNo,String openId) throws Exception {
+	public String toPayPage(String billNo,String licensePlateNo, String mobileNo,String openId) throws Exception {
 		String url=illegalCache.getPartnerUrl()+"fee/toQueryFeePage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
@@ -555,7 +556,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String serionNo=RandomUtil.randomString(20);
 		
 		Map<String,String> data=new HashMap<String,String>();
-		data.put("billNo",illegalNo);
+		data.put("billNo",billNo);
 		data.put("licensePlateNo",licensePlateNo);
 		data.put("mobileNo",mobileNo);
 		data.put("remark1", "1");
@@ -943,6 +944,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return strings;
 	}
 	
+
 	/**
 	 * 车辆临时停车违停申报
 	 */
@@ -1121,5 +1123,44 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 		return map;
 	}
+
+	
+	/**
+	 * 查询电子回单（规费、缴费）
+	 * @throws Exception 
+	 * @throws Exception 
+	 */
+	@Override
+	public List<ElectronicReceiptBean> toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String drivingLicenceNo,String openId) throws Exception{
+		String url="http://uat.stcpay.com/gov-traffic-front/openapi/eicBillResultQuery.do";
+		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
+		String key="1234567890000000";//illegalCache.getPartnerKey();
+		String partnerCode=illegalCache.getPartnerCode();
+		String partnerUserId=openId;
+		String macAlg=illegalCache.getPartnerMacAlg();
+		String serionNo=RandomUtil.randomString(20);
+		
+		Map<String,String> data=new HashMap<String,String>();
+		data.put("billNo",billNo);
+		data.put("plateNo",licensePlateNo);
+		data.put("driverNo",drivingLicenceNo);
+		ParamRequestBean bean=null;
+		ResultReturnBean result=null;
+		List<ElectronicReceiptBean> infos=null;
+		try {
+			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
+			result= ApiClientUtils.requestApi(url,bean,data,key);
+			
+			if(result.getRespCode().equals("0000")&&result.getData()!=null){			
+				infos=(List<ElectronicReceiptBean>) JSON.parseArray(result.getData().toString(), ElectronicReceiptBean.class); 
+			}
+		} catch (Exception e) {
+			logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString(), e);
+			throw e;
+		}
+			
+		return infos;
+	}
+
 
 }

@@ -235,10 +235,6 @@ public class IIllegalServiceImpl implements IIllegalService {
 				}
 			}
 		}
-		
-		for(IllegalInfoBean illegalInfoBean : infos){
-			illegalInfoBean.setImgQueryCode("");
-		}
 		return infos;
 	}
 

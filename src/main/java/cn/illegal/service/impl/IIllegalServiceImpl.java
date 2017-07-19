@@ -229,9 +229,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 				//查询违法图片
 				if(StringUtils.isNotBlank(illegalInfoBean.getImgQueryCode())){
 					//illegalImgs = illegalPictureQuery(illegalInfoBean.getImgQueryCode());
-					illegalInfoBean.setIllegalImgs(illegalImgs);
+					//illegalInfoBean.setIllegalImgs(illegalImgs);
 				}else{
-					illegalInfoBean.setIllegalImgs(illegalImgs);
+					//illegalInfoBean.setIllegalImgs(illegalImgs);
 				}
 			}
 		}

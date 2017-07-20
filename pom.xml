@@ -296,7 +296,7 @@
                 <redis.user-center.password><![CDATA[123456]]></redis.user-center.password>
                
                 <partner.code>P003</partner.code>
-                <partner.url>http://code.stcpay.com:8088/ysth-traffic-front/</partner.url>
+                <partner.url>http://code.stcpay.com:8088/gov-traffic-front/</partner.url>
              	<partner.userid>123456</partner.userid>
              	<partner.key>1234567890000000</partner.key>
              	<partner.macAlg>33</partner.macAlg>

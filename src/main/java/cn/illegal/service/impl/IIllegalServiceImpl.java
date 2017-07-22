@@ -163,7 +163,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		Map<String,String> data=new HashMap<String,String>();
 		data.put("licensePlateNo",licensePlateNo);
 		data.put("licensePlateType", licensePlateType);
-		//data.put("vehicleIdentifyNoLast4", vehicleIdentifyNoLast4);
+		data.put("vehicleIdentifyNoLast4", vehicleIdentifyNoLast4);
 		
 		ResultReturnBean result=null;
 		ParamRequestBean bean=null;
@@ -1164,6 +1164,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			
 		return infos;
 	}
+
 
 
 }

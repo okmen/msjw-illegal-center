@@ -150,7 +150,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 查询违法信息根据--根据车牌号
 	 * @throws Exception 
 	 */
-	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo1(String licensePlateNo, String licensePlateType,
+	public  BaseBean  queryInfoByLicensePlateNo1(String licensePlateNo, String licensePlateType,
 		String vehicleIdentifyNoLast4,String openId) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
@@ -167,6 +167,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		ResultReturnBean result=null;
 		ParamRequestBean bean=null;
+		BaseBean baseBean =new BaseBean();
 		List<IllegalInfoBean> infos=null;
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
@@ -177,20 +178,23 @@ public class IIllegalServiceImpl implements IIllegalService {
 				infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
 			}
 
+			baseBean.setCode(result.getRespCode());
+			baseBean.setData(infos);
+			baseBean.setMsg(result.getRespMsg());
 		} catch (Exception e) {
 			logger.error("查询违法信息根据（根据车牌号）失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
 		}
 		logger.debug("---"+result.getData());
 		
-		return infos;
+		return baseBean;
 	}
 	
 	/**
 	 * 查询违法信息根据--根据车牌号
 	 * @throws Exception 
 	 */
-	public  List<IllegalInfoBean>  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
+	public  BaseBean  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
 		String vehicleIdentifyNoLast4,String openId) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
@@ -207,6 +211,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		ResultReturnBean result=null;
 		ParamRequestBean bean=null;
+		BaseBean baseBean =new BaseBean();
 		List<IllegalInfoBean> infos = new ArrayList<IllegalInfoBean>();
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
@@ -217,6 +222,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 				infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
 			}
 
+			baseBean.setCode(result.getRespCode());
+			baseBean.setData(infos);
+			baseBean.setMsg(result.getRespMsg());
 		} catch (Exception e) {
 			logger.error("查询违法信息根据（根据车牌号）失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
@@ -239,7 +247,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		for(IllegalInfoBean illegalInfoBean : infos){
 			illegalInfoBean.setImgQueryCode("");
 		}
-		return infos;
+		return baseBean;
 	}
 
 

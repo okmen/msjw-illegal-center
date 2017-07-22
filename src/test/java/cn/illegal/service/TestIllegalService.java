@@ -106,7 +106,7 @@ public class TestIllegalService {
    @Test
    public void queryInfoByLicensePlateNo() throws Exception{
 
-	   List<IllegalInfoBean> illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo("粤B8Q55T","01","","oPyqQjheTh8nCsdpQD8WukZv9Uxk");
+	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤B6F7M1",  "02", "9094","oPyqQjheTh8nCsdpQD8WukZv9Uxk");
 	   System.out.println(illegalInfoBeans);
    }
    
@@ -132,7 +132,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void trafficIllegalClaimBefore() throws Exception{
-	   BaseBean bean= illegalService.trafficIllegalClaimBefore("粤B5ZN11","02","13501592159","oPyqQjheTh8nCsdpQD8WukZv9Uxk");
+	   BaseBean bean= illegalService.trafficIllegalClaimBefore("粤B6F7M1","02","15920071829","oPyqQjheTh8nCsdpQD8WukZv9Uxk");
 	   System.out.println(bean.getData().toString());
 	   
    }
@@ -143,8 +143,8 @@ public class TestIllegalService {
 	 */
    @Test
    public void toQueryPunishmentPage() throws Exception{
-	 // String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358",openId);
-	  String ss= illegalService.toPayPage("4403010922403405","粤B8A3N2","18601174358",openId);
+	 String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358",openId);
+	  //String ss= illegalService.toPayPage("4403010922403405","粤B8A3N2","18601174358",openId);
 	  
 	  System.out.println(ss+"--test");
    }

@@ -14,6 +14,7 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,13 @@ import cn.illegal.dao.IIllegalDao;
 import cn.illegal.service.IIllegalService;
 import cn.illegal.utils.ApiClientUtils;
 import cn.sdk.bean.BaseBean;
+import cn.sdk.pingan.OpenApiClient;
+import cn.sdk.pingan.OpenApiRsp;
 import cn.sdk.util.DateUtil;
 import cn.sdk.util.DateUtil2;
 import cn.sdk.util.HttpClientUtil;
 import cn.sdk.util.MacUtil;
+import cn.sdk.util.MsgCode;
 import cn.sdk.util.RandomUtil;
 import cn.sdk.webservice.WebServiceClient;
 
@@ -1140,39 +1144,52 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 查询电子回单（规费、缴费）
 	 * @throws Exception 
 	 * @throws Exception 
+	 * @param ideNo  驾驶证或身份证
+	 * @param billNo 缴款编号
+	 * @param licensePlateNo  车牌号
 	 */
 	@Override
-	public List<ElectronicReceiptBean> toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String drivingLicenceNo,String openId) throws Exception{
-		String url="http://uat.stcpay.com/gov-traffic-front/openapi/eicBillResultQuery.do";
-		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
-		String key="1234567890000000";//illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
-		String partnerUserId=openId;
-		String macAlg=illegalCache.getPartnerMacAlg();
-		String serionNo=RandomUtil.randomString(20);
-		
-		Map<String,String> data=new HashMap<String,String>();
-		data.put("billNo",billNo);
-		data.put("plateNo",licensePlateNo);
-		data.put("driverNo",drivingLicenceNo);
-		ParamRequestBean bean=null;
-		ResultReturnBean result=null;
-		List<ElectronicReceiptBean> infos=null;
-		try {
-			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
-			result= ApiClientUtils.requestApi(url,bean,data,key);
-			
-			if(result.getRespCode().equals("0000")&&result.getData()!=null){			
-				infos=(List<ElectronicReceiptBean>) JSON.parseArray(result.getData().toString(), ElectronicReceiptBean.class); 
-			}
-		} catch (Exception e) {
-			logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString(), e);
+	public BaseBean toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String ideNo) throws Exception{
+		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";//"http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
+		String APPKEY="1234567890123456";//illegalCache.getPartnerKey();
+		String APPID=illegalCache.getPartnerCode();
+		boolean IS_DATA_ENCYPTY = false;//是否需要对data部分加密
+		boolean IS_SIGN = true;//是否校验签名
+		// 请求接口
+        String method = "eicBillResultQuery";
+				
+        String data = "{"
+            + "\"ideNo\":\""+ideNo+"\","
+            + "\"licenseNum\":\""+licensePlateNo+"\","
+            + "\"billNo\":\""+billNo+"\""
+            + "}";
+        OpenApiRsp rsp=null;
+        List<ElectronicReceiptBean> result =null;
+        BaseBean bean=new BaseBean();
+        
+        logger.info("请求data：" + data);
+        try{
+	        // 实例化OpenApi客户端
+	        OpenApiClient client = new OpenApiClient(GATEWAY, APPID, APPKEY, IS_DATA_ENCYPTY, IS_SIGN);
+	        // 发送请求
+	        rsp = client.execute(method, data);
+	        result =(List<ElectronicReceiptBean>) JSON.parseArray(rsp.getData(), ElectronicReceiptBean.class);
+	        if(result==null||result.size()==0){
+	        	bean.setCode(MsgCode.businessError);
+		        bean.setMsg("未查询到相应的记录");
+	        }else{
+	        	bean.setCode(rsp.getReturnCode());
+		        bean.setData(result);
+		        bean.setMsg(rsp.getReturnMsg());
+	        }
+	        
+        }catch (Exception e) {
+			logger.error("查询电子回单错误！");
+			e.printStackTrace();
 			throw e;
-		}
-			
-		return infos;
+		}			
+		return bean;
 	}
-
 
 
 }

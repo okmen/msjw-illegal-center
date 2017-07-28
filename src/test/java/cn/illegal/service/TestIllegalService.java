@@ -104,7 +104,7 @@ public class TestIllegalService {
    @Test
    public void queryInfoByLicensePlateNo() throws Exception{
 
-	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤BV406L",  "02", "9089","oPyqQjheTh8nCsdpQD8WukZv9Uxk");
+	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤SC2H55",  "02", "1970","oPyqQjheTh8nCsdpQD8WukZv9Uxk");
 	   System.out.println(illegalInfoBeans);
    }
    

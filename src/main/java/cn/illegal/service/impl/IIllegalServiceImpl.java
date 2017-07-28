@@ -484,7 +484,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	public String callback(String traffData) throws Exception{
 		String url ="";    
         try {     	
-        	String source="http://szjj.u-road.com/api/illegalHanding/qrCodeToQueryPage.html?traffData="+traffData;
+        	String source="http://gzh.stc.gov.cn/api/illegalHanding/qrCodeToQueryPage.html?traffData="+traffData;
     	    url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc2b699cf2f919b58"+
     	    "&redirect_uri="+java.net.URLEncoder.encode(source,"utf-8")+
     	    "&response_type=code&scope=snsapi_base&state=123#wechat_redirect"; 

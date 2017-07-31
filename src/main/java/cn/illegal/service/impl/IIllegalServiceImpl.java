@@ -247,9 +247,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 				}
 			}
 		}
-		for(IllegalInfoBean illegalInfoBean : infos){
+		/*for(IllegalInfoBean illegalInfoBean : infos){
 			illegalInfoBean.setImgQueryCode("");
-		}
+		}*/
 		return baseBean;
 	}
 

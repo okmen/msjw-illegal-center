@@ -604,7 +604,6 @@ public class IIllegalServiceImpl implements IIllegalService {
 			if(result==302){
 				Header header=post.getResponseHeader("location");
 				redirectUrl=header.getValue();
-				System.out.println(redirectUrl+"---");
 			}
 			
 

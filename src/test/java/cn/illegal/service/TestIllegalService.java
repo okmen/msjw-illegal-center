@@ -147,8 +147,8 @@ public class TestIllegalService {
 	 */
    @Test
    public void toQueryPunishmentPage() throws Exception{
-	 String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358",openId);
-	  //String ss= illegalService.toPayPage("4403010922403405","粤B8A3N2","18601174358",openId);
+	// String ss= illegalService.toQueryPunishmentPage("931701009747","粤B8A3N2","18601174358",openId);
+	  String ss= illegalService.toPayPage("011170801B16030","123","123",openId);
 	  
 	  System.out.println(ss+"--test");
    }
@@ -215,7 +215,7 @@ public class TestIllegalService {
    @Test
    public void toQueryElectronicReceiptPage() throws Exception{
 	   
-	  BaseBean list = illegalService.toQueryElectronicReceiptPage("187900237573", "", "");
+	  BaseBean list = illegalService.toQueryElectronicReceiptPage("", "粤B47119", "");
 	  
 	  System.out.println(list.toJson());
    }

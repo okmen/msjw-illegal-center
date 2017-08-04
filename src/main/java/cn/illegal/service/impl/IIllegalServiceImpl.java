@@ -247,9 +247,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 				}
 			}
 		}
-		/*for(IllegalInfoBean illegalInfoBean : infos){
+		
+		//屏蔽违法图片显示
+		for(IllegalInfoBean illegalInfoBean : infos){
 			illegalInfoBean.setImgQueryCode("");
-		}*/
+		}
 		return baseBean;
 	}
 

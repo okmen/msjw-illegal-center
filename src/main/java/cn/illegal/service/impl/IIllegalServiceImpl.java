@@ -979,7 +979,8 @@ public class IIllegalServiceImpl implements IIllegalService {
 				+ reportingNoParking.getScenePhoto1() + "</TCZP1><TCZP2>" + reportingNoParking.getScenePhoto2()
 				+ "</TCZP2><TCZP3>" + reportingNoParking.getScenePhoto3() + "</TCZP3><TCGZDZP>"
 				+ reportingNoParking.getStopNoticePhoto() + "</TCGZDZP><YHLY>"
-				+ reportingNoParking.getSourceOfCertification() + "</YHLY></REQUEST>";
+				+ reportingNoParking.getSourceOfCertification() + "</YHLY>"+ "<WTGZDH>"
+				+ reportingNoParking.getStopNoticeNumber() + "</WTGZDH></REQUEST>";
 		try {
 			JSONObject json = WebServiceClient.requestWebService(url, method, jkid, xml, userid, userpwd, key);
 			String code = json.getString("CODE");

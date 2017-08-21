@@ -2,6 +2,7 @@ package cn.illegal.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,17 +58,19 @@ public class TestIllegalService {
 		try {
 			ReportingNoParking rp = new ReportingNoParking();
 			rp.setIDcard("440301199002101119");
-			rp.setNumberPlateNumber("粤B6F7M1");
-			rp.setParkingReason("111");
+			rp.setNumberPlateNumber("粤B701NR");
+			rp.setParkingReason("");
 			rp.setParkingSpot("111");
 			rp.setPlateType("02");
 			rp.setScenePhoto("111");
 			rp.setScenePhoto1("22");
 			rp.setScenePhoto2("33");
-			rp.setScenePhoto3("44");
+			rp.setScenePhoto3("");
 			rp.setSourceOfCertification("C");
 			rp.setStopNoticePhoto("gg");
-			illegalService.reportingNoParking(rp);
+			rp.setStopNoticeNumber("121313131");
+			Map<String, String> reportingNoParking = illegalService.reportingNoParking(rp);
+			System.out.println(reportingNoParking);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -249,9 +249,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 		}
 		
 		//屏蔽违法图片显示
-		/*for(IllegalInfoBean illegalInfoBean : infos){
+		for(IllegalInfoBean illegalInfoBean : infos){
 			illegalInfoBean.setImgQueryCode("");
-		}*/
+		}
 		return baseBean;
 	}
 

@@ -44,7 +44,7 @@ public class TestIllegalService {
 	@Test
 	public void testsingleQueryOfreportingNoParking() {
 		try {
-			illegalService.singleQueryOfReportingNoParking("10611", "粤B6F7M1", "02", "C");
+			illegalService.singleQueryOfReportingNoParking("1556", "粤B901BU", "02", "C");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

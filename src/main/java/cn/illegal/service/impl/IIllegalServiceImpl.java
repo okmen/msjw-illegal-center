@@ -975,13 +975,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><HPHM>"
 				+ reportingNoParking.getNumberPlateNumber() + "</HPHM><HPZL>" + reportingNoParking.getPlateType()
 				+ "</HPZL><SFZMHM>" + reportingNoParking.getIDcard() + "</SFZMHM><TCDD>"
-				+ reportingNoParking.getParkingSpot() + "</TCDD><TCYY>" + reportingNoParking.getParkingReason()
-				+ "</TCYY><TCZP>" + reportingNoParking.getScenePhoto() + "</TCZP><TCZP1>"
-				+ reportingNoParking.getScenePhoto1() + "</TCZP1><TCZP2>" + reportingNoParking.getScenePhoto2()
-				+ "</TCZP2><TCZP3>" + reportingNoParking.getScenePhoto3() + "</TCZP3><TCGZDZP>"
-				+ reportingNoParking.getStopNoticePhoto() + "</TCGZDZP><YHLY>"
-				+ reportingNoParking.getSourceOfCertification() + "</YHLY>"+ "<WTGZDH>"
-				+ reportingNoParking.getStopNoticeNumber() + "</WTGZDH></REQUEST>";
+				+ reportingNoParking.getParkingSpot() + "</TCDD><TCZP>" + reportingNoParking.getScenePhoto() + "</TCZP><YHLY>"
+				+ reportingNoParking.getSourceOfCertification() + "</YHLY><OPENID>"+reportingNoParking.getOpenId()
+				+ "</OPENID></REQUEST>";
 		try {
 			JSONObject json = WebServiceClient.requestWebService(url, method, jkid, xml, userid, userpwd, key);
 			String code = json.getString("CODE");

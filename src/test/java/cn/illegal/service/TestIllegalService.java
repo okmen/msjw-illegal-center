@@ -44,7 +44,9 @@ public class TestIllegalService {
 	@Test
 	public void testsingleQueryOfreportingNoParking() {
 		try {
+
 			illegalService.singleQueryOfReportingNoParking("1556", "粤B901BU", "02", "C");
+			illegalService.singleQueryOfReportingNoParking("10696", "粤B6A42E", "02", "C");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,16 +61,11 @@ public class TestIllegalService {
 			ReportingNoParking rp = new ReportingNoParking();
 			rp.setIDcard("440301199002101119");
 			rp.setNumberPlateNumber("粤B701NR");
-			rp.setParkingReason("");
 			rp.setParkingSpot("111");
 			rp.setPlateType("02");
-			rp.setScenePhoto("111");
-			rp.setScenePhoto1("22");
-			rp.setScenePhoto2("33");
-			rp.setScenePhoto3("");
+			rp.setScenePhoto("33");
 			rp.setSourceOfCertification("C");
-			rp.setStopNoticePhoto("gg");
-			rp.setStopNoticeNumber("121313131");
+			rp.setOpenId("123");
 			Map<String, String> reportingNoParking = illegalService.reportingNoParking(rp);
 			System.out.println(reportingNoParking);
 		} catch (Exception e) {

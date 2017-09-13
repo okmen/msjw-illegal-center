@@ -199,7 +199,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	public  BaseBean  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
-		String vehicleIdentifyNoLast4,String openId) throws Exception {
+		String vehicleIdentifyNoLast4,String openId,String sourceOfCertification) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
 		String key=illegalCache.getPartnerKey();
@@ -249,9 +249,13 @@ public class IIllegalServiceImpl implements IIllegalService {
 			}
 		}
 		
-		//屏蔽违法图片显示
-		for(IllegalInfoBean illegalInfoBean : infos){
-			illegalInfoBean.setImgQueryCode("");
+		//屏蔽微信违法图片显示
+		if(sourceOfCertification.equals("Z")){
+			
+		}else if(sourceOfCertification.equals("C")){
+			for(IllegalInfoBean illegalInfoBean : infos){
+				illegalInfoBean.setImgQueryCode("");
+			}
 		}
 		return baseBean;
 	}

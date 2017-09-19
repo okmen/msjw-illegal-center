@@ -251,7 +251,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 		
 		//屏蔽微信违法图片显示
 		if(sourceOfCertification.equals("Z")){
-			
+			for(IllegalInfoBean illegalInfoBean : infos){
+				illegalInfoBean.setImgQueryCode("");
+			}
 		}else if(sourceOfCertification.equals("C")){
 			for(IllegalInfoBean illegalInfoBean : infos){
 				illegalInfoBean.setImgQueryCode("");

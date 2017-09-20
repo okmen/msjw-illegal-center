@@ -35,7 +35,7 @@ public class TestIllegalService {
 	@Test
 	public void testQueryOfreportingNoParking() {
 		try {
-			illegalService.recordOfReportingNoParking("粤B6F7M1", "02", "C");
+			illegalService.recordOfReportingNoParking("粤B6A42E", "02", "C");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,8 +45,7 @@ public class TestIllegalService {
 	public void testsingleQueryOfreportingNoParking() {
 		try {
 
-			illegalService.singleQueryOfReportingNoParking("1556", "粤B901BU", "02", "C");
-			illegalService.singleQueryOfReportingNoParking("10696", "粤B6A42E", "02", "C");
+			illegalService.singleQueryOfReportingNoParking("1077", "粤B6A42E", "02", "C");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -64,7 +63,7 @@ public class TestIllegalService {
 			rp.setParkingSpot("111");
 			rp.setPlateType("02");
 			rp.setScenePhoto("33");
-			rp.setSourceOfCertification("C");
+			rp.setSourceOfCertification("Z");
 			rp.setOpenId("123");
 			Map<String, String> reportingNoParking = illegalService.reportingNoParking(rp);
 			System.out.println(reportingNoParking);

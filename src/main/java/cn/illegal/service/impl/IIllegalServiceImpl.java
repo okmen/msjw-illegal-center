@@ -1082,7 +1082,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 						String plateType2 = jsonObject.getString("hpzl");
 						String parkingSpot = jsonObject.getString("tcdd");
 						String parkingReason = jsonObject.getString("tcyy");
-						String reportTime = jsonObject.getString("sqsj");
+						String reportTime1 = jsonObject.getString("sqsj");
+						Date date2 = DateUtil2.str2date(reportTime1);
+						String reportTime = DateUtil2.date2str(date2);
 						String sourceOfCertification2 = jsonObject.getString("sqly");
 						String IDcard = jsonObject.getString("sqsfzmhm");
 						String state = jsonObject.getString("clzt");
@@ -1108,7 +1110,9 @@ public class IIllegalServiceImpl implements IIllegalService {
 					String plateType2 = jsonObject.getString("hpzl");
 					String parkingSpot = jsonObject.getString("tcdd");
 					String parkingReason = jsonObject.getString("tcyy");
-					String reportTime = jsonObject.getString("sqsj");
+					String reportTime1 = jsonObject.getString("sqsj");
+					Date date2 = DateUtil2.str2date(reportTime1);
+					String reportTime = DateUtil2.date2str(date2);
 					String sourceOfCertification2 = jsonObject.getString("sqly");
 					String IDcard = jsonObject.getString("sqsfzmhm");
 					String state = jsonObject.getString("clzt");

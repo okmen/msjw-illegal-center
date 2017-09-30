@@ -46,6 +46,7 @@ import cn.sdk.pingan.OpenApiClient;
 import cn.sdk.pingan.OpenApiRsp;
 import cn.sdk.util.DateUtil;
 import cn.sdk.util.DateUtil2;
+import cn.sdk.util.MD5;
 //import cn.sdk.util.HttpClientUtil;
 import cn.sdk.util.MacUtil;
 import cn.sdk.util.MsgCode;
@@ -1163,7 +1164,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	@Override
 	public BaseBean toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String ideNo) throws Exception{
 		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";//"http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
-		String APPKEY="1234567890123456";//illegalCache.getPartnerKey();
+		String APPKEY="c7e05df070ab5933";//illegalCache.getPartnerKey();
 		String APPID=illegalCache.getPartnerCode();
 		boolean IS_DATA_ENCYPTY = false;//是否需要对data部分加密
 		boolean IS_SIGN = true;//是否校验签名
@@ -1203,5 +1204,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return bean;
 	}
 
-
+	
+	
+	
 }

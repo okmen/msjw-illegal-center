@@ -1172,7 +1172,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         String method = "eicBillResultQuery";
 				
         String data = "{"
-            + "\"idNo\":\""+ideNo+"\","
+            + "\"idNo\":\""+""+"\","
             + "\"licenseNum\":\""+licensePlateNo+"\","
             + "\"billNo\":\""+billNo+"\""
             + "}";

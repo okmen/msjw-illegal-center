@@ -1253,7 +1253,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			APPID=illegalCache.getPartnerCodeZ();
 		}
 		boolean IS_DATA_ENCYPTY = false;//是否需要对data部分加密
-		boolean IS_SIGN = true;//是否校验签名
+		boolean IS_SIGN = false;//是否校验签名
 		// 请求接口
         String method = "eicBillResultQuery";
 				

@@ -33,17 +33,23 @@ public class IIllegalCachedImpl implements IIllegalCached{
     private int accessTokenTime;
     
     
-    //平安接口--合作方代码
-    @Value("${partnerCode}")
-    private String  partnerCode;
+    //平安接口--合作方代码微信
+    @Value("${partnerCodeW}")
+    private String  partnerCodeW;
+  //平安接口--合作方代码支付宝
+    @Value("${partnerCodeZ}")
+    private String  partnerCodeZ;
     @Value("${partnerUrl}")
     private String  partnerUrl;
     //平安接口--合作方唯一标识
     @Value("${partnerUserId}")
     private String partnerUserId;
-    //平安接口--秘钥
-    @Value("${partnerKey}")
-    private String partnerKey;
+    //平安接口--秘钥微信
+    @Value("${partnerKeyW}")
+    private String partnerKeyW;
+  //平安接口--秘钥微信
+    @Value("${partnerKeyZ}")
+    private String partnerKeyZ;
     //平安接口--签名算法
     @Value("${partnerMacAlg}")
     private String partnerMacAlg;
@@ -190,14 +196,6 @@ public class IIllegalCachedImpl implements IIllegalCached{
     }
 
 
-	public String getPartnerCode() {
-		return partnerCode;
-	}
-
-
-	public void setPartnerCode(String partnerCode) {
-		this.partnerCode = partnerCode;
-	}
 
 
 	public String getPartnerUserId() {
@@ -209,15 +207,6 @@ public class IIllegalCachedImpl implements IIllegalCached{
 		this.partnerUserId = partnerUserId;
 	}
 
-
-	public String getPartnerKey() {
-		return partnerKey;
-	}
-
-
-	public void setPartnerKey(String partnerKey) {
-		this.partnerKey = partnerKey;
-	}
 
 
 	public String getPartnerMacAlg() {
@@ -337,6 +326,46 @@ public class IIllegalCachedImpl implements IIllegalCached{
 
 	public void setPartnerUrl(String partnerUrl) {
 		this.partnerUrl = partnerUrl;
+	}
+
+
+	public String getPartnerCodeW() {
+		return partnerCodeW;
+	}
+
+
+	public void setPartnerCodeW(String partnerCodeW) {
+		this.partnerCodeW = partnerCodeW;
+	}
+
+
+	public String getPartnerCodeZ() {
+		return partnerCodeZ;
+	}
+
+
+	public void setPartnerCodeZ(String partnerCodeZ) {
+		this.partnerCodeZ = partnerCodeZ;
+	}
+
+
+	public String getPartnerKeyW() {
+		return partnerKeyW;
+	}
+
+
+	public void setPartnerKeyW(String partnerKeyW) {
+		this.partnerKeyW = partnerKeyW;
+	}
+
+
+	public String getPartnerKeyZ() {
+		return partnerKeyZ;
+	}
+
+
+	public void setPartnerKeyZ(String partnerKeyZ) {
+		this.partnerKeyZ = partnerKeyZ;
 	}
 
 

@@ -1,5 +1,6 @@
 package cn.illegal.service.impl;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +45,7 @@ import cn.illegal.utils.HttpClientUtil;
 import cn.sdk.bean.BaseBean;
 import cn.sdk.pingan.OpenApiClient;
 import cn.sdk.pingan.OpenApiRsp;
+import cn.sdk.util.Base64Encoder;
 import cn.sdk.util.DateUtil;
 import cn.sdk.util.DateUtil2;
 import cn.sdk.util.MD5;
@@ -88,11 +90,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 验证用户是否注册或同步   0-未同步   1-已同步
 	 * @throws Exception 
 	 */
-	public String isRegisterUser(String openId) throws Exception{
+	public String isRegisterUser(String openId,String sourceOfCertification) throws Exception{
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/isRegisterUser.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -124,11 +133,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 已注册客户信息同步
 	 */
-	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo,String openId)throws Exception {
+	public String custRegInfoReceive(CustInfoBean custInfo, List<CarInfoBean> carInfo,String openId,String sourceOfCertification)throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/custRegInfoReceive.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -156,11 +172,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	public  BaseBean  queryInfoByLicensePlateNo1(String licensePlateNo, String licensePlateType,
-		String vehicleIdentifyNoLast4,String openId) throws Exception {
+		String vehicleIdentifyNoLast4,String openId,String sourceOfCertification) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -200,11 +223,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	public  BaseBean  queryInfoByLicensePlateNo(String licensePlateNo, String licensePlateType,
-		String vehicleIdentifyNoLast4,String openId) throws Exception {
+		String vehicleIdentifyNoLast4,String openId,String sourceOfCertification) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuerySync.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -272,11 +302,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 查询违法信息--根据驾驶证
 	 * @throws Exception 
 	 */
-	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo,String openId) throws Exception {
+	public List<IllegalInfoBean> queryInfoByDrivingLicenceNo(String drivingLicenceNo, String recordNo,String openId,String sourceOfCertification) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficDriverIllegalQuery.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -315,11 +352,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @return
 	 * @throws Exception 
 	 */
-	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo,String openId) throws Exception{
+	public BaseBean  trafficIllegalClaimReg(CustInfoBean custInfo, CarInfoBean carInfo,String openId,String sourceOfCertification) throws Exception{
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaimReg.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -358,11 +402,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone,String openId) throws Exception {
+	public BaseBean trafficIllegalClaimBefore(String licensePlateNo, String licensePlateType, String mobilephone,String openId,String sourceOfCertification) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalQuery.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -400,11 +451,18 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public IllegalInfoSheet trafficIllegalClaim(String illegalNo,String openId) throws Exception {
+	public IllegalInfoSheet trafficIllegalClaim(String illegalNo,String openId,String sourceOfCertification) throws Exception {
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		String url=illegalCache.getPartnerUrl()+"partnerService/trafficIllegalClaim.do";
-		String key=illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -439,12 +497,19 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public String toQueryPunishmentPage(String billNo, String licensePlateNo, String mobileNo,String openId) throws Exception{
+	public String toQueryPunishmentPage(String billNo, String licensePlateNo, String mobileNo,String openId,String sourceOfCertification) throws Exception{
 		String url=illegalCache.getPartnerUrl()+"punishment/toQueryPunishmentPage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
-		String key="1234567890000000";//illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -515,13 +580,20 @@ public class IIllegalServiceImpl implements IIllegalService {
 	/**
 	 * 扫码查询信息
 	 */
-	public String qrCodeToQueryPage(String userName, String traffData, String mobileNo,String openId) throws Exception{
+	public String qrCodeToQueryPage(String userName, String traffData, String mobileNo,String openId,String sourceOfCertification) throws Exception{
 		String url=illegalCache.getPartnerUrl()+"partnerService/qrCodeToQueryPage.do";
 		//String url="http://uat.stcpay.com/ysth-traffic-front/partnerService/qrCodeToQueryPage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
-		String key="1234567890000000";//illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -573,12 +645,19 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 规费缴费信息
 	 * @throws Exception 
 	 */
-	public String toPayPage(String billNo,String licensePlateNo, String mobileNo,String openId) throws Exception {
+	public String toPayPage(String billNo,String licensePlateNo, String mobileNo,String openId,String sourceOfCertification) throws Exception {
 		String url=illegalCache.getPartnerUrl()+"fee/toQueryFeePage.do";
 		PostMethod post=null;
 		String timeStamp=DateUtil.formatDateTimeWithSec(new Date());	
-		String key="1234567890000000";//illegalCache.getPartnerKey();
-		String partnerCode=illegalCache.getPartnerCode();
+		String key="";
+		String partnerCode="";
+		if("C".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyW();
+			partnerCode=illegalCache.getPartnerCodeW();
+		}else{
+			key=illegalCache.getPartnerKeyZ();
+			partnerCode=illegalCache.getPartnerCodeZ();
+		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
@@ -1162,10 +1241,17 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @param licensePlateNo  车牌号
 	 */
 	@Override
-	public BaseBean toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String ideNo) throws Exception{
+	public BaseBean toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String ideNo,String sourceOfCertification) throws Exception{
 		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";//"http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
 		String APPKEY="c7e05df070ab5933";//illegalCache.getPartnerKey();
-		String APPID=illegalCache.getPartnerCode();
+		String APPID="";
+		if("C".equals(sourceOfCertification)){
+			//key=illegalCache.getPartnerKeyW();
+			APPID=illegalCache.getPartnerCodeW();
+		}else{
+			//key=illegalCache.getPartnerKeyZ();
+			APPID=illegalCache.getPartnerCodeZ();
+		}
 		boolean IS_DATA_ENCYPTY = false;//是否需要对data部分加密
 		boolean IS_SIGN = true;//是否校验签名
 		// 请求接口
@@ -1204,7 +1290,43 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return bean;
 	}
 
-	
-	
-	
+
+
+	/**
+	 * 查询电子印章
+	 * @throws Exception 
+	 * @throws Exception 
+	 * @param orderId  银行流水号
+	 */
+	public String szTrafficPoliceElecBillQry(String orderId) throws Exception {
+        String url="https://my-uat1.orangebank.com.cn/khpayment/szTrafficPoliceElecBillQry.do";
+        String key="szjjhd20170929SDB000000001";
+        String md5Str="orderId="+orderId+"&md5Key="+key;
+        logger.info("请求data：" + orderId);
+        String resultStr=null;
+        try{
+	       String sign=MD5.MD5Encode(md5Str);
+	       String method=url+"?orderId="+orderId+"&sign="+sign.toUpperCase();
+	       logger.debug(method);
+	        // 发送请求
+	       resultStr=method;//HttpClientUtil.get(method);
+	       
+	      
+	      /* FileModel resultStr=HttpRequest.sendPost4File(url, null);
+	       InputStream in = resultStr.getInputStream();
+	       byte[] bytes = new byte[in.available()];
+           // 将文件中的内容读入到数组中
+           in.read(bytes);
+           
+           String  strBase64 = Base64Encoder.encode(bytes);     //将字节流数组转换为字符串
+           in.close();
+           bean.setData(strBase64);*/
+        }catch (Exception e) {
+			logger.error("查询电子印章异常！");
+			e.printStackTrace();
+			throw e;
+		}			
+		return resultStr;
+	}
+
 }

@@ -48,6 +48,7 @@ public class ApiClientUtils {
 	     try {
 		    	JSONObject show1=JSONObject.fromObject(data);
 		        String mac= MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
+		        logger.info("timeStamp:"+paramBean.getTimeStamp()+",key:"+key+",macAlg:"+paramBean.getMacAlg()+",msg:"+show1.toString()+",mac="+mac);
 		        paramBean.setMac(mac);     
 		        JSONObject jsons=JSONObject.fromObject(paramBean);
 		        logger.info("Json"+jsons);
@@ -72,9 +73,11 @@ public class ApiClientUtils {
 	 
 	 public static ResultReturnBeanA requestApiA(String url,ParamRequestBean paramBean, Object data,String key) throws Exception{		        
 		 ResultReturnBeanA result=null;
+		
 	     try {
 		    	JSONObject show1=JSONObject.fromObject(data);
 		        String mac= MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
+		        logger.info("timeStamp:"+paramBean.getTimeStamp()+",key:"+key+",macAlg:"+paramBean.getMacAlg()+",msg:"+show1.toString()+",mac="+mac);
 		        paramBean.setMac(mac);     
 		        JSONObject jsons=JSONObject.fromObject(paramBean);
 		        logger.info("Json"+jsons);

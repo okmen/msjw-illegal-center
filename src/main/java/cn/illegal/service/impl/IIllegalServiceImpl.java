@@ -1299,7 +1299,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @param orderId  银行流水号
 	 */
 	public String szTrafficPoliceElecBillQry(String orderId) throws Exception {
-        String url="https://my-uat1.orangebank.com.cn/khpayment/szTrafficPoliceElecBillQry.do";
+        String url="https://ebank.sdb.com.cn/khpayment/szTrafficPoliceElecBillQry.do";
         String key="szjjhd20170929SDB000000001";
         String md5Str="orderId="+orderId+"&md5Key="+key;
         logger.info("请求data：" + orderId);

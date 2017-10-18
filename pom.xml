@@ -154,8 +154,8 @@
              	<partner.codeZ>P002</partner.codeZ>
              	<partner.keyW>c7e05df070ab5933</partner.keyW>
              	<partner.keyZ>4c2a98ea6138512e</partner.keyZ>
- 				<partner.url>http://code.stcpay.com:8088/gov-traffic-front/</partner.url>
- 				<!-- <partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
+ 				 <partner.url>http://code.stcpay.com:8088/gov-traffic-front/</partner.url>
+ 				<!--<partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
              	<partner.userid>123456</partner.userid>            	
              	<partner.macAlg>33</partner.macAlg>
              	

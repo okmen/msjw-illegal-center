@@ -1329,4 +1329,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return resultStr;
 	}
 
+	
+	/**
+	 * 测试testDemo
+	 * @throws Exception 
+	 * @throws Exception 
+	 * @param orderId  银行流水号
+	 */
+	public String testDemo(String timeStamp,String key,String data) throws Exception {
+		String mac= MacUtil.genMsgMac(timeStamp, key,"33",data);
+		System.out.println(mac.toString());
+		return mac;
+	}
 }

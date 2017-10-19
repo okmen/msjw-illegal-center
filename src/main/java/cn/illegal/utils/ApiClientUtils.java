@@ -2,15 +2,16 @@ package cn.illegal.utils;
 
 import org.apache.log4j.Logger;
 
+import cn.illegal.bean.CustDataInfo;
 import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ResultReturnBean;
 import cn.illegal.bean.ResultReturnBeanA;
 import cn.sdk.exception.HttpPingAnException;
 import cn.illegal.utils.HttpClientUtil;
-import cn.sdk.util.MacUtil;
 import cn.sdk.util.MsgCode;
 
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 public class ApiClientUtils {
 
@@ -100,8 +101,8 @@ public class ApiClientUtils {
 		  return  result;  
 		 }
 	 
-/*	 public static void main(String[] args) {
-		 String key="1234567890123456";
+	 public static void main(String[] args) {
+		/* String key="1234567890123456";
 		 String macAlg="33";
 		 String timeStamp=DateUtil.formatDateTimeWithSec(new Date());
 		 String url="http://code.stcpay.com:8088/ysth-traffic-front/partnerService/custRegInfoReceive.do";
@@ -125,8 +126,28 @@ public class ApiClientUtils {
 	     carInfo.put("licensePlateType", "2");
 	     show.put("custInfo", custInfo);
 	     list.add(carInfo);
-	     show.put("carInfo", list);
+	     show.put("carInfo", list);*/
 	   
 	    // String result=ApiClientUtils.requestApi(url, key, macAlg, timeStamp, show);
-	}*/
+		CustDataInfo data=new CustDataInfo();
+		JsonConfig jsonConfig=new JsonConfig();
+		JSONObject show1=JSONObject.fromObject(data, jsonConfig);
+		
+		String mac= MacUtil.genMsgMac("20171018164942", "c7e05df070ab5933","33","{\"licensePlateNo\":\"粤BN925P\",\"licensePlateType\":\"02\",\"vehicleIdentifyNoLast4\":\"0243\"}");
+		System.out.println(show1.toString());
+		System.out.println(mac);
+		String mac1= MacUtil.genMsgMac("20171018153015","c7e05df070ab5933","33","{\"carInfo\":[],\"custInfo\":null}");
+		System.out.println(mac1);
+	}
+	 //timeStamp:20171018153015,key:c7e05df070ab5933,macAlg:33,msg:{"carInfo":[],"custInfo":null},mac=29C142D77304E2CAE2DF0CC48AF7C944016665ADE5DE386F88548C8BFAD48951D44860DD7A7899232628013D96ECF37B
+
+
+
+
+	//timeStamp:20171018152450,key:c7e05df070ab5933,macAlg:33,msg:{"licensePlateNo":"粤B701NR","licensePlateType":"02","vehicleIdentifyNoLast4":"7336"},mac=E9D054BD032D510EE2F44EF7272FDF64BE83EC71973A9433297188329DD0D01D97E1CF165D092F3FF10988373779620F
+
+
+	 //timeStamp:20171018091836,key:c7e05df070ab5933,macAlg:33,msg:{"carInfo":[],"custInfo":null},mac=BCAC1643F5B096B94976CE8274A4A74664DD36D182E0E252C550B878D01B6D43592586617B57A6D69DA4A0B6FDD64D55
+
+
 }

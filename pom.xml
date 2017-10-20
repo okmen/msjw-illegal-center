@@ -202,7 +202,7 @@
 				
 				<dubbo.registry.url><![CDATA[test-zookeeper.chudaokeji.me:2181]]></dubbo.registry.url>
 				<dubbo.provider.port><![CDATA[30200]]></dubbo.provider.port>
-				<dubbo.provider.timeout><![CDATA[10000]]></dubbo.provider.timeout>
+				<dubbo.provider.timeout><![CDATA[15000]]></dubbo.provider.timeout>
 				<dubbo.monitor.address><![CDATA[test-monitor.chudaokeji.me:7070]]></dubbo.monitor.address>
 
 				<mysql.illegal.read.url><![CDATA[jdbc:mysql://rm-2zebn71x33j5h0430.mysql.rds.aliyuncs.com:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.read.url>
@@ -286,7 +286,7 @@
 				<account.center.api.version>1.0.0</account.center.api.version>
 				<dubbo.registry.url><![CDATA[zookeeper.szjj.me:2181]]></dubbo.registry.url>
 				<dubbo.provider.port><![CDATA[30200]]></dubbo.provider.port>
-				<dubbo.provider.timeout><![CDATA[10000]]></dubbo.provider.timeout>
+				<dubbo.provider.timeout><![CDATA[15000]]></dubbo.provider.timeout>
 				<dubbo.monitor.address><![CDATA[monitor.szjj.me:7070]]></dubbo.monitor.address>
 
 				<mysql.illegal.read.url><![CDATA[jdbc:mysql://db.szjj.me:3306/service?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.illegal.read.url>

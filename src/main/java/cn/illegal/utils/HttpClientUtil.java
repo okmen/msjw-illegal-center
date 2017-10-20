@@ -31,8 +31,8 @@ public class HttpClientUtil {
 		params.setStaleCheckingEnabled(true);
 		params.setMaxTotalConnections(200);
 		params.setDefaultMaxConnectionsPerHost(80);
-		params.setConnectionTimeout(10000);
-		params.setSoTimeout(10000);
+		params.setConnectionTimeout(15000);
+		params.setSoTimeout(15000);
 	}
 
 	public static HttpClient getHttpClient() {

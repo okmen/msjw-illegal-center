@@ -112,7 +112,7 @@ public class ApiClientUtils {
 		 String respStr="";
 		 BaseBean result=new BaseBean();
 	     try {
-	    	 	url="http://192.168.2.219:8100/illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
+	    	 	url="http://101.201.41.225:8100//illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
 	    	 	Map<String,String> data=new HashMap<String,String>();
 	    	 	
 	    		data.put("timestamp",timeStamp);
@@ -135,10 +135,11 @@ public class ApiClientUtils {
 	 
 	 public static void main(String[] args) throws Exception {
 	
-		String mac= getMac("20171018164942", "c7e05df070ab5933","33","{\"licensePlateNo\":\"粤BN925P\",\"licensePlateType\":\"02\",\"vehicleIdentifyNoLast4\":\"0243\"}");
+		String mac= getMac("20171020134651", "c7e05df070ab5933","33","{\"billNo\":\"011171012B20460\",\"mobileNo\":\"13802235270\",\"remark1\":\"1\"}");
 
 		System.out.println(mac);
 	}
 
+	 //timeStamp:20171020134651,key:c7e05df070ab5933,macAlg:33,msg:{"billNo":"011171012B20460","mobileNo":"13802235270","remark1":"1"},mac=5C4C199185459EE189276372D621992DB6C51BAF0934DBD1E5E689F710D558713661B96A3AA4525043857E286A394021
 
 }

@@ -147,8 +147,10 @@ public class HttpClientUtil {
 			config.setHost(_url.getHost(), port, _url.getProtocol());
 
 			post = new PostMethod(url);
+			post.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 			if(StringUtils.isNotEmpty(productName)){
 				post.setRequestHeader("product", productName); // setRequestHeader设置必须在setRequestBody之前
+				
 			}
 			if (paramPair != null && paramPair.length > 0) {
 				post.setRequestBody(paramPair);

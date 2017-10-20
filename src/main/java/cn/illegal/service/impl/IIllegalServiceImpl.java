@@ -526,7 +526,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
      		
      		JSONObject show1=(JSONObject) JSONObject.toJSON(data);
-     	    String mac= MacUtil.genMsgMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
+     	    String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
      	    bean.setMac(mac);     
 
      	    JSONObject jsons=(JSONObject) JSONObject.toJSON(bean);
@@ -610,7 +610,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
      		
      		JSONObject show1=(JSONObject) JSONObject.toJSON(data);
-     	    String mac= MacUtil.genMsgMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
+     		String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
      	    bean.setMac(mac);     
 
      	    JSONObject jsons=(JSONObject) JSONObject.toJSON(bean);
@@ -677,7 +677,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
     		
     		JSONObject show1=(JSONObject) JSONObject.toJSON(data);
-    	    String mac= MacUtil.genMsgMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
+    		String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
     	    
     	   // boolean s=MacUtil.verifyMsgMac(timeStamp, key, bean.getMacAlg(), show1.toString(), mac);
     	    System.out.println(mac);

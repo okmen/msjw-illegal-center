@@ -1246,10 +1246,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String APPKEY="c7e05df070ab5933";//illegalCache.getPartnerKey();
 		String APPID="";
 		if("C".equals(sourceOfCertification)){
-			//key=illegalCache.getPartnerKeyW();
+			APPKEY=illegalCache.getPartnerKeyW();
 			APPID=illegalCache.getPartnerCodeW();
 		}else{
-			//key=illegalCache.getPartnerKeyZ();
+			APPKEY=illegalCache.getPartnerKeyZ();
 			APPID=illegalCache.getPartnerCodeZ();
 		}
 		boolean IS_DATA_ENCYPTY = false;//是否需要对data部分加密

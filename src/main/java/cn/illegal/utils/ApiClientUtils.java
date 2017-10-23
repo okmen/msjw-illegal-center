@@ -112,7 +112,7 @@ public class ApiClientUtils {
 		 String respStr="";
 		 BaseBean result=new BaseBean();
 	     try {
-	    	 	url="http://101.201.41.225:8100//illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
+	    	 	url="http://192.168.2.219:8100/illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
 	    	 	Map<String,String> data=new HashMap<String,String>();
 	    	 	
 	    		data.put("timestamp",timeStamp);

@@ -59,6 +59,10 @@ public class IIllegalCachedImpl implements IIllegalCached{
     //平安接口--签名算法
     @Value("${partnerMacAlg}")
     private String partnerMacAlg;
+    //生成mac地址
+    @Value("${partnerMacUrl}")
+    private String partnerMacUrl;
+    
     
     //警司通接口违法预约接口--ip
     @Value("${subcribeLrip}")
@@ -432,6 +436,16 @@ public class IIllegalCachedImpl implements IIllegalCached{
 
 	public void setPoliceUserpwdApp(String policeUserpwdApp) {
 		this.policeUserpwdApp = policeUserpwdApp;
+	}
+
+
+	public String getPartnerMacUrl() {
+		return partnerMacUrl;
+	}
+
+
+	public void setPartnerMacUrl(String partnerMacUrl) {
+		this.partnerMacUrl = partnerMacUrl;
 	}
 
 

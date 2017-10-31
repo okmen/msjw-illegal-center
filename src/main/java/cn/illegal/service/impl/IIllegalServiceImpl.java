@@ -117,7 +117,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		//data.setCarInfo(carInfo);
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
-			result= ApiClientUtils.requestApiA(url,bean,data,key);
+			result= ApiClientUtils.requestApiA(url,bean,data,key,illegalCache.getPartnerMacUrl());
 			if(result.getData()==null){
 				logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString()+"  result:"+result.getData().toString());
 			}else{
@@ -163,7 +163,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-			result= ApiClientUtils.requestApi(url,bean,data,key);
+			result= ApiClientUtils.requestApi(url,bean,data,key,illegalCache.getPartnerMacUrl());
 		} catch (Exception e) {
 			logger.error("已注册客户信息同步失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
@@ -209,7 +209,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-			result= ApiClientUtils.requestApi(url,bean,data,key);
+			result= ApiClientUtils.requestApi(url,bean,data,key,illegalCache.getPartnerMacUrl());
 			
 			if(result.getRespCode().equals("0000")&&result.getData()!=null){			
 				infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
@@ -263,7 +263,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-			result= ApiClientUtils.requestApi(url,bean,data,key);
+			result= ApiClientUtils.requestApi(url,bean,data,key,illegalCache.getPartnerMacUrl());
 			
 			if(result.getRespCode().equals("0000")&&result.getData()!=null){			
 				infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
@@ -344,7 +344,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-			result= ApiClientUtils.requestApi(url,bean,data,key);
+			result= ApiClientUtils.requestApi(url,bean,data,key,illegalCache.getPartnerMacUrl());
 				
 			if(result.getRespCode().equals("0000")&&result.getData()!=null){			
 				infos=(List<IllegalInfoBean>) JSON.parseArray(result.getData().toString(), IllegalInfoBean.class); 
@@ -402,7 +402,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-			result= ApiClientUtils.requestApiA(url,bean,data,key);
+			result= ApiClientUtils.requestApiA(url,bean,data,key,illegalCache.getPartnerMacUrl());
 			baseBean.setCode(result.getRespCode());
 			baseBean.setMsg(result.getRespMsg());
 			baseBean.setData(result.getData());
@@ -449,7 +449,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-			result= ApiClientUtils.requestApi(url,bean,data,key);
+			result= ApiClientUtils.requestApi(url,bean,data,key,illegalCache.getPartnerMacUrl());
 				
 			baseBean.setCode(result.getRespCode());
 			baseBean.setMsg(result.getRespMsg());
@@ -499,7 +499,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 
-			result= ApiClientUtils.requestApiA(url,bean,data,key);
+			result= ApiClientUtils.requestApiA(url,bean,data,key,illegalCache.getPartnerMacUrl());
 			if(result.getRespCode().equals("0000")&&result.getData()!=null){	
 				info=(IllegalInfoSheet) JSON.parseObject(result.getData().toString(), IllegalInfoSheet.class);
 				if(result.getRespMsg().equals("重复打单")){
@@ -557,7 +557,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
      		
      		JSONObject show1=(JSONObject) JSONObject.toJSON(data);
-     	    String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
+     	    String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString(),illegalCache.getPartnerMacUrl());
      	    bean.setMac(mac);     
 
      	    JSONObject jsons=(JSONObject) JSONObject.toJSON(bean);
@@ -644,7 +644,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
      		
      		JSONObject show1=(JSONObject) JSONObject.toJSON(data);
-     		String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
+     		String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString(),illegalCache.getPartnerMacUrl());
      	    bean.setMac(mac);     
 
      	    JSONObject jsons=(JSONObject) JSONObject.toJSON(bean);
@@ -714,7 +714,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
     		
     		JSONObject show1=(JSONObject) JSONObject.toJSON(data);
-    		String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString());
+    		String mac= ApiClientUtils.getMac(bean.getTimeStamp(), key, bean.getMacAlg(), show1.toString(),illegalCache.getPartnerMacUrl());
     	    
     	   // boolean s=MacUtil.verifyMsgMac(timeStamp, key, bean.getMacAlg(), show1.toString(), mac);
     	    System.out.println(mac);

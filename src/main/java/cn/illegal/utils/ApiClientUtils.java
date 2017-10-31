@@ -50,11 +50,11 @@ public class ApiClientUtils {
 	    }
 	
 	 
-	 public static ResultReturnBean requestApi(String url,ParamRequestBean paramBean, Object data,String key)throws Exception{
+	 public static ResultReturnBean requestApi(String url,ParamRequestBean paramBean, Object data,String key,String baseUrl)throws Exception{
 		 ResultReturnBean result=null;
 	     try {
 		    	JSONObject show1=JSONObject.fromObject(data);
-		        String mac=getMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());// MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
+		        String mac=getMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString(),baseUrl);// MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
 		        //logger.info("timeStamp:"+paramBean.getTimeStamp()+",key:"+key+",macAlg:"+paramBean.getMacAlg()+",msg:"+show1.toString()+",mac="+mac);
 		        paramBean.setMac(mac);     
 		        JSONObject jsons=JSONObject.fromObject(paramBean);
@@ -78,12 +78,12 @@ public class ApiClientUtils {
 		  return  result;
 	 }
 	 
-	 public static ResultReturnBeanA requestApiA(String url,ParamRequestBean paramBean, Object data,String key) throws Exception{		        
+	 public static ResultReturnBeanA requestApiA(String url,ParamRequestBean paramBean, Object data,String key,String baseUrl) throws Exception{		        
 		 ResultReturnBeanA result=null;
 		
 	     try {
 		    	JSONObject show1=JSONObject.fromObject(data);
-		        String mac= getMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());//MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
+		        String mac= getMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString(),baseUrl);//MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
 		        paramBean.setMac(mac);     
 		        JSONObject jsons=JSONObject.fromObject(paramBean);
 		        logger.info("Json"+jsons);
@@ -107,12 +107,12 @@ public class ApiClientUtils {
 		 }
 	 
 	 
-	 public static String getMac(String timeStamp, String macKey, String hashAlg, String msg) throws Exception{		        
-		 String url="";
+	 public static String getMac(String timeStamp, String macKey, String hashAlg, String msg,String url) throws Exception{		        
+		 //String url="";
 		 String respStr="";
 		 BaseBean result=new BaseBean();
 	     try {
-	    	 	url="http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//"http://192.168.2.219:8100/illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
+	    	 	//url=url+"/illegalHanding/getMac.html";//"http://192.168.2.219:8100/illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
 	    	 	Map<String,String> data=new HashMap<String,String>();
 	    	 	
 	    		data.put("timestamp",timeStamp);
@@ -135,7 +135,7 @@ public class ApiClientUtils {
 	 
 	 public static void main(String[] args) throws Exception {
 	
-		String mac= getMac("20171020134651", "c7e05df070ab5933","33","{\"billNo\":\"011171012B20460\",\"mobileNo\":\"13802235270\",\"remark1\":\"1\"}");
+		String mac= getMac("20171020134651", "c7e05df070ab5933","33","{\"billNo\":\"011171012B20460\",\"mobileNo\":\"13802235270\",\"remark1\":\"1\"}","");
 
 		System.out.println(mac);
 	}

@@ -160,6 +160,7 @@
  				<!--<partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
              	<partner.userid>123456</partner.userid>            	
              	<partner.macAlg>33</partner.macAlg>
+             	<partner.macUrl>http://101.201.41.225:8100/illegalHanding/getMac.html</partner.macUrl>
              	
              	
              	<subcribe.lrip>123.56.180.216</subcribe.lrip>
@@ -248,7 +249,7 @@
  				<!-- <partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
              	<partner.userid>123456</partner.userid>
              	<partner.macAlg>33</partner.macAlg>
-             	
+             	<partner.macUrl>http://101.201.41.225:8100/illegalHanding/getMac.html</partner.macUrl>
              	
              	<subcribe.lrip>123.56.180.216</subcribe.lrip>
              	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
@@ -325,6 +326,7 @@
  				<!-- <partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
              	<partner.userid>123456</partner.userid>
              	<partner.macAlg>33</partner.macAlg>
+             	<partner.macUrl>http://192.168.2.219:8100/illegalHanding/getMac.html</partner.macUrl>
              	
              	
              	<subcribe.lrip>123.56.180.216</subcribe.lrip>

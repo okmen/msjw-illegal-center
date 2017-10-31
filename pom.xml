@@ -152,9 +152,11 @@
              
              	<partner.codeW>P003</partner.codeW>
              	<partner.codeZ>P002</partner.codeZ>
+             	<partner.codeA>P001</partner.codeA>
              	<partner.keyW>c7e05df070ab5933</partner.keyW>
              	<partner.keyZ>4c2a98ea6138512e</partner.keyZ>
- 				 <partner.url>http://code.stcpay.com:8088/gov-traffic-front/</partner.url>
+             	<partner.keyA>024587c075969566</partner.keyA>
+ 				<partner.url>http://code.stcpay.com:8088/gov-traffic-front/</partner.url>
  				<!--<partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
              	<partner.userid>123456</partner.userid>            	
              	<partner.macAlg>33</partner.macAlg>
@@ -165,6 +167,7 @@
              	<subcribe.userid>WX02</subcribe.userid>
              	<subcribe.userpwd>WX02@168</subcribe.userpwd>
              	<subcribe.url>https://szjjapi.chudaokeji.com/yywfcl/services/yywfcl</subcribe.url>
+        	
              	
              	<police.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</police.url>
              	<police.method>xxptSchuding</police.method>
@@ -172,6 +175,10 @@
              	<police.userpwd>WX02@168</police.userpwd>
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
  
+             	<!-- 警司通app参数 -->
+             	<police.app.userid>YD02</police.app.userid>
+             	<police.app.userpwd>YD02</police.app.userpwd>
+             	<police.app.key>VUCr6YKOFdaPpQcOtLgRETCV</police.app.key>
              	
                 
 				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
@@ -233,8 +240,10 @@
  -->
  				<partner.codeW>P003</partner.codeW>
              	<partner.codeZ>P002</partner.codeZ>
+             	<partner.codeA>P001</partner.codeA>
              	<partner.keyW>c7e05df070ab5933</partner.keyW>
              	<partner.keyZ>4c2a98ea6138512e</partner.keyZ>
+             	<partner.keyA>024587c075969566</partner.keyA>
  				<partner.url>http://code.stcpay.com:8088/gov-traffic-front/</partner.url>
  				<!-- <partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
              	<partner.userid>123456</partner.userid>
@@ -253,6 +262,11 @@
              	<police.userpwd>WX02@168</police.userpwd>
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
  				
+ 				<!-- 警司通app参数 -->
+             	<police.app.userid>YD02</police.app.userid>
+             	<police.app.userpwd>YD02</police.app.userpwd>
+             	<police.app.key>VUCr6YKOFdaPpQcOtLgRETCV</police.app.key>
+             	
                 <!-- accessToken有效期60秒 -->
                 <accessToken.time>86400</accessToken.time>
 				<refreshToken.time>2592000</refreshToken.time>
@@ -303,8 +317,10 @@
                
                 <partner.codeW>P003</partner.codeW>
              	<partner.codeZ>P002</partner.codeZ>
+             	<partner.codeA>P001</partner.codeA>
              	<partner.keyW>c7e05df070ab5933</partner.keyW>
              	<partner.keyZ>4c2a98ea6138512e</partner.keyZ>
+             	<partner.keyA>024587c075969566</partner.keyA>
  				<partner.url>http://code.stcpay.com:8088/gov-traffic-front/</partner.url>
  				<!-- <partner.url>http://uat.stcpay.com/gov-traffic-front/</partner.url> -->
              	<partner.userid>123456</partner.userid>
@@ -322,6 +338,11 @@
              	<police.userid>WX02</police.userid>
              	<police.userpwd>WX02@168</police.userpwd>
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
+             	
+             	<!-- 警司通app参数 -->
+             	<police.app.userid>YD02</police.app.userid>
+             	<police.app.userpwd>YD02</police.app.userpwd>
+             	<police.app.key>VUCr6YKOFdaPpQcOtLgRETCV</police.app.key>
                
                 <!-- accessToken有效期30天 -->
                 <accessToken.time>2592000</accessToken.time>

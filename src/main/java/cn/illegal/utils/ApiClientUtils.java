@@ -107,12 +107,12 @@ public class ApiClientUtils {
 		 }
 	 
 	 
-	 public static String getMac(String timeStamp, String macKey, String hashAlg, String msg) throws Exception{		        
-		 String url="";
+	 public static String getMac(String timeStamp, String macKey, String hashAlg, String msg,String url) throws Exception{		        
+		 //String url="";
 		 String respStr="";
 		 BaseBean result=new BaseBean();
 	     try {
-	    	 	url="http://192.168.2.219:8100/illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
+	    	 	url="http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//"http://192.168.2.219:8100/illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
 	    	 	Map<String,String> data=new HashMap<String,String>();
 	    	 	
 	    		data.put("timestamp",timeStamp);

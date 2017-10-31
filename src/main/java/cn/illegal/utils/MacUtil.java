@@ -336,13 +336,18 @@ public class MacUtil {
 		//String mac= MacUtil.genMsgMac("20171018153015", "c7e05df070ab5933","33",show1.toString());
 		//System.out.println(show1.toString());
 		//System.out.println(mac);
-		String mac1= genMsgMac("20171019175624", "4c2a98ea6138512e","33","{\"vehicleIdentifyNoLast4\":\"440301446938\",\"drivingLicenceNo\":\"511222198201056390\"}");
+		String mac1= genMsgMac("20171020114127", "4c2a98ea6138512e","33",":{\"billNo\":\"057901340413\",\"licensePlateNo\":\"粤B9C50B\",\"remark1\":\"1\"}");
 		System.out.println(mac1);
 		
-		String xx = genMsgMac("20171018153931", "c7e05df070ab5933", "33", "{\"licensePlateNo\":\"粤B6Y39E\",\"licensePlateType\":\"02\",\"vehicleIdentifyNoLast4\":\"0093\"}");
+		String xx = genMsgMac("20171020114256", "4c2a98ea6138512e", "33", "{\"licensePlateNo\":\"粤KE7418\",\"licensePlateType\":\"02\",\"vehicleIdentifyNoLast4\":\"2786\"}");
 		System.out.println(xx);
 	}
-    //timeStamp:20171019175624,key:4c2a98ea6138512e,macAlg:33,msg:{"vehicleIdentifyNoLast4":"440301446938","drivingLicenceNo":"511222198201056390"},mac=5967AD840E81B78F368AEF875032D739DB1C3B0588877EC24646232E14F529FFFED0894A0CDAF409BAB6B88F05FCF923
+    //timeStamp:20171020103249,key:4c2a98ea6138512e,macAlg:33,msg:{"licensePlateNo":"粤BS463S","licensePlateType":"02","vehicleIdentifyNoLast4":"8674"},mac=EB4382328D2CE49135FA0BB039ACA10F9B665EA019C8196E0137DE3DBDF9625070ADDB09C07345D7AC48DFA704EE0D32
+    //timeStamp:20171020114256,key:4c2a98ea6138512e,macAlg:33,msg:{"licensePlateNo":"粤KE7418","licensePlateType":"02","vehicleIdentifyNoLast4":"2786"},mac=05B33101C7E22FF888A9094C57E457DCCB31D6DF32877A34271E068172FE61B4EAEE19BC92C6A1C612FFBA0A5EE22568
+
+
+
+
   
 
 }

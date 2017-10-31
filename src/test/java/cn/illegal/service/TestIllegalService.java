@@ -91,7 +91,7 @@ public class TestIllegalService {
 
 	   List<CarInfoBean> list=new ArrayList<>();
 	   list.add(carinfo);
-	   String code=illegalService.custRegInfoReceive(custinfo, list,openId,"Z");
+	   String code=illegalService.custRegInfoReceive(custinfo, list,"oPyqQjheTh8nCsdpQD8WukZv9Uxk","Z");
 	   //String code=illegalService.isRegisterUser(openId, "Z");
 	   System.out.println("返回結果："+code);
     }
@@ -99,7 +99,7 @@ public class TestIllegalService {
    @Test
    public void isRegisterUser() throws Exception{
 	   
-	   String code=illegalService.isRegisterUser(openId, "Z");
+	   String code=illegalService.isRegisterUser("oPyqQjheTh8nCsdpQD8WukZv9Uxk", "A");
 	   System.out.println("返回結果："+code);
    }
    
@@ -110,7 +110,7 @@ public class TestIllegalService {
    @Test
    public void queryInfoByLicensePlateNo() throws Exception{
 
-	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤BY51D3","02","0770","oPyqQjheTh8nCsdpQD8WukZv9Uxk","Z");
+	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤B138XL","02","4918","oPyqQjheTh8nCsdpQD8WukZv9Uxk","A");
 	   System.out.println(illegalInfoBeans);
 
    }
@@ -121,7 +121,7 @@ public class TestIllegalService {
 	 */
    @Test
    public void queryInfoByDrivingLicenceNo() throws Exception{
-	   illegalService.queryInfoByDrivingLicenceNo("511222198201056390","440301446938",openId,"Z");
+	   illegalService.queryInfoByDrivingLicenceNo("511222198201056390","440301446938",openId,"A");
    }
    
    
@@ -133,7 +133,7 @@ public class TestIllegalService {
    public void  trafficIllegalClaimReg() throws Exception{
 	   CarInfoBean carinfo=new CarInfoBean("粤B7A5M8",  "02", "4058");
 	   CustInfoBean custinfo=new CustInfoBean("谭映月", "445222199209020034", "01", "18565860552",  "445222199209020034");
-	   illegalService.trafficIllegalClaimReg(custinfo, carinfo,openId,"Z");
+	   illegalService.trafficIllegalClaimReg(custinfo, carinfo,openId,"A");
    }
    
    
@@ -143,9 +143,10 @@ public class TestIllegalService {
 	 */
    @Test
    public void trafficIllegalClaimBefore() throws Exception{
-	   BaseBean bean= illegalService.trafficIllegalClaimBefore("粤B5XK10","02","13602663221","oPyqQjheTh8nCsdpQD8WukZv9Uxk","C");
+	   BaseBean bean= illegalService.trafficIllegalClaimBefore("粤BM58H8","02","13798545363","oPyqQjheTh8nCsdpQD8WukZv9Uxk","C");
 	   System.out.println(bean.getData().toString());
-	   
+	   //IllegalInfoSheet a=illegalService.trafficIllegalClaim("4403077901326770", "oPyqQjheTh8nCsdpQD8WukZv9Uxk", "A");
+	   //System.out.println(a.toString());
 	   //{"licensePlateNo":"粤B7A5M8","licensePlateType":"02","mobileNo":"18565860552"},
    }
   
@@ -156,7 +157,7 @@ public class TestIllegalService {
    @Test
    public void toQueryPunishmentPage() throws Exception{
 	 //String ss= illegalService.toQueryPunishmentPage("4403047901832152","粤BQ5F36","15920050177",openId,"Z");
-	  String ss= illegalService.toPayPage("011170801B16030","123","123",openId,"Z");
+	  String ss= illegalService.toPayPage("011170801B16030","123","123",openId,"A");
 	 //IllegalInfoSheet sheet=illegalService.trafficIllegalClaim("4403047901832152",openId,"Z");
 	  System.out.println(ss+"--test");
    }
@@ -167,7 +168,7 @@ public class TestIllegalService {
     */
    @Test
    public void getIllegalProcessingPoint() throws Exception{
-	   illegalService.getIllegalProcessingPoint();
+	   illegalService.getIllegalProcessingPoint("A");
    }
    
    /**
@@ -197,7 +198,7 @@ public class TestIllegalService {
     */
    @Test
    public void toCancleSubscribe() throws Exception{
-	   illegalService.toCancleSubscribe("1170414100961");
+	   illegalService.toCancleSubscribe("1170414100961","");
    }
    
    /**
@@ -206,7 +207,7 @@ public class TestIllegalService {
     */
    @Test
    public void querySubscribe() throws Exception{
-	   illegalService.querySubscribe("粤B6F7M1",2,"18601174358");
+	   illegalService.querySubscribe("粤B6F7M1",2,"18601174358","");
    }
    
    @Test

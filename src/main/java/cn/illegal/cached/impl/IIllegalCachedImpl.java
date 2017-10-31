@@ -36,9 +36,12 @@ public class IIllegalCachedImpl implements IIllegalCached{
     //平安接口--合作方代码微信
     @Value("${partnerCodeW}")
     private String  partnerCodeW;
-  //平安接口--合作方代码支付宝
+    //平安接口--合作方代码支付宝
     @Value("${partnerCodeZ}")
     private String  partnerCodeZ;
+    //平安接口--合作方代码app
+    @Value("${partnerCodeA}")
+    private String  partnerCodeA;
     @Value("${partnerUrl}")
     private String  partnerUrl;
     //平安接口--合作方唯一标识
@@ -47,26 +50,29 @@ public class IIllegalCachedImpl implements IIllegalCached{
     //平安接口--秘钥微信
     @Value("${partnerKeyW}")
     private String partnerKeyW;
-  //平安接口--秘钥微信
+    //平安接口--秘钥微信
     @Value("${partnerKeyZ}")
     private String partnerKeyZ;
+    //平安接口--秘钥微信-app
+    @Value("${partnerKeyA}")
+    private String partnerKeyA;
     //平安接口--签名算法
     @Value("${partnerMacAlg}")
     private String partnerMacAlg;
     
-    //违法预约接口--ip
+    //警司通接口违法预约接口--ip
     @Value("${subcribeLrip}")
     private String subcribeLrip;
-    //违法预约接口--mac
+    //警司通接口违法预约接口--mac
     @Value("${subcribeLrmac}")
     private String subcribeLrmac;
-    //违法预约接口--用户名
+    //警司通接口违法预约接口--用户名
     @Value("${subcribeUserid}")
     private String subcribeUserid;
-    //违法预约接口--密码
+    //警司通接口违法预约接口--密码
     @Value("${subcribeUserpwd}")
     private String subcribeUserpwd;
-  //违法预约接口--密码
+    //警司通接口违法预约接口--url
     @Value("${subcribeUrl}")
     private String subcribeUrl;
     
@@ -86,6 +92,16 @@ public class IIllegalCachedImpl implements IIllegalCached{
     //警司通接口--密码
     @Value("${policeUserpwd}")
     private String policeUserpwd;
+    
+    //警司通接口--秘钥-app
+    @Value("${policeKeyApp}")
+    private String policeKeyApp;
+    //警司通接口--用户名-app
+    @Value("${policeUseridApp}")
+    private String policeUseridApp;
+    //警司通接口--密码-app
+    @Value("${policeUserpwdApp}")
+    private String policeUserpwdApp;
     
     
 	@Autowired
@@ -366,6 +382,56 @@ public class IIllegalCachedImpl implements IIllegalCached{
 
 	public void setPartnerKeyZ(String partnerKeyZ) {
 		this.partnerKeyZ = partnerKeyZ;
+	}
+
+
+	public String getPartnerCodeA() {
+		return partnerCodeA;
+	}
+
+
+	public void setPartnerCodeA(String partnerCodeA) {
+		this.partnerCodeA = partnerCodeA;
+	}
+
+
+	public String getPartnerKeyA() {
+		return partnerKeyA;
+	}
+
+
+	public void setPartnerKeyA(String partnerKeyA) {
+		this.partnerKeyA = partnerKeyA;
+	}
+
+
+	public String getPoliceKeyApp() {
+		return policeKeyApp;
+	}
+
+
+	public void setPoliceKeyApp(String policeKeyApp) {
+		this.policeKeyApp = policeKeyApp;
+	}
+
+
+	public String getPoliceUseridApp() {
+		return policeUseridApp;
+	}
+
+
+	public void setPoliceUseridApp(String policeUseridApp) {
+		this.policeUseridApp = policeUseridApp;
+	}
+
+
+	public String getPoliceUserpwdApp() {
+		return policeUserpwdApp;
+	}
+
+
+	public void setPoliceUserpwdApp(String policeUserpwdApp) {
+		this.policeUserpwdApp = policeUserpwdApp;
 	}
 
 

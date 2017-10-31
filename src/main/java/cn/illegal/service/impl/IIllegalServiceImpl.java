@@ -98,9 +98,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -141,9 +144,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -180,9 +186,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -231,9 +240,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -310,9 +322,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -360,9 +375,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -410,9 +428,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -459,9 +480,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -478,8 +502,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 			result= ApiClientUtils.requestApiA(url,bean,data,key);
 			if(result.getRespCode().equals("0000")&&result.getData()!=null){	
 				info=(IllegalInfoSheet) JSON.parseObject(result.getData().toString(), IllegalInfoSheet.class);
+				if(result.getRespMsg().equals("重复打单")){
+					info.setBillNo("-1");
+				}
 			}
 
+			
 		} catch (Exception e) {
 			logger.error("违法确认，打单失败，ParamRequestBean= "+bean.toString(), e);
 			throw e;
@@ -506,9 +534,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -558,7 +589,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 
 
 	/**
-	 * 扫码查询信息
+	 * 微信扫码查询信息
 	 */
 	public String callback(String traffData) throws Exception{
 		String url ="";    
@@ -578,7 +609,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	
 	
 	/**
-	 * 扫码查询信息
+	 * 微信扫码查询信息
 	 */
 	public String qrCodeToQueryPage(String userName, String traffData, String mobileNo,String openId,String sourceOfCertification) throws Exception{
 		String url=illegalCache.getPartnerUrl()+"partnerService/qrCodeToQueryPage.do";
@@ -590,9 +621,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -654,9 +688,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		if("C".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyW();
 			partnerCode=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			key=illegalCache.getPartnerKeyZ();
 			partnerCode=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			key=illegalCache.getPartnerKeyA();
+			partnerCode=illegalCache.getPartnerCodeA();
 		}
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
@@ -715,12 +752,17 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * 获取所以违法处理点
 	 * @throws Exception 
 	 */
-	public List<IllegalProcessPointBean> getIllegalProcessingPoint() throws Exception{
-		//String xml = "<request><userid>WX02</userid><userpwd>WX02@168</userpwd ><lrip>123.56.180.216</lrip><lrmac>00:16:3e:10:16:4d</lrmac></request>";
+	public List<IllegalProcessPointBean> getIllegalProcessingPoint(String sourceOfCertification) throws Exception{
+		String userId=illegalCache.getSubcribeUserid();
+		String pwd=illegalCache.getSubcribeUserpwd();
+		if("A".equals(sourceOfCertification)){
+			userId=illegalCache.getPoliceUseridApp();
+			pwd=illegalCache.getPoliceUserpwdApp();
+		}
 		StringBuffer xml=new StringBuffer();
 		xml.append("<request>");
-		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
-		xml.append("<userpwd>"+illegalCache.getSubcribeUserpwd()+"</userpwd >");
+		xml.append("<userid>"+userId+"</userid>");
+		xml.append("<userpwd>"+pwd+"</userpwd >");
 		xml.append("<lrip>"+illegalCache.getSubcribeLrip()+"</lrip>");
 		xml.append("<lrmac>"+illegalCache.getSubcribeLrmac()+"</lrmac>");
 		xml.append("</request>");
@@ -763,11 +805,17 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public Map toGetSubscribeSorts(String cldbmid) throws Exception {
+	public Map toGetSubscribeSorts(String cldbmid,String sourceOfCertification) throws Exception {
+		String userId=illegalCache.getSubcribeUserid();
+		String pwd=illegalCache.getSubcribeUserpwd();
+		if("A".equals(sourceOfCertification)){
+			userId=illegalCache.getPoliceUseridApp();
+			pwd=illegalCache.getPoliceUserpwdApp();
+		}
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
-		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
-		xml.append("<userpwd>"+illegalCache.getSubcribeUserpwd()+"</userpwd >");
+		xml.append("<userid>"+userId+"</userid>");
+		xml.append("<userpwd>"+pwd+"</userpwd >");
 		xml.append("<lrip>"+illegalCache.getSubcribeLrip()+"</lrip>");
 		xml.append("<lrmac>"+illegalCache.getSubcribeLrmac()+"</lrmac>");
 		xml.append("<cldbmid>"+cldbmid+"</cldbmid >");
@@ -811,7 +859,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean toChangeSubscribe(String snm,String cldbmid,String cczb_id,CustInfoBean custInfo,CarInfoBean carInfo,String sourceType) throws Exception {
+	public BaseBean toChangeSubscribe(String snm,String cldbmid,String cczb_id,CustInfoBean custInfo,CarInfoBean carInfo,String sourceOfCertification) throws Exception {
 		Integer plateType=null;
 		try {
 			plateType=Integer.parseInt(carInfo.getLicensePlateType());
@@ -819,10 +867,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 			plateType=2;
 		}
 		
+		String userId=illegalCache.getSubcribeUserid();
+		String pwd=illegalCache.getSubcribeUserpwd();
+		if("A".equals(sourceOfCertification)){
+			userId=illegalCache.getPoliceUseridApp();
+			pwd=illegalCache.getPoliceUserpwdApp();
+		}
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
-		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
-		xml.append("<userpwd>"+illegalCache.getSubcribeUserpwd()+"</userpwd >");
+		xml.append("<userid>"+userId+"</userid>");
+		xml.append("<userpwd>"+pwd+"</userpwd >");
 		xml.append("<lrip>"+illegalCache.getSubcribeLrip()+"</lrip>");
 		xml.append("<lrmac>"+illegalCache.getSubcribeLrmac()+"</lrmac>");
 		xml.append("<snm>"+snm+"</snm>");
@@ -832,7 +886,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		xml.append("<hpzl>"+plateType+"</hpzl>");
 		xml.append("<jszh>"+custInfo.getDrivingLicenceNo()+"</jszh>");
 		xml.append("<sjhm>"+custInfo.getMobileNo()+"</sjhm>");
-		xml.append("<lyfs>"+sourceType+"</lyfs>");
+		xml.append("<lyfs>"+sourceOfCertification+"</lyfs>");
 		xml.append("</request>");
 		String url = illegalCache.getSubcribeUrl();
 		String method = "addYypqSjxr";
@@ -861,11 +915,17 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean toCancleSubscribe(String subscribeNo) throws Exception {
+	public BaseBean toCancleSubscribe(String subscribeNo,String sourceOfCertification) throws Exception {
+		String userId=illegalCache.getSubcribeUserid();
+		String pwd=illegalCache.getSubcribeUserpwd();
+		if("A".equals(sourceOfCertification)){
+			userId=illegalCache.getPoliceUseridApp();
+			pwd=illegalCache.getPoliceUserpwdApp();
+		}
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
-		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
-		xml.append("<userpwd>"+illegalCache.getSubcribeUserpwd()+"</userpwd >");
+		xml.append("<userid>"+userId+"</userid>");
+		xml.append("<userpwd>"+pwd+"</userpwd >");
 		xml.append("<lrip>"+illegalCache.getSubcribeLrip()+"</lrip>");
 		xml.append("<lrmac>"+illegalCache.getSubcribeLrmac()+"</lrmac>");
 		xml.append("<yylsh>"+subscribeNo+"</yylsh> ");
@@ -896,11 +956,17 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public List<SubcribeBean> querySubscribe(String licensePlateNo, int licensePlateType, String mobilephone) throws Exception {
+	public List<SubcribeBean> querySubscribe(String licensePlateNo, int licensePlateType, String mobilephone,String sourceOfCertification) throws Exception {
+		String userId=illegalCache.getSubcribeUserid();
+		String pwd=illegalCache.getSubcribeUserpwd();
+		if("A".equals(sourceOfCertification)){
+			userId=illegalCache.getPoliceUseridApp();
+			pwd=illegalCache.getPoliceUserpwdApp();
+		}
 		StringBuffer xml =new StringBuffer();
 		xml.append("<request>");
-		xml.append("<userid>"+illegalCache.getSubcribeUserid()+"</userid>");
-		xml.append("<userpwd>"+illegalCache.getSubcribeUserpwd()+"</userpwd >");
+		xml.append("<userid>"+userId+"</userid>");
+		xml.append("<userpwd>"+pwd+"</userpwd >");
 		xml.append("<lrip>"+illegalCache.getSubcribeLrip()+"</lrip>");
 		xml.append("<lrmac>"+illegalCache.getSubcribeLrmac()+"</lrmac>");
 		xml.append("<hphm>"+licensePlateNo+"</hphm>");
@@ -941,13 +1007,19 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public BaseBean trafficIllegalAppeal(AppealInfoBean info,String identityCard,String userCode,String sourceType) throws Exception {
+	public BaseBean trafficIllegalAppeal(AppealInfoBean info,String identityCard,String userCode,String sourceOfCertification) throws Exception {
 		String url = illegalCache.getPoliceUrl(); //webservice请求url
 		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
 		String userid = illegalCache.getPoliceUserid(); //webservice登录账号
 		String userpwd = illegalCache.getPoliceUserpwd(); //webservice登录密码
 		String key = illegalCache.getPoliceKey(); //秘钥
 		String jkid="HM1003";
+		if("A".equals(sourceOfCertification)){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
+		
 		StringBuffer xml=new StringBuffer();
 		xml.append("<?xml version=\"1.0\" encoding=\"utf-8\"?><request>");
 		xml.append("<ssrxm>"+info.getClaimant()+"</ssrxm>");
@@ -961,7 +1033,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 		xml.append("<wfdd>"+info.getIllegalAddress()+"</wfdd>");
 		xml.append("<zfdw>"+info.getAgency()+"</zfdw>");
 		xml.append("<zjtp>"+info.getMaterialPicture()+"</zjtp>");
-		xml.append("<ssly>"+sourceType+"</ssly>");//申述来源（ A移动APP C微信Z支付宝E邮政）
+		xml.append("<ssly>"+sourceOfCertification+"</ssly>");//申述来源（ A移动APP C微信Z支付宝E邮政）
 		xml.append("<sfzmhm>"+identityCard+"</sfzmhm>");
 		xml.append("<xjyhid>"+userid+" </xjyhid>");
 		xml.append("<sshpzl>2</sshpzl>");
@@ -988,7 +1060,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @throws Exception 
 	 */
 	@Override
-	public List<AppealInfoBack> trafficIllegalAppealFeedback(String identityCard,String sourceType) throws Exception {
+	public List<AppealInfoBack> trafficIllegalAppealFeedback(String identityCard,String sourceOfCertification) throws Exception {
 		List<AppealInfoBack> info=null;
 		String url = illegalCache.getPoliceUrl(); //webservice请求url
 		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
@@ -996,10 +1068,15 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String userpwd = illegalCache.getPoliceUserpwd(); //webservice登录密码
 		String key = illegalCache.getPoliceKey(); //秘钥
 		String jkid="sfrz_wfss_jgfk";
+		if("A".equals(sourceOfCertification)){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
 		StringBuffer xml=new StringBuffer();
 		xml.append("<?xml version=\"1.0\" encoding=\"utf-8\"?><REQUEST>");
 		xml.append("<SFZMHM>"+identityCard+"</SFZMHM>");
-		xml.append("<YHLY>"+sourceType+"</YHLY>");//用户来源，C-微信；Z-支付宝；A-移动APP	
+		xml.append("<YHLY>"+sourceOfCertification+"</YHLY>");//用户来源，C-微信；Z-支付宝；A-移动APP	
 		xml.append("</REQUEST>");
 
 		try {
@@ -1028,6 +1105,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String userpwd = illegalCache.getPoliceUserpwd(); //webservice登录密码
 		String key = illegalCache.getPoliceKey(); //秘钥
 		String jkid="WFTPCX";
+		if("A".equals(sourceOfCertification)){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
 		StringBuffer xml=new StringBuffer();
 		xml.append("<request><head>");
 		xml.append("<tpcxm>"+imgQueryCode+"</tpcxm>");
@@ -1062,6 +1144,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String key = illegalCache.getPoliceKey(); // 秘钥
 		Map<String, String> map = new HashMap<>();
 		String jkid = "WTSQ01";
+		if("A".equals(reportingNoParking.getSourceOfCertification())){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
 		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><HPHM>"
 				+ reportingNoParking.getNumberPlateNumber() + "</HPHM><HPZL>" + reportingNoParking.getPlateType()
 				+ "</HPZL><SFZMHM>" + reportingNoParking.getIDcard() + "</SFZMHM><TCDD>"
@@ -1098,6 +1185,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String userpwd = illegalCache.getPoliceUserpwd(); // webservice登录密码
 		String key = illegalCache.getPoliceKey(); // 秘钥
 		String jkid = "WTSQ02";
+		if("A".equals(sourceOfCertification)){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
 		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><XH>" + orderNumber + "</XH><HPHM>"
 				+ numberPlateNumber + "</HPHM><HPZL>" + plateType + "</HPZL><YHLY>" + sourceOfCertification
 				+ "</YHLY></REQUEST>";
@@ -1142,6 +1234,11 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String userpwd = illegalCache.getPoliceUserpwd(); // webservice登录密码
 		String key = illegalCache.getPoliceKey(); // 秘钥
 		String jkid = "WTSQ03";
+		if("A".equals(sourceOfCertification)){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
 		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><HPHM>" + numberPlateNumber + "</HPHM><HPZL>"
 				+ plateType + "</HPZL><YHLY>" + sourceOfCertification + "</YHLY></REQUEST>";
 		Map<String, Object> map = new HashMap<>();
@@ -1243,14 +1340,17 @@ public class IIllegalServiceImpl implements IIllegalService {
 	@Override
 	public BaseBean toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String ideNo,String sourceOfCertification) throws Exception{
 		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";//"http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
-		String APPKEY="c7e05df070ab5933";//illegalCache.getPartnerKey();
+		String APPKEY="";//illegalCache.getPartnerKey();
 		String APPID="";
 		if("C".equals(sourceOfCertification)){
 			APPKEY=illegalCache.getPartnerKeyW();
 			APPID=illegalCache.getPartnerCodeW();
-		}else{
+		}else if("Z".equals(sourceOfCertification)){
 			APPKEY=illegalCache.getPartnerKeyZ();
 			APPID=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			APPKEY=illegalCache.getPartnerKeyA();
+			APPID=illegalCache.getPartnerCodeA();
 		}
 		boolean IS_DATA_ENCYPTY = false;//是否需要对data部分加密
 		boolean IS_SIGN = true;//是否校验签名
@@ -1330,15 +1430,4 @@ public class IIllegalServiceImpl implements IIllegalService {
 	}
 
 	
-	/**
-	 * 测试testDemo
-	 * @throws Exception 
-	 * @throws Exception 
-	 * @param orderId  银行流水号
-	 */
-	public String testDemo(String timeStamp,String key,String data) throws Exception {
-		String mac= MacUtil.genMsgMac(timeStamp, key,"33",data);
-		System.out.println(mac.toString());
-		return mac;
-	}
 }

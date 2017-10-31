@@ -107,8 +107,8 @@ public class ApiClientUtils {
 		 }
 	 
 	 
-	 public static String getMac(String timeStamp, String macKey, String hashAlg, String msg,String url) throws Exception{		        
-		 //String url="";
+	 public static String getMac(String timeStamp, String macKey, String hashAlg, String msg) throws Exception{		        
+		 String url="";
 		 String respStr="";
 		 BaseBean result=new BaseBean();
 	     try {

@@ -1061,7 +1061,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 */
 	@Override
 	public List<AppealInfoBack> trafficIllegalAppealFeedback(String identityCard,String sourceOfCertification) throws Exception {
-		List<AppealInfoBack> info=null;
+		List<AppealInfoBack> info=new ArrayList<AppealInfoBack>();
 		String url = illegalCache.getPoliceUrl(); //webservice请求url
 		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
 		String userid = illegalCache.getPoliceUserid(); //webservice登录账号
@@ -1083,8 +1083,13 @@ public class IIllegalServiceImpl implements IIllegalService {
 			JSONObject result=WebServiceClient.requestWebService(url, method, jkid, xml.toString(),userid,userpwd, key);
 			JSONObject body=(JSONObject) result.get("BODY");
 		    String items=body.get("ROW").toString();
+		    if(items.indexOf("[")!=-1){
+		    	info=(List<AppealInfoBack>) JSON.parseArray(items, AppealInfoBack.class);
+		    }else{
+		    	AppealInfoBack bean=JSON.parseObject(items, AppealInfoBack.class);
+		    	info.add(bean);
+		    }
 		    
-		    info=(List<AppealInfoBack>) JSON.parseArray(items, AppealInfoBack.class);
 			//System.out.println(info.get(0).getLXDZ());
 		} catch (Exception e) {
 			logger.error("获取申诉反馈信息失败 ， XML= "+xml.toString(), e);

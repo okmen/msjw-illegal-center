@@ -34,7 +34,7 @@ public class TestIllegalService {
 	@Test
 	public void testQueryOfreportingNoParking() {
 		try {
-			illegalService.recordOfReportingNoParking("粤B6A42E", "02", "C");
+			illegalService.recordOfReportingNoParking("粤B6A42E", "02", "A");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -177,8 +177,8 @@ public class TestIllegalService {
 	 */
    @Test
    public void toGetSubscribeSorts() throws Exception{
-	   //illegalService.toGetSubscribeSorts("440319000000");
-	   illegalService.isRegisterUser(openId,"C");
+	   illegalService.toGetSubscribeSorts("440319000000","A");
+	   //illegalService.isRegisterUser(openId,"A");
    }
     
    /**
@@ -189,7 +189,7 @@ public class TestIllegalService {
    public void toChangeSubscribe() throws Exception{
 	   CarInfoBean carinfo=new CarInfoBean("粤B6F7M1",  "002", "9094");
 	   CustInfoBean custinfo=new CustInfoBean("王玉璞", "622822198502074110", "01", "18601174358",  "622822198502074110");
-	   illegalService.toChangeSubscribe("CgQxRtU5pO", "440319000000", "140053", custinfo, carinfo, "003");
+	   illegalService.toChangeSubscribe("CgQxRtU5pO", "440319000000", "155091", custinfo, carinfo, "A");
    }
    
    /**
@@ -207,24 +207,24 @@ public class TestIllegalService {
     */
    @Test
    public void querySubscribe() throws Exception{
-	   illegalService.querySubscribe("粤B6F7M1",2,"18601174358","");
+	   illegalService.querySubscribe("粤B6F7M1",2,"18601174358","A");
    }
    
    @Test
    public void trafficIllegalAppeal() throws Exception{
 	   AppealInfoBean bean=new AppealInfoBean("000000002", "粤B6F7M1","2", "2017-04-11 14:20:24", "深南大道2", "测试用2！", "交警队", "小王", "白石洲", "18601174358", "2", "测试！", "xxx");
-	   illegalService.trafficIllegalAppeal(bean, "622822198502074110", "", "C");
+	   illegalService.trafficIllegalAppeal(bean, "622822198502074110", "", "A");
    }
    
    @Test
    public void trafficIllegalAppealFeedback() throws Exception{
-	   illegalService.trafficIllegalAppealFeedback("622822198502074110", "C");
+	   illegalService.trafficIllegalAppealFeedback("622822198502074110", "A");
    }
    
    @Test
    public void toQueryElectronicReceiptPage() throws Exception{
 	   
-	  BaseBean list = illegalService.toQueryElectronicReceiptPage("", "粤B2D99S", "","C");
+	  BaseBean list = illegalService.toQueryElectronicReceiptPage("", "粤B2D99S", "","A");
 	  
 	  System.out.println(list.toJson());
    }
@@ -232,7 +232,7 @@ public class TestIllegalService {
    @Test
    public void szTrafficPoliceElecBillQry() throws Exception{
 	   
-	  String list = illegalService.szTrafficPoliceElecBillQry("SDB000000120170119904601091");
+	  String list = illegalService.szTrafficPoliceElecBillQry("SDB00000012017070712838356");
 	  
 	  System.out.println(list);
    }

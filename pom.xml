@@ -177,9 +177,9 @@
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
  
              	<!-- 警司通app参数 -->
-             	<police.app.userid>YD02</police.app.userid>
-             	<police.app.userpwd>YD02</police.app.userpwd>
-             	<police.app.key>VUCr6YKOFdaPpQcOtLgRETCV</police.app.key>
+             	<police.app.userid>YD01</police.app.userid>
+             	<police.app.userpwd>YYWF2013@168</police.app.userpwd>
+             	<police.app.key>ZG20YD14WFJB2013XXLRJK16</police.app.key>
              	
                 
 				<env.url_prefix><![CDATA[test.]]></env.url_prefix>
@@ -264,9 +264,9 @@
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
  				
  				<!-- 警司通app参数 -->
-             	<police.app.userid>YD02</police.app.userid>
-             	<police.app.userpwd>YD02</police.app.userpwd>
-             	<police.app.key>VUCr6YKOFdaPpQcOtLgRETCV</police.app.key>
+             	<police.app.userid>YD01</police.app.userid>
+             	<police.app.userpwd>YYWF2013@168</police.app.userpwd>
+             	<police.app.key>ZG20YD14WFJB2013XXLRJK16</police.app.key>
              	
                 <!-- accessToken有效期60秒 -->
                 <accessToken.time>86400</accessToken.time>
@@ -342,9 +342,9 @@
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
              	
              	<!-- 警司通app参数 -->
-             	<police.app.userid>YD02</police.app.userid>
-             	<police.app.userpwd>YD02</police.app.userpwd>
-             	<police.app.key>VUCr6YKOFdaPpQcOtLgRETCV</police.app.key>
+             	<police.app.userid>YD01</police.app.userid>
+             	<police.app.userpwd>YYWF2013@168</police.app.userpwd>
+             	<police.app.key>ZG20YD14WFJB2013XXLRJK16</police.app.key>
                
                 <!-- accessToken有效期30天 -->
                 <accessToken.time>2592000</accessToken.time>

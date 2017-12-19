@@ -37,6 +37,7 @@ import cn.illegal.bean.ReservationDay;
 import cn.illegal.bean.SubcribeBean;
 import cn.illegal.bean.ResultReturnBean;
 import cn.illegal.bean.ResultReturnBeanA;
+import cn.illegal.bean.StarsBean;
 import cn.illegal.cached.impl.IIllegalCachedImpl;
 import cn.illegal.dao.IIllegalDao;
 import cn.illegal.service.IIllegalService;
@@ -1434,5 +1435,108 @@ public class IIllegalServiceImpl implements IIllegalService {
 		return resultStr;
 	}
 
-	
+
+	/**
+	 * 申诉结果评价星级
+	 */
+	@Override
+	public BaseBean evaluateResult(String businessType, String serialNumber, String stars, String sourceOfCertification)
+			throws Exception {
+		BaseBean baseBean = new BaseBean();
+		String url = illegalCache.getPoliceUrl(); //webservice请求url
+		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
+		String userid = illegalCache.getPoliceUserid(); //webservice登录账号
+		String userpwd = illegalCache.getPoliceUserpwd(); //webservice登录密码
+		String key = illegalCache.getPoliceKey(); //秘钥
+		String jkid="sfrz_kjk_jgpj";
+		if("A".equals(sourceOfCertification)){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
+		StringBuffer xml=new StringBuffer();
+		xml.append("<?xml version=\"1.0\"  encoding=\"utf-8\"?><REQUEST>")
+		.append("<YWLX>").append(businessType).append("</YWLX>")
+		.append("<LSH>").append(serialNumber).append("</LSH>")
+		.append("<PJXJ>").append(stars).append("</PJXJ>")
+		.append("<YHLY>").append(sourceOfCertification).append("</YHLY>")
+		.append("</REQUEST>");
+		JSONObject json = WebServiceClient.requestWebService(url, method, jkid, xml.toString(), userid, userpwd, key);
+		String code = json.getString("CODE");
+		String msg = json.getString("MSG");
+		baseBean.setCode(code);
+		baseBean.setMsg(msg);
+		return baseBean;
+	}
+
+
+	/**
+	 *申诉结果评价查询
+	 */
+	@Override
+	@SuppressWarnings("rawtypes")
+	public BaseBean queryEvaluateResult(String serialNumber, String sourceOfCertification) throws Exception {
+		BaseBean baseBean = new BaseBean();
+		String url = illegalCache.getPoliceUrl(); //webservice请求url
+		String method = illegalCache.getPoliceMethod(); //webservice请求方法名称
+		String userid = illegalCache.getPoliceUserid(); //webservice登录账号
+		String userpwd = illegalCache.getPoliceUserpwd(); //webservice登录密码
+		String key = illegalCache.getPoliceKey(); //秘钥
+		String jkid="sfrz_kjk_pjcx";
+		if("A".equals(sourceOfCertification)){
+			userid=illegalCache.getPoliceUseridApp();
+			userpwd=illegalCache.getPoliceUserpwdApp();
+			key=illegalCache.getPoliceKeyApp();
+		}
+		StringBuffer xml=new StringBuffer();
+		xml.append("<?xml version=\"1.0\"  encoding=\"utf-8\"?><REQUEST>")
+		.append("<LSH>").append(serialNumber).append("</LSH>")
+		.append("<YHLY>").append(sourceOfCertification).append("</YHLY>")
+		.append("</REQUEST>");
+		JSONObject json = WebServiceClient.requestWebService(url, method, jkid, xml.toString(), userid, userpwd, key);
+		String code = json.getString("CODE");
+		String msg = json.getString("MSG");
+		Object obj = json.get("BODY");
+		if (MsgCode.success.equals(code)) {
+			if(obj instanceof JSONObject && obj != null){
+				JSONObject result = (JSONObject) obj;
+				baseBean.setCode(MsgCode.success);
+				List<StarsBean> list = new ArrayList<>();
+				if (json.toJSONString().contains("[")) {
+					// 多条
+					JSONArray jsonArray = result.getJSONArray("ROW");
+					Iterator iterator = jsonArray.iterator();
+					while (iterator.hasNext()) {
+						JSONObject jsonObject = (JSONObject) iterator.next();
+						StarsBean star = new StarsBean();
+						String evaluateTime = jsonObject.getString("PJSJ");
+						String serialNum = jsonObject.getString("ID");
+						String stars = jsonObject.getString("PJXJ");
+						star.setEvaluateTime(evaluateTime);
+						star.setSerialNumber(serialNum);
+						star.setStars(stars);
+						list.add(star);
+					}
+				} else {
+					JSONObject jsonObject = result.getJSONObject("ROW");
+					StarsBean star = new StarsBean();
+					String evaluateTime = jsonObject.getString("PJSJ");
+					String serialNum = jsonObject.getString("ID");
+					String stars = jsonObject.getString("PJXJ");
+					star.setEvaluateTime(evaluateTime);
+					star.setSerialNumber(serialNum);
+					star.setStars(stars);
+					list.add(star);
+				}
+				baseBean.setData(list);
+			}else{
+				baseBean.setCode(MsgCode.businessError);
+				baseBean.setMsg("未查询到记录");
+			}
+		}else {
+			baseBean.setCode(code);
+			baseBean.setMsg(msg);
+		}
+		return baseBean;
+	}
 }

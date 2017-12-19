@@ -29,8 +29,24 @@ public class TestIllegalService {
     private IIllegalService illegalService;
     
     private String openId="123456";
-    
-    
+    /**
+     * 申诉结果评价
+     * @throws Exception
+     */
+    @Test
+    public void testevaluateResult() throws Exception{
+    	BaseBean evaluateResult = illegalService.evaluateResult("3", "31068906", "2", "C");
+    	System.out.println(evaluateResult.toJson());
+    }
+    /**
+     * 申诉结果评价查询
+     * @throws Exception
+     */
+    @Test
+    public void testqueryEvaluateResult() throws Exception{
+    	BaseBean queryEvaluateResult = illegalService.queryEvaluateResult("12345", "C");
+    	System.out.println(queryEvaluateResult.toJson());
+    }
 	@Test
 	public void testQueryOfreportingNoParking() {
 		try {
@@ -44,7 +60,7 @@ public class TestIllegalService {
 	public void testsingleQueryOfreportingNoParking() {
 		try {
 
-			illegalService.singleQueryOfReportingNoParking("1077", "粤B6A42E", "02", "C");
+			illegalService.singleQueryOfReportingNoParking("1077", "粤B6A42E", "02", "A");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +78,7 @@ public class TestIllegalService {
 			rp.setParkingSpot("111");
 			rp.setPlateType("02");
 			rp.setScenePhoto("33");
-			rp.setSourceOfCertification("Z");
+			rp.setSourceOfCertification("A");
 			rp.setOpenId("123");
 			Map<String, String> reportingNoParking = illegalService.reportingNoParking(rp);
 			System.out.println(reportingNoParking);
@@ -110,7 +126,8 @@ public class TestIllegalService {
    @Test
    public void queryInfoByLicensePlateNo() throws Exception{
 
-	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤B138XL","02","4918","oPyqQjheTh8nCsdpQD8WukZv9Uxk","A");
+//	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤B138XL","02","4918","oPyqQjheTh8nCsdpQD8WukZv9Uxk","A");
+	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤Z0010港","02","1892",openId,"C");
 	   System.out.println(illegalInfoBeans);
 
    }
@@ -213,7 +230,8 @@ public class TestIllegalService {
    @Test
    public void trafficIllegalAppeal() throws Exception{
 	   AppealInfoBean bean=new AppealInfoBean("000000002", "粤B6F7M1","2", "2017-04-11 14:20:24", "深南大道2", "测试用2！", "交警队", "小王", "白石洲", "18601174358", "2", "测试！", "xxx");
-	   illegalService.trafficIllegalAppeal(bean, "622822198502074110", "", "A");
+	   BaseBean trafficIllegalAppeal = illegalService.trafficIllegalAppeal(bean, "622822198502074110", "", "A");
+	   System.out.println(trafficIllegalAppeal);
    }
    
    @Test

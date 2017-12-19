@@ -1083,13 +1083,16 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			JSONObject result=WebServiceClient.requestWebService(url, method, jkid, xml.toString(),userid,userpwd, key);
 			JSONObject body=(JSONObject) result.get("BODY");
-		    String items=body.get("ROW").toString();
-		    if(items.indexOf("[")!=-1){
-		    	info=(List<AppealInfoBack>) JSON.parseArray(items, AppealInfoBack.class);
-		    }else{
-		    	AppealInfoBack bean=JSON.parseObject(items, AppealInfoBack.class);
-		    	info.add(bean);
-		    }
+			String code = result.getString("CODE");
+			if (MsgCode.success.equals(code)) {
+				String items=body.get("ROW").toString();
+			    if(items.indexOf("[")!=-1){
+			    	info=(List<AppealInfoBack>) JSON.parseArray(items, AppealInfoBack.class);
+			    }else{
+			    	AppealInfoBack bean=JSON.parseObject(items, AppealInfoBack.class);
+			    	info.add(bean);
+			    }
+			}
 		    
 			//System.out.println(info.get(0).getLXDZ());
 		} catch (Exception e) {

@@ -236,7 +236,7 @@ public class TestIllegalService {
    
    @Test
    public void trafficIllegalAppealFeedback() throws Exception{
-	   illegalService.trafficIllegalAppealFeedback("622822198502074110", "A");
+	   illegalService.trafficIllegalAppealFeedback("440583198311234821", "C");
    }
    
    @Test

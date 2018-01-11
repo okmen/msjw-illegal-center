@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.illegal.bean.AppealInfoBean;
 import cn.illegal.bean.CarInfoBean;
 import cn.illegal.bean.CustInfoBean;
@@ -90,7 +92,8 @@ public class TestIllegalService {
     @Test
     public void illegalPictureQuery() {
     	try {
-			illegalService.illegalPictureQuery("1A84ED1DECF55BA7330BB05302BDE6F2","C");
+			List<String> illegalPictureQuery = illegalService.illegalPictureQuery("E112CD652B94C49DFF2E2FFE5252C6E3","C");
+			System.out.println(illegalPictureQuery);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -128,7 +131,7 @@ public class TestIllegalService {
 
 //	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤B138XL","02","4918","oPyqQjheTh8nCsdpQD8WukZv9Uxk","A");
 	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤Z0010港","02","1892",openId,"C");
-	   System.out.println(illegalInfoBeans);
+	   System.out.println(JSON.toJSONString(illegalInfoBeans));
 
    }
    

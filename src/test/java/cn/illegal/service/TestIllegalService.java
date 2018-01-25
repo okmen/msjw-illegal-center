@@ -230,19 +230,21 @@ public class TestIllegalService {
    @Test
    public void trafficIllegalAppeal() throws Exception{
 	   AppealInfoBean bean=new AppealInfoBean("000000002", "粤B6F7M1","2", "2017-04-11 14:20:24", "深南大道2", "测试用2！", "交警队", "小王", "白石洲", "18601174358", "2", "测试！", "xxx");
-	   BaseBean trafficIllegalAppeal = illegalService.trafficIllegalAppeal(bean, "622822198502074110", "", "A");
+	   BaseBean trafficIllegalAppeal = illegalService.trafficIllegalAppeal(bean, "622822198502074110", "", "C");
 	   System.out.println(trafficIllegalAppeal);
    }
    
    @Test
    public void trafficIllegalAppealFeedback() throws Exception{
-	   illegalService.trafficIllegalAppealFeedback("440583198311234821", "C");
+	   illegalService.trafficIllegalAppealFeedback("445222197912152216", "C");
+//	   illegalService.trafficIllegalAppealFeedback("622822198502074110", "A");
    }
    
    @Test
    public void toQueryElectronicReceiptPage() throws Exception{
 	   
-	  BaseBean list = illegalService.toQueryElectronicReceiptPage("", "粤B2D99S", "","A");
+//	  BaseBean list = illegalService.toQueryElectronicReceiptPage("", "粤B2D99S", "","A","02");
+	  BaseBean list = illegalService.toQueryElectronicReceiptPage("4403010922368645", "粤BBG041", "","C","01");
 	  
 	  System.out.println(list.toJson());
    }

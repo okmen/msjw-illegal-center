@@ -1347,12 +1347,15 @@ public class IIllegalServiceImpl implements IIllegalService {
 	 * @param licensePlateNo  车牌号
 	 */
 	@Override
-	public BaseBean toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String ideNo,String sourceOfCertification) throws Exception{
-		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";//"http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
+	public BaseBean toQueryElectronicReceiptPage(String billNo, String licensePlateNo, String ideNo,String sourceOfCertification,String licenseType) throws Exception{
+		String GATEWAY =
+//		illegalCache.getPartnerUrl()+"openapi/gateway.do";
+		"http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
 		String APPKEY="";//illegalCache.getPartnerKey();
 		String APPID="";
 		if("C".equals(sourceOfCertification)){
-			APPKEY=illegalCache.getPartnerKeyW();
+			APPKEY = "1234567890007777";
+//			APPKEY=illegalCache.getPartnerKeyW();
 			APPID=illegalCache.getPartnerCodeW();
 		}else if("Z".equals(sourceOfCertification)){
 			APPKEY=illegalCache.getPartnerKeyZ();
@@ -1369,6 +1372,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         String data = "{"
             + "\"idNo\":\""+""+"\","
             + "\"licenseNum\":\""+licensePlateNo+"\","
+            + "\"licenseType\":\""+licenseType+"\","
             + "\"billNo\":\""+billNo+"\""
             + "}";
         OpenApiRsp rsp=null;

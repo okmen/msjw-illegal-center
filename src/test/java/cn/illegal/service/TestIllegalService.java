@@ -129,8 +129,8 @@ public class TestIllegalService {
    @Test
    public void queryInfoByLicensePlateNo() throws Exception{
 
-//	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤B138XL","02","4918","oPyqQjheTh8nCsdpQD8WukZv9Uxk","A");
-	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤Z0010港","02","1892",openId,"C");
+	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo("粤B138XL","02","4918","oPyqQjheTh8nCsdpQD8WukZv9Uxk","A");
+//	   BaseBean illegalInfoBeans =  illegalService.queryInfoByLicensePlateNo1("粤Z0010港","02","1892",openId,"C");
 	   System.out.println(JSON.toJSONString(illegalInfoBeans));
 
    }
@@ -246,8 +246,8 @@ public class TestIllegalService {
    @Test
    public void toQueryElectronicReceiptPage() throws Exception{
 	   
-//	  BaseBean list = illegalService.toQueryElectronicReceiptPage("", "粤B2D99S", "","A","02");
-	  BaseBean list = illegalService.toQueryElectronicReceiptPage("4403010922368645", "粤BBG041", "","C","01");
+//	  BaseBean list = illegalService.toQueryElectronicReceiptPage("4403010922368645", "粤BBG041", "","C","01");
+	  BaseBean list = illegalService.toQueryElectronicReceiptPage("", "粤BU8296", "","C","01");
 	  
 	  System.out.println(list.toJson());
    }

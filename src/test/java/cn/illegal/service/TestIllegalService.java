@@ -32,6 +32,15 @@ public class TestIllegalService {
     
     private String openId="123456";
     /**
+     * 接收消息
+     * @throws Exception
+     */
+    @Test
+    public void testrm() throws Exception{
+    	illegalService.receiveMessage("F01", "event", "subscribe", "C");
+    }
+    /**
+     * 
      * 申诉结果评价
      * @throws Exception
      */
@@ -52,7 +61,7 @@ public class TestIllegalService {
 	@Test
 	public void testQueryOfreportingNoParking() {
 		try {
-			illegalService.recordOfReportingNoParking("粤B6A42E", "02", "A");
+			illegalService.recordOfReportingNoParking("粤S9XS12", "02", "C");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

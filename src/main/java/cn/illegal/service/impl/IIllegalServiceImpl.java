@@ -1401,8 +1401,57 @@ public class IIllegalServiceImpl implements IIllegalService {
 		}			
 		return bean;
 	}
-
-
+	/**
+	 * 接收消息
+	 */
+	@Override
+	public BaseBean receiveMessage(String src, String msgType, String eventType, String sourceOfCertification)
+			throws Exception {
+//		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";
+		String GATEWAY ="http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
+		String APPKEY="";//illegalCache.getPartnerKey();
+		String APPID="";
+		if("C".equals(sourceOfCertification)){
+			APPKEY = "1234567890007777";
+//			APPKEY=illegalCache.getPartnerKeyW();
+			APPID=illegalCache.getPartnerCodeW();
+		}else if("Z".equals(sourceOfCertification)){
+			APPKEY=illegalCache.getPartnerKeyZ();
+			APPID=illegalCache.getPartnerCodeZ();
+		}else if("A".equals(sourceOfCertification)){
+			APPKEY=illegalCache.getPartnerKeyA();
+			APPID=illegalCache.getPartnerCodeA();
+		}
+		boolean IS_DATA_ENCYPTY = false;//是否需要对data部分加密
+		boolean IS_SIGN = true;//是否校验签名
+		// 请求接口
+        String method = "msgReceive";
+				
+        String data = "{"
+            + "\"src\":\""+src+"\","
+            + "\"msgType\":\""+msgType+"\","
+            + "\"eventType\":\""+eventType+"\""
+            + "}";
+        OpenApiRsp rsp=null;
+        BaseBean bean=new BaseBean();
+        
+        logger.info("请求data：" + data);
+        try{
+	        // 实例化OpenApi客户端
+	        OpenApiClient client = new OpenApiClient(GATEWAY, APPID, APPKEY, IS_DATA_ENCYPTY, IS_SIGN);
+	        // 发送请求
+	        rsp = client.execute(method, data);
+        	bean.setCode(rsp.getReturnCode());
+	        bean.setData(rsp.getData());
+	        bean.setMsg(rsp.getReturnMsg());
+	        
+        }catch (Exception e) {
+			logger.error("接收消息错误！");
+			e.printStackTrace();
+			throw e;
+		}			
+		return bean;
+	}
 
 	/**
 	 * 查询电子印章
@@ -1545,4 +1594,8 @@ public class IIllegalServiceImpl implements IIllegalService {
 		}
 		return baseBean;
 	}
+
+
+
+	
 }

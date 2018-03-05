@@ -1435,7 +1435,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         OpenApiRsp rsp=null;
         BaseBean bean=new BaseBean();
         
-        logger.info("请求data：" + data);
+        logger.info("平安接收消息请求data：" + data);
         try{
 	        // 实例化OpenApi客户端
 	        OpenApiClient client = new OpenApiClient(GATEWAY, APPID, APPKEY, IS_DATA_ENCYPTY, IS_SIGN);
@@ -1444,7 +1444,7 @@ public class IIllegalServiceImpl implements IIllegalService {
         	bean.setCode(rsp.getReturnCode());
 	        bean.setData(rsp.getData());
 	        bean.setMsg(rsp.getReturnMsg());
-	        
+	        logger.info("平安接收消息请求bean：" + bean.toJson());
         }catch (Exception e) {
 			logger.error("接收消息错误！");
 			e.printStackTrace();

@@ -37,7 +37,10 @@ public class TestIllegalService {
      */
     @Test
     public void testrm() throws Exception{
-    	illegalService.receiveMessage("F01", "event", "subscribe", "C");
+    	String eventKey = "qrscene_F01";
+    	String i = eventKey.substring(eventKey.indexOf("F"));
+    	System.out.println(i);
+//    	illegalService.receiveMessage("F01", "event", "subscribe", "C");
     }
     /**
      * 

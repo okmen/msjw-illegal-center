@@ -1407,13 +1407,13 @@ public class IIllegalServiceImpl implements IIllegalService {
 	@Override
 	public BaseBean receiveMessage(String src, String msgType, String eventType, String sourceOfCertification,String giveOpenId)
 			throws Exception {
-//		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";
-		String GATEWAY ="http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
+		String GATEWAY =illegalCache.getPartnerUrl()+"openapi/gateway.do";
+//		String GATEWAY ="http://uat.stcpay.com/gov-traffic-front/openapi/gateway.do";
 		String APPKEY="";//illegalCache.getPartnerKey();
 		String APPID="";
 		if("C".equals(sourceOfCertification)){
-			APPKEY = "1234567890007777";
-//			APPKEY=illegalCache.getPartnerKeyW();
+//			APPKEY = "1234567890007777";
+			APPKEY=illegalCache.getPartnerKeyW();
 			APPID=illegalCache.getPartnerCodeW();
 		}else if("Z".equals(sourceOfCertification)){
 			APPKEY=illegalCache.getPartnerKeyZ();

@@ -1390,7 +1390,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			}
 	        if(result==null||result.size()==0){
 	        	bean.setCode(MsgCode.businessError);
-		        bean.setMsg("未查询到相应的记录");
+		        bean.setMsg(rsp.getReturnMsg());
 	        }else{
 	        	bean.setCode(rsp.getReturnCode());
 		        bean.setData(result);

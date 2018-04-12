@@ -1384,7 +1384,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 	        OpenApiClient client = new OpenApiClient(GATEWAY, APPID, APPKEY, IS_DATA_ENCYPTY, IS_SIGN);
 	        // 发送请求
 	        rsp = client.execute(method, data);
-	        result =(List<ElectronicReceiptBean>) JSON.parseArray(rsp.getData(), ElectronicReceiptBean.class);
+	        String returnCode = rsp.getReturnCode();
+	        if (MsgCode.success.equals(returnCode)) {
+	        	 result =(List<ElectronicReceiptBean>) JSON.parseArray(rsp.getData(), ElectronicReceiptBean.class);
+			}
 	        if(result==null||result.size()==0){
 	        	bean.setCode(MsgCode.businessError);
 		        bean.setMsg("未查询到相应的记录");

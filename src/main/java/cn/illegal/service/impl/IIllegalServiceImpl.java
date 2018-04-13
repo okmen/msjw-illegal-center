@@ -121,7 +121,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			result= ApiClientUtils.requestApiA(url,bean,data,key,illegalCache.getPartnerMacUrl());
 			if (null != result) {
 				if(result.getData()==null){
-					logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString()+"  result:"+result.getData().toString());
+					logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString());
 				}else{
 					isReg=result.getData().get("isRegister").toString();
 				}

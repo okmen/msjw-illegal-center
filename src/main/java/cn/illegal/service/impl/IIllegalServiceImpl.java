@@ -119,10 +119,12 @@ public class IIllegalServiceImpl implements IIllegalService {
 		try {
 			bean=new ParamRequestBean(partnerCode,partnerUserId ,serionNo, timeStamp, macAlg, null, data);
 			result= ApiClientUtils.requestApiA(url,bean,data,key,illegalCache.getPartnerMacUrl());
-			if(result.getData()==null){
-				logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString()+"  result:"+result.getData().toString());
-			}else{
-				isReg=result.getData().get("isRegister").toString();
+			if (null != result) {
+				if(result.getData()==null){
+					logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString()+"  result:"+result.getData().toString());
+				}else{
+					isReg=result.getData().get("isRegister").toString();
+				}
 			}
 		} catch (Exception e) {
 			logger.error("校验客户是否注册失败，ParamRequestBean= "+bean.toString(), e);

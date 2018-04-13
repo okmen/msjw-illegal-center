@@ -109,8 +109,8 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String partnerUserId=openId;
 		String macAlg=illegalCache.getPartnerMacAlg();
 		String serionNo=RandomUtil.randomString(20);
-		ResultReturnBeanA result=null;
-		ParamRequestBean bean=null;
+		ResultReturnBeanA result=new ResultReturnBeanA();
+		ParamRequestBean bean=new ParamRequestBean();
 		String isReg="0";
 		
 		CustDataInfo data=new CustDataInfo();

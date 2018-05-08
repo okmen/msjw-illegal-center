@@ -22,6 +22,20 @@ import cn.sdk.serialization.ISerializeManager;
 public class IIllegalCachedImpl implements IIllegalCached{
 	protected Logger log = Logger.getLogger(this.getClass());
 	
+	/**
+     * 民生警务参数
+     */
+    @Value("${useridMsjw}")
+    private String useridMsjw;
+    @Value("${userpwdMsjw}")
+    private String userpwdMsjw;
+    @Value("${urlMsjw}")
+    private String urlMsjw;
+    @Value("${methodMsjw}")
+    private String methodMsjw;
+    @Value("${keyMsjw}")
+    private String keyMsjw;
+    
     
     @Value("${refreshTokenTime}")
     private int refreshTokenTime;
@@ -446,6 +460,56 @@ public class IIllegalCachedImpl implements IIllegalCached{
 
 	public void setPartnerMacUrl(String partnerMacUrl) {
 		this.partnerMacUrl = partnerMacUrl;
+	}
+
+
+	public String getUseridMsjw() {
+		return useridMsjw;
+	}
+
+
+	public void setUseridMsjw(String useridMsjw) {
+		this.useridMsjw = useridMsjw;
+	}
+
+
+	public String getUserpwdMsjw() {
+		return userpwdMsjw;
+	}
+
+
+	public void setUserpwdMsjw(String userpwdMsjw) {
+		this.userpwdMsjw = userpwdMsjw;
+	}
+
+
+	public String getUrlMsjw() {
+		return urlMsjw;
+	}
+
+
+	public void setUrlMsjw(String urlMsjw) {
+		this.urlMsjw = urlMsjw;
+	}
+
+
+	public String getMethodMsjw() {
+		return methodMsjw;
+	}
+
+
+	public void setMethodMsjw(String methodMsjw) {
+		this.methodMsjw = methodMsjw;
+	}
+
+
+	public String getKeyMsjw() {
+		return keyMsjw;
+	}
+
+
+	public void setKeyMsjw(String keyMsjw) {
+		this.keyMsjw = keyMsjw;
 	}
 
 

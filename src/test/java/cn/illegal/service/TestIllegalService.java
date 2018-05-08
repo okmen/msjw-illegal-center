@@ -92,7 +92,7 @@ public class TestIllegalService {
 			rp.setParkingSpot("111");
 			rp.setPlateType("02");
 			rp.setScenePhoto("33");
-			rp.setSourceOfCertification("A");
+			rp.setSourceOfCertification("M");
 			rp.setOpenId("123");
 			Map<String, String> reportingNoParking = illegalService.reportingNoParking(rp);
 			System.out.println(reportingNoParking);
@@ -130,7 +130,7 @@ public class TestIllegalService {
    @Test
    public void isRegisterUser() throws Exception{
 	   
-	   String code=illegalService.isRegisterUser("oPyqQjheTh8nCsdpQD8WukZv9Uxk", "A");
+	   String code=illegalService.isRegisterUser("oIhY6wVii1F-tvREoE-2OznBhnJw", "M");
 	   System.out.println("返回結果："+code);
    }
    

@@ -149,7 +149,14 @@
 				<refreshToken.time>2592000</refreshToken.time>
                 <encypt.access.token.time>86400</encypt.access.token.time>
              
-             
+             	<!-- 警司通参数-民生警务 -->
+				<jiaojing.userid.msjw>msjwpt</jiaojing.userid.msjw>
+				<jiaojing.userpwd.msjw>msjw@2017</jiaojing.userpwd.msjw>
+				<jiaojing.url.msjw>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</jiaojing.url.msjw>
+				<jiaojing.method.msjw>xxptSchuding</jiaojing.method.msjw>
+				<jiaojing.key.msjw>ZG20YD14WFJB2013XXLRJK89</jiaojing.key.msjw>
+				
+				
              	<partner.codeW>P003</partner.codeW>
              	<partner.codeZ>P002</partner.codeZ>
              	<partner.codeA>P001</partner.codeA>
@@ -262,6 +269,13 @@
              	<police.userid>WX02</police.userid>
              	<police.userpwd>WX02@168</police.userpwd>
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
+             	
+             	<!-- 警司通参数-民生警务 -->
+				<jiaojing.userid.msjw>msjwpt</jiaojing.userid.msjw>
+				<jiaojing.userpwd.msjw>msjw@2017</jiaojing.userpwd.msjw>
+				<jiaojing.url.msjw>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</jiaojing.url.msjw>
+				<jiaojing.method.msjw>xxptSchuding</jiaojing.method.msjw>
+				<jiaojing.key.msjw>ZG20YD14WFJB2013XXLRJK89</jiaojing.key.msjw>
  				
  				<!-- 警司通app参数 -->
              	<police.app.userid>YD01</police.app.userid>
@@ -340,6 +354,13 @@
              	<police.userid>WX02</police.userid>
              	<police.userpwd>WX02@168</police.userpwd>
              	<police.key>94D863D9BE7FB032E6A19430CC892610</police.key>
+             	
+             	<!-- 警司通参数-民生警务 -->
+				<jiaojing.userid.msjw>msjwpt</jiaojing.userid.msjw>
+				<jiaojing.userpwd.msjw>msjw@2017</jiaojing.userpwd.msjw>
+				<jiaojing.url.msjw>http://api.szjj.me:9080/xxfbpt/services/xxfbptservice</jiaojing.url.msjw>
+				<jiaojing.method.msjw>xxptSchuding</jiaojing.method.msjw>
+				<jiaojing.key.msjw>ZG20YD14WFJB2013XXLRJK89</jiaojing.key.msjw>
              	
              	<!-- 警司通app参数 -->
              	<police.app.userid>YD01</police.app.userid>

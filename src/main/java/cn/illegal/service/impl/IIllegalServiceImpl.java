@@ -1159,6 +1159,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 			userid=illegalCache.getPoliceUseridApp();
 			userpwd=illegalCache.getPoliceUserpwdApp();
 			key=illegalCache.getPoliceKeyApp();
+		}else if("M".equals(reportingNoParking.getSourceOfCertification())){
+			userid=illegalCache.getUseridMsjw();
+			userpwd=illegalCache.getUserpwdMsjw();
+			key=illegalCache.getKeyMsjw();
 		}
 		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><HPHM>"
 				+ reportingNoParking.getNumberPlateNumber() + "</HPHM><HPZL>" + reportingNoParking.getPlateType()
@@ -1200,6 +1204,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 			userid=illegalCache.getPoliceUseridApp();
 			userpwd=illegalCache.getPoliceUserpwdApp();
 			key=illegalCache.getPoliceKeyApp();
+		}else if("M".equals(sourceOfCertification)){
+			userid=illegalCache.getUseridMsjw();
+			userpwd=illegalCache.getUserpwdMsjw();
+			key=illegalCache.getKeyMsjw();
 		}
 		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><XH>" + orderNumber + "</XH><HPHM>"
 				+ numberPlateNumber + "</HPHM><HPZL>" + plateType + "</HPZL><YHLY>" + sourceOfCertification
@@ -1249,6 +1257,10 @@ public class IIllegalServiceImpl implements IIllegalService {
 			userid=illegalCache.getPoliceUseridApp();
 			userpwd=illegalCache.getPoliceUserpwdApp();
 			key=illegalCache.getPoliceKeyApp();
+		}else if("M".equals(sourceOfCertification)){
+			userid=illegalCache.getUseridMsjw();
+			userpwd=illegalCache.getUserpwdMsjw();
+			key=illegalCache.getKeyMsjw();
 		}
 		String xml = "<?xml version=\"1.0\" encoding=\"gb2312\" ?><REQUEST><HPHM>" + numberPlateNumber + "</HPHM><HPZL>"
 				+ plateType + "</HPZL><YHLY>" + sourceOfCertification + "</YHLY></REQUEST>";

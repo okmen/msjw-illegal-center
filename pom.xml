@@ -230,22 +230,7 @@
 				
 				<redis.user-center.configstr><![CDATA[account-center1:r-2ze5901305ba84b4.redis.rds.aliyuncs.com:6379,user-center2:r-2ze5901305ba84b4.redis.rds.aliyuncs.com:6379]]></redis.user-center.configstr>
 				<redis.user-center.password><![CDATA[Redis123456]]></redis.user-center.password>
-						
-				<!-- <dubbo.registry.url><![CDATA[test-zookeeper.choumei.me:2181]]></dubbo.registry.url>
-				<dubbo.provider.port><![CDATA[30000]]></dubbo.provider.port>
-				<dubbo.provider.timeout><![CDATA[5000]]></dubbo.provider.timeout>
-				<dubbo.monitor.address><![CDATA[test-monitor.choumei.me:7070]]></dubbo.monitor.address>
-
-				<mysql.account.read.url><![CDATA[jdbc:mysql://test-cmdb.choumei.me:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.read.url>
-                <mysql.account.read.username><![CDATA[u_webapp]]></mysql.account.read.username>
-
-                <mysql.account.write.url><![CDATA[jdbc:mysql://test-cmdb.choumei.me:4306/cm_choumeionline?useUnicode=true&autoReconnect=true&characterEncoding=UTF-8]]></mysql.account.write.url>
-                <mysql.account.write.username><![CDATA[u_webapp]]></mysql.account.write.username>
-
-				<mysql.account.password.config><![CDATA[config.file=/workspace/druid/choumei-password_test.properties;secretkey.file=/workspace/druid/key_test]]></mysql.account.password.config>
-
-				<redis.user-center.configstr><![CDATA[user-center1:test-redis1.choumei.me:6379,user-center2:test-redis1.choumei.me:6379]]></redis.user-center.configstr>
- -->
+				
  				<partner.codeW>P003</partner.codeW>
              	<partner.codeZ>P002</partner.codeZ>
              	<partner.codeA>P001</partner.codeA>

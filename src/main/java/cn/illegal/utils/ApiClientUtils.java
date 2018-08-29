@@ -1,13 +1,10 @@
 package cn.illegal.utils;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.log4j.Logger;
 
-import cn.illegal.bean.CustDataInfo;
 import cn.illegal.bean.ParamRequestBean;
 import cn.illegal.bean.ResultReturnBean;
 import cn.illegal.bean.ResultReturnBeanA;
@@ -17,7 +14,6 @@ import cn.illegal.utils.HttpClientUtil;
 import cn.sdk.util.MsgCode;
 
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 public class ApiClientUtils {
 
@@ -52,27 +48,26 @@ public class ApiClientUtils {
 	 
 	 public static ResultReturnBean requestApi(String url,ParamRequestBean paramBean, Object data,String key,String baseUrl)throws Exception{
 		 ResultReturnBean result=null;
+		 //请求返回结果
+		 String respStr="";
+		 String jsonParamStr="";
 	     try {
 		    	JSONObject show1=JSONObject.fromObject(data);
-		        String mac=getMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString(),baseUrl);// MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
-		        //logger.info("timeStamp:"+paramBean.getTimeStamp()+",key:"+key+",macAlg:"+paramBean.getMacAlg()+",msg:"+show1.toString()+",mac="+mac);
-		        paramBean.setMac(mac);     
+		        String mac=getMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString(),baseUrl);
+		        paramBean.setMac(mac);  
 		        JSONObject jsons=JSONObject.fromObject(paramBean);
-		        logger.info("Json"+jsons);
-		
+		        jsonParamStr=jsons.toString();
 		        long startTime = System.currentTimeMillis();
-		        String respStr = HttpClientUtil.post(url,jsons.toString());
+		        respStr = HttpClientUtil.post(url,jsonParamStr);
 	            long endTime = System.currentTimeMillis();
 	            long times = endTime - startTime;
 	            if(times > 14900){
-	            	logger.error(url + "接口执行耗时:" + times + " 毫秒");
+	            	logger.error(url + "接口执行耗时:" + times + " 毫秒"+"。返回结果："+respStr); 
 	            	throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 	            }
-		       
-	            logger.info("ReturnJson:"+respStr);
 		        result=(ResultReturnBean) JSONObject.toBean(JSONObject.fromObject(respStr),ResultReturnBean.class);	
 			} catch (Exception e) {
-				logger.error("平安接口调用错误,url=" + url,e);
+				logger.error("平安接口调用错误,url=" + url+";请求参数："+jsonParamStr+";返回结果："+respStr+"。resultJson="+result,e);
 	            throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 			}       	 
 		  return  result;
@@ -80,53 +75,47 @@ public class ApiClientUtils {
 	 
 	 public static ResultReturnBeanA requestApiA(String url,ParamRequestBean paramBean, Object data,String key,String baseUrl) throws Exception{		        
 		 ResultReturnBeanA result=null;
-		
+		 //返回请求结果
+		 String respStr="";
+		 String jsonParamStr="";
 	     try {
 		    	JSONObject show1=JSONObject.fromObject(data);
 		        String mac= getMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString(),baseUrl);//MacUtil.genMsgMac(paramBean.getTimeStamp(), key, paramBean.getMacAlg(), show1.toString());
 		        paramBean.setMac(mac);     
 		        JSONObject jsons=JSONObject.fromObject(paramBean);
-		        logger.info("Json"+jsons);
-		
+		        jsonParamStr=jsons.toString(); 
 		        long startTime = System.currentTimeMillis();
-		        String respStr = HttpClientUtil.post(url,jsons.toString());
+		        respStr = HttpClientUtil.post(url,jsonParamStr);
 	            long endTime = System.currentTimeMillis();
 	            long times = endTime - startTime;
 	            if(times > 14900){
-	            	logger.error(url + "接口执行耗时:" + times + " 毫秒");
+	            	logger.error(url + "接口执行耗时:" + times + " 毫秒"+"。请求参数："+jsonParamStr+"返回结果："+respStr); 
 	            	throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 	            }
-		       
-	            logger.info("ReturnJson:"+respStr);
 		        result=(ResultReturnBeanA) JSONObject.toBean(JSONObject.fromObject(respStr),ResultReturnBeanA.class);	
 			} catch (Exception e) {
-				logger.error("平安接口调用错误,url=" + url,e);
-	            throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
+				logger.error("平安接口调用错误,url=" + url+";请求参数："+jsonParamStr+";返回结果："+respStr+"。resultJson="+result,e);
+				throw new HttpPingAnException(Integer.valueOf(MsgCode.httpPingAnCallError), MsgCode.httpPingAnCallMsg);
 			}       	 
 		  return  result;  
 		 }
 	 
 	 
 	 public static String getMac(String timeStamp, String macKey, String hashAlg, String msg,String url) throws Exception{		        
-		 //String url="";
 		 String respStr="";
 		 BaseBean result=new BaseBean();
 	     try {
-	    	 	//url=url+"/illegalHanding/getMac.html";//"http://192.168.2.219:8100/illegalHanding/getMac.html";//"http://szjjapi.stc.gov.cn/illegalHanding/getMac.html";//?timesStamp="+timeStamp+"&key="+macKey+"&hashAlg="+hashAlg+"&data="+msg; 
-	    	 	Map<String,String> data=new HashMap<String,String>();
-	    	 	
+	    	    Map<String,String> data=new HashMap<String,String>();
 	    		data.put("timestamp",timeStamp);
 	    		data.put("key",macKey);
 	    		data.put("hashAlg",hashAlg);
 	    		data.put("data",msg);
 	    		respStr =HttpClientUtil.post(url,data,null);
 	    		result=(BaseBean) JSONObject.toBean(JSONObject.fromObject(respStr),BaseBean.class);	
-	    		logger.info("timeStamp:"+timeStamp+",key:"+macKey+",macAlg:"+hashAlg+",msg:"+msg+",mac="+result.getMsg());
-	    	 	//URLEncoder.encode(url);
-		       // respStr = HttpClientUtil.get(url);
+//	    		logger.info("timeStamp:"+timeStamp+",key:"+macKey+",macAlg:"+hashAlg+",msg:"+msg+",mac="+result.getMsg());
+	    	 
 			} catch (Exception e) {
-				logger.info("timeStamp:"+timeStamp+",key:"+macKey+",macAlg:"+hashAlg+",msg:"+msg);
-				logger.error("获取mac失败,url=" + url,e);
+				logger.error("获取mac失败,url=" + url+";请求参数：[timestamp:"+timeStamp+",key:"+macKey+",hashAlg:"+hashAlg+",data:"+msg+"]",e);
 	            throw e;
 			}       	 
 		  return  result.getMsg();  

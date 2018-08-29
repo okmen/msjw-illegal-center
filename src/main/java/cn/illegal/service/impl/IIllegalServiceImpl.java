@@ -990,13 +990,14 @@ public class IIllegalServiceImpl implements IIllegalService {
 		String url = illegalCache.getSubcribeUrl();
 		String method = "getYycxByLsh";
 		List<SubcribeBean> subcribes = new ArrayList<>();
+		JSONObject respStr=null;
 		try {
-			JSONObject respStr = WebServiceClient.easyWebService(url, method, xml.toString());
+			respStr = WebServiceClient.easyWebService(url, method, xml.toString());
 			JSONObject head = (JSONObject) respStr.get("head");
 			// 返回的message
 			// String msg = head.get("message").toString();
 			// 返回的状态码
-			String code = head.get("code").toString();
+//			String code = head.get("code").toString();
 			JSONObject body = (JSONObject) respStr.get("body");
 			if (body != null) {
 				String items = body.get("item").toString();
@@ -1009,7 +1010,7 @@ public class IIllegalServiceImpl implements IIllegalService {
 			}
 
 		} catch (Exception e) {
-			logger.error("获取预约信息列表失败 ， XML= " + xml.toString(), e);
+			logger.error("获取预约信息列表失败 ， xml= " + xml.toString()+";返回结果:"+respStr, e);
 			throw e;
 		}
 		return subcribes;

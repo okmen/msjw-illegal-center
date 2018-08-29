@@ -158,9 +158,9 @@ public class HttpClientUtil {
 
 			int result = getHttpClient().executeMethod(config, post);
 
-			if (log.isDebugEnabled()) {
-				log.debug("HttpClient.executeMethod returns result = [" + result + "]");
-			}
+//			if (log.isDebugEnabled()) {
+//				log.debug("HttpClient.executeMethod returns result = [" + result + "]");
+//			}
 
 			if (result != 200) {
 				log.error("wrong HttpClient.executeMethod post method !");
@@ -193,9 +193,9 @@ public class HttpClientUtil {
 
             int result = getHttpClient().executeMethod(config, post);
 
-            if (log.isDebugEnabled()) {
-                log.debug("HttpClient.executeMethod returns result = [" + result + "]");
-            }
+//            if (log.isDebugEnabled()) {
+//                log.debug("HttpClient.executeMethod returns result = [" + result + "]");
+//            }
 
             if (result != 200) {
                 log.error("wrong HttpClient.executeMethod post method !");

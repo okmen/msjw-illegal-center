@@ -174,7 +174,7 @@
              	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
              	<subcribe.userid>msjwpt</subcribe.userid>
              	<subcribe.userpwd>msjw@2017</subcribe.userpwd>
-             	<subcribe.url>https://szjjapi.chudaokeji.com/yywfcl/services/yywfcl</subcribe.url>
+             	<subcribe.url>https://app.stc.gov.cn:8095/yywfcl/services/yywfcl</subcribe.url>
         	
              	
              	<police.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</police.url>
@@ -247,7 +247,7 @@
              	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
              	<subcribe.userid>msjwpt</subcribe.userid>
              	<subcribe.userpwd>msjw@2017</subcribe.userpwd>
-             	<subcribe.url>https://szjjapi.chudaokeji.com/yywfcl/services/yywfcl</subcribe.url>
+             	<subcribe.url>https://app.stc.gov.cn:8095/yywfcl/services/yywfcl</subcribe.url>
              	
              	<police.url>http://123.56.180.216:19002/xxfbpt/services/xxfbptservice</police.url>
              	<police.method>xxptSchuding</police.method>
@@ -332,7 +332,7 @@
              	<subcribe.lrmac>00:16:3e:10:16:4d</subcribe.lrmac>
              	<subcribe.userid>msjwpt</subcribe.userid>
              	<subcribe.userpwd>msjw@2017</subcribe.userpwd>
-             	<subcribe.url>https://wfyyapi.szjj.me:8095/yywfcl/services/yywfcl</subcribe.url>
+             	<subcribe.url>https://app.stc.gov.cn:8095/yywfcl/services/yywfcl</subcribe.url><!-- wfyyapi.szjj.me:8095 -->
              	
              	<police.url>http://api.szjj.me:9080/xxfbpt/services/xxfbptservice</police.url>
              	<police.method>xxptSchuding</police.method>
